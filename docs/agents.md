@@ -16,6 +16,9 @@ Copilot Chat discovers Concierge via [copilot-agents.json](../copilot-agents.jso
 - Editor — narrative/doc writing. Prompt module: [.copilot/prompts/editor.prompt.md](../.copilot/prompts/editor.prompt.md)
 - Migrator — scaffold migration/upgrades; audits differences, applies safe updates, writes changelogs. Prompt module: [.copilot/prompts/migrator.updater.prompt.md](../.copilot/prompts/migrator.updater.prompt.md); Guide: [docs/migration.md](../docs/migration.md)
 
+## Project Domain Modules (selected by Concierge when in-scope)
+- Portfolio Frontend Domain — frontend implementation guardrails (11ty/Nunjucks/Tailwind v4/GSAP/Airtable/Sanity). Prompt module: [.copilot/prompts/portfolio-frontend-domain.prompt.md](../.copilot/prompts/portfolio-frontend-domain.prompt.md)
+
 Note: some projects may include their own domain-specific agents (e.g., choreography or framework-specific helpers). Prefer the project context packs under `context/projects/`.
 
 

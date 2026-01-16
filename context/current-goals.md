@@ -2,10 +2,11 @@
 
 This file is the single-source-of-truth for what matters *right now*.
 
-Last updated: 2026-01-16T18:50:00Z
+Last updated: 2026-01-16T19:34:01Z
 
 ## Now
 - Develop spec for a domain-specialized AI coding agent tailored to my preferred toolkit: 11ty + Nunjucks + JS + GSAP + Sanity. (Draft: `specs/ai/domain-specialized-coding-agent.md`)
+- Implement Model A for the domain module (internal routing map; Concierge remains the only router).
 
 ## Next
 - Deliver MVP of the domain-specialized coding agent.

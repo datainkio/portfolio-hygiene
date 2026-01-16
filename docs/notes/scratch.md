@@ -14,6 +14,7 @@ Domain Agent:
 - Guardrails:
 -- maintain AIX
 -- maintain DX
+-- small incremental improvements over large jumps
 - Avoid:
--- overengineering,
+-- overengineering, 
 -- loops

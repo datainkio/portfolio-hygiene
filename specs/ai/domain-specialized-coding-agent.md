@@ -69,6 +69,9 @@ A dedicated prompt module that Concierge can route to for frontend-domain work.
 - Add to: `aix/.copilot/prompts/_module-index.md`
 - Concierge routing update: `aix/.copilot/prompts/concierge.prompt.md` (minimal new triggers)
 
+Routing note:
+- The domain module uses **Model A** (internal routing map inside a single module); Concierge remains the only router. See `docs/decisions/0002-portfolio-frontend-domain-model-a.md`.
+
 ### D3 — Minimal Context Bundle (to be created in MVP)
 A stable, low-churn “what to read first” bundle for frontend tasks.
 - Location: `aix/context/projects/portfolio-frontend.md` (already exists; may be extended)

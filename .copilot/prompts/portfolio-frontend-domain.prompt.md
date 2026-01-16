@@ -36,6 +36,52 @@ Which frontend area is this change in?
 
 If the repo target is unclear, ask: “Should this be implemented in `frontend/`?”
 
+## Internal Routing Map (Model A)
+This module is **not** a peer router to Concierge. It is a single domain module with an internal decision tree:
+
+### 1) Classify the request (choose 1–2 areas)
+Pick the smallest set of areas that must change. If two areas are plausible, prefer the one that matches the requested deliverable.
+
+Signals → area(s):
+- **Nunjucks/UI markup:** mentions pages, layouts, components, macros, atomic design, `njk/`, “template”, “include”, “molecule/organism” → `njk/`
+- **Styling/Tailwind:** mentions Tailwind classes, CSS layers, tokens, `styles/`, “theme”, “utilities”, “responsive styling” → `styles/`
+- **Motion/GSAP:** mentions animations, ScrollTrigger/ScrollSmoother, Director, AnimationBus events, section timelines, `js/choreography/` → `js/choreography/`
+- **11ty build-time behavior:** mentions collections, filters, shortcodes, permalinks, `.eleventy.js`, build pipeline, `eleventy/` → `eleventy/`
+- **Content integration:** mentions Airtable sync, caches, schema, Sanity studio integration/content model → usually `eleventy/` plus the relevant integration folder(s)
+
+If the request spans multiple areas (common), apply each area’s guardrails and keep changes minimal.
+
+### 2) Apply the area playbook
+For each selected area, follow these rules:
+
+#### Area: `njk/`
+- Prefer macros for reusable UI; avoid logic-heavy templates.
+- Confirm existing atomic placement under `frontend/njk/_includes/` before creating a new component.
+- Verify imports are relative to `njk/_includes/` conventions.
+
+#### Area: `styles/`
+- Respect `frontend/styles/main.css` import order and layer strategy.
+- Do not edit Figma-generated token outputs.
+- Use project npm scripts; never call Tailwind CLI directly.
+
+#### Area: `js/choreography/`
+- Keep within the established architecture (Director → sections → triggers/animations).
+- Prefer AnimationBus events for cross-section coordination.
+- Ensure reduced-motion behavior is preserved.
+
+#### Area: `eleventy/`
+- Follow existing patterns in `frontend/eleventy/collections`, `filters`, `shortcodes`, `services`.
+- Keep changes build-time; avoid runtime fetches unless the repo already does that for the feature.
+
+### 3) Verification mapping (pick the smallest relevant check)
+- Template-only changes: `npm run start:nobundle` (or `npm run build:11ty` if faster for CI-like confirmation)
+- CSS-only changes: `npm run build:css` (or dev watch if requested)
+- Choreography changes: `npm run test:choreography` when applicable; otherwise run dev and confirm no runtime errors
+- Eleventy pipeline changes: `npm run build:11ty` (and/or the narrow script that exercises the edited service)
+
+### 4) Report output
+Always return the **Implementation Report** sections defined above and list the chosen area(s) in Notes.
+
 ## Hard Guardrails (must comply)
 - Verify file existence before citing paths (use workspace search / file reads).
 - Do not edit generated output: `frontend/_site/`.
