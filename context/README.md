@@ -39,6 +39,15 @@ Content for the context folder typically includes:
 * Client / stakeholder mental models
 * AI agent guidance (“how to think here”)
 
+## Canonical context files
+
+Keep these short and authoritative; link out to `/specs` and `/docs` for details.
+
+- `project.md` — durable project purpose + principles
+- `current-goals.md` — time-bound priorities
+- `constraints.md` — non-negotiables + phase guardrails
+- `decisions.md` — accepted decision index (summaries), with ADRs in `/docs/decisions/`
+
 ## Authority
 All humans and AI agents should treat the contents of this folder as the source of truth. Other context layers may summarize or reference these files, but must not
 contradict them.

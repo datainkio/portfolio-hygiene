@@ -8,3 +8,7 @@ Last updated: 2026-01-16
 - [ ] Add a lightweight Markdown link-existence checker for `docs/` (existence only; no network) and document it in a runbook.
 - [ ] Extend the probe bank with an explicit multi-root safety probe (“do not touch mounted projects”) and add scoring notes for scope discipline.
 - [ ] Account for terminal issues related to EOF errors and stuck heredoc modes.
+
+## Future improvements for Vitaixmen
+This section contains TODO items marking opportunities for improving Vitaixmen through lessons learned in this project.
+- [ ] Integrate maintenance of constraints and decisions 

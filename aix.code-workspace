@@ -4,7 +4,10 @@
       "path": "."
     },
     {
-      "path": "../Portfolio/frontend"
+      "path": "../frontend"
+    },
+    {
+      "path": "../backend"
     }
   ],
 
