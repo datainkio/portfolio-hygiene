@@ -131,6 +131,18 @@
 			"problemMatcher": []
 		},
 		{
+			"label": "Update Context Freshness Sidecar (From Staged)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\"",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
 			"label": "Open Current Goals",
 			"type": "shell",
 			"command": "code \"${workspaceFolder}/context/current-goals.md\"",

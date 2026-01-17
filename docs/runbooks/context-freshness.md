@@ -85,6 +85,31 @@ After refreshing:
 - Revert the context file(s) in git.
 - If you used `--touch` accidentally, revert just the timestamp line.
 
+## Troubleshooting
+
+### The commit hook didn’t update `context/.freshness.json`
+
+Most common causes:
+
+1) Hooks aren’t installed for this clone
+	- Check: `git config --get core.hooksPath` (should be `.githooks`)
+	- Fix: `node scripts/install-git-hooks.mjs` (or VS Code task **Install Git Hooks (core.hooksPath)**)
+
+2) The context file wasn’t staged
+	- The pre-commit updater only runs when one of these is staged:
+	  - `context/current-goals.md`
+	  - `context/constraints.md`
+	  - `context/decisions.md`
+
+3) Hooks were bypassed
+	- If you commit with `git commit --no-verify`, hooks will not run.
+
+4) Quick manual verification
+	- Stage a context change: `git add context/current-goals.md`
+	- Run: `node scripts/update-context-freshness.mjs`
+	- Confirm: `git diff --cached --name-only` includes `context/.freshness.json`
+	- VS Code task: **Update Context Freshness Sidecar (From Staged)**
+
 ## Comms template
 
 - "Refreshed workspace context: goals/constraints/decisions reviewed and updated. Ran context freshness check; drift resolved."
