@@ -1,15 +1,14 @@
 # Current Goals
 
 This file is the single-source-of-truth for what matters *right now*.
-Last updated: 2026-01-17T14:14:02.854Z
+Last updated: 2026-01-17T15:02:00Z
 
 ## Now
-- Streamline process of keeping decisions and constraints fresh
-- Tighten CI so it requires sidecar freshness (and ignores Last updated: entirely) once the hook has been installed everywhere.
+- Adopt the new context freshness workflow (hooks + sidecar) as the default
+- Document UX for maintaining project context
 
 
 ## Next
-- Document UX for maintain project context
 - Define and document command permissions (e.g. zsh) to streamline agent work
 - Develop MVP through iteration.
 - Optimize frontend by moving agents out and integrating into aix repo.
@@ -19,6 +18,9 @@ Last updated: 2026-01-17T14:14:02.854Z
 - Create 11ty pages for rapid iterating on the UX of landing page section design (e.g. Hero, Bio, Organizations, etc.).
 
 ## Done (recent)
+- Implement workspace-wide context freshness tooling (check + guided refresh)
+- Add sidecar-based review freshness (`context/.freshness.json`) updated automatically via git hooks
+- Enforce strict sidecar freshness in CI + add daily drift reminder (6am EST)
 - Respond to identified contradictions/drift risks
 - Address current goals freshness check inefficiency.
 - Deliver MVP of the domain-specialized coding agent.
