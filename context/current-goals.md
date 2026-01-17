@@ -5,7 +5,6 @@ Last updated: 2026-01-17T15:02:00Z
 
 ## Now
 - Adopt the new context freshness workflow (hooks + sidecar) as the default
-- This edit tests management of context freshness via git hooks.
 - Document UX for maintaining project context
 
 
