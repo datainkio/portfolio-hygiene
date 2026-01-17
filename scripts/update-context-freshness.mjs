@@ -12,9 +12,14 @@ const CONTEXT_FILES = [
 	'context/decisions.md',
 ];
 
+const DEFAULT_ALERT_THRESHOLD = 6;
+const DEFAULT_MAX_AGE_DAYS = 14;
+
 function parseArgs(argv) {
 	const args = {
 		init: false,
+		alertThreshold: DEFAULT_ALERT_THRESHOLD,
+		maxAgeDays: DEFAULT_MAX_AGE_DAYS,
 	};
 
 	for (let i = 0; i < argv.length; i += 1) {
@@ -25,6 +30,18 @@ function parseArgs(argv) {
 		}
 		if (token === '--help' || token === '-h') {
 			args.help = true;
+			continue;
+		}
+		if (token === '--alert-threshold') {
+			const n = Number(argv[i + 1]);
+			if (Number.isFinite(n) && n >= 0) args.alertThreshold = n;
+			i += 1;
+			continue;
+		}
+		if (token === '--maxAgeDays') {
+			const n = Number(argv[i + 1]);
+			if (Number.isFinite(n) && n > 0) args.maxAgeDays = n;
+			i += 1;
 			continue;
 		}
 	}
@@ -39,10 +56,13 @@ Usage:
 
 Options:
   --init         Initialize context/.freshness.json for all context files (one-time)
+	--alert-threshold <n>  Alert on commit when aggregate drift score >= n (default: ${DEFAULT_ALERT_THRESHOLD})
+	--maxAgeDays <n>       Pass-through for drift scoring (default: ${DEFAULT_MAX_AGE_DAYS})
   -h, --help     Show help
 
 Notes:
   Default mode runs during pre-commit and only updates entries for staged context files.
+	It also runs a commit-time drift threshold check and prints an alert when exceeded.
 `);
 }
 
@@ -64,6 +84,19 @@ function execGit(args, { cwd } = {}) {
 		encoding: 'utf8',
 		stdio: ['ignore', 'pipe', 'pipe'],
 	}).trim();
+}
+
+function tryExecNodeJson(scriptArgs, { cwd } = {}) {
+	try {
+		const raw = execFileSync(process.execPath, scriptArgs, {
+			cwd,
+			encoding: 'utf8',
+			stdio: ['ignore', 'pipe', 'ignore'],
+		}).trim();
+		return JSON.parse(raw);
+	} catch {
+		return null;
+	}
 }
 
 function sha256(text) {
@@ -144,56 +177,90 @@ async function main() {
 			.filter(Boolean);
 
 		targetFiles = CONTEXT_FILES.filter((p) => staged.includes(p));
-		if (targetFiles.length === 0) {
-			process.exit(0);
-		}
 	}
 
 	const sidecarAbs = path.join(rootDir, SIDECAR_REL);
-	const existing = (await readJsonIfExists(sidecarAbs)) || {};
 
-	const next = {
-		version: 1,
-		updatedAt: isoNowUtc(),
-		files: {
-			...(existing.files || {}),
-		},
-	};
+	// 1) Update sidecar only when relevant context files are staged (or init mode).
+	if (args.init || targetFiles.length > 0) {
+		const existing = (await readJsonIfExists(sidecarAbs)) || {};
+		const next = {
+			version: 1,
+			updatedAt: isoNowUtc(),
+			files: {
+				...(existing.files || {}),
+			},
+		};
 
-	let changed = false;
-	for (const relPath of targetFiles) {
-		const content = args.init
-			? await getWorkingTreeContent(relPath, { rootDir })
-			: getStagedContent(relPath, { cwd: rootDir });
+		let changed = false;
+		for (const relPath of targetFiles) {
+			const content = args.init
+				? await getWorkingTreeContent(relPath, { rootDir })
+				: getStagedContent(relPath, { cwd: rootDir });
 
-		if (content == null) continue;
+			if (content == null) continue;
 
-		const hash = sha256(content);
-		const prev = next.files[relPath];
-		if (!prev || prev.contentHash !== hash) {
-			next.files[relPath] = {
-				reviewedAt: isoNowUtc(),
-				contentHash: hash,
-			};
-			changed = true;
+			const hash = sha256(content);
+			const prev = next.files[relPath];
+			if (!prev || prev.contentHash !== hash) {
+				next.files[relPath] = {
+					reviewedAt: isoNowUtc(),
+					contentHash: hash,
+				};
+				changed = true;
+			}
+		}
+
+		if (changed) {
+			await fs.mkdir(path.dirname(sidecarAbs), { recursive: true });
+			await fs.writeFile(sidecarAbs, stableStringify(next), 'utf8');
+
+			// Stage the sidecar so the commit includes the freshness record.
+			execGit(['add', SIDECAR_REL], { cwd: rootDir });
+
+			process.stdout.write(
+				args.init
+					? `update-context-freshness: initialized and staged ${SIDECAR_REL}\n`
+					: `update-context-freshness: updated and staged ${SIDECAR_REL}\n`
+			);
 		}
 	}
 
-	if (!changed) {
-		process.exit(0);
+	// 2) On commit, alert (do not block) if drift has accumulated beyond threshold.
+	if (!args.init && args.alertThreshold >= 0) {
+		const payload = tryExecNodeJson(
+			[
+				'scripts/context-freshness-check.mjs',
+				'--json',
+				'--require-sidecar',
+				'--maxAgeDays',
+				String(args.maxAgeDays),
+			],
+			{ cwd: rootDir }
+		);
+
+		const files = Array.isArray(payload?.files) ? payload.files : [];
+		const aggregateScore = files.reduce((sum, f) => sum + (Number(f?.score) || 0), 0);
+		if (aggregateScore >= args.alertThreshold && aggregateScore > 0) {
+			process.stdout.write(
+				`\ncontext-freshness alert: drift score ${aggregateScore} >= ${args.alertThreshold}.\n` +
+				`Consider reviewing/updating context (task: \"Refresh Context (Guided)\").\n`
+			);
+
+			const toShow = files
+				.filter((f) => (Number(f?.score) || 0) > 0)
+				.sort((a, b) => (Number(b?.score) || 0) - (Number(a?.score) || 0))
+				.slice(0, 3);
+
+			for (const f of toShow) {
+				const score = Number(f?.score) || 0;
+				const tag = f?.recommended ? 'RECOMMENDED' : 'drift';
+				process.stdout.write(`- ${f.file} (${tag}, score=${score})\n`);
+			}
+			process.stdout.write('\n');
+		}
 	}
 
-	await fs.mkdir(path.dirname(sidecarAbs), { recursive: true });
-	await fs.writeFile(sidecarAbs, stableStringify(next), 'utf8');
-
-	// Stage the sidecar so the commit includes the freshness record.
-	execGit(['add', SIDECAR_REL], { cwd: rootDir });
-
-	process.stdout.write(
-		args.init
-			? `update-context-freshness: initialized and staged ${SIDECAR_REL}\n`
-			: `update-context-freshness: updated and staged ${SIDECAR_REL}\n`
-	);
 	process.exit(0);
 }
 
