@@ -22,6 +22,11 @@ Domain-module rule:
 - Only select a domain-specific module (e.g., project-specific frontend modules) when the user request clearly targets that repo/domain (explicit `frontend/` references or unmistakable stack keywords).
 - If the repo/domain is ambiguous, default to a general module (Navigator for location, Implementer for coding) and proceed with minimal assumptions.
 
+Portfolio frontend sub-routing (when domain is clear):
+- Planning motion/choreography → `portfolio-frontend-choreography-planning.prompt.md`
+- Implementing an approved choreography plan → `portfolio-frontend-choreography-implementation.prompt.md`
+- General frontend implementation work → `portfolio-frontend-domain.prompt.md`
+
 ## Step 2 — Blocking question policy
 Ask **at most one** question *only if blocked* (i.e., you cannot produce a safe/usable output without it).
 If blocked:

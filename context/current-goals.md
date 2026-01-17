@@ -5,6 +5,7 @@ This file is the single-source-of-truth for what matters *right now*.
 Last updated: 2026-01-16T22:41:28Z
 
 ## Now
+- Optimize frontend by moving agents out and integrating into aix repo.
 - Complete Sanity adoption (full separation from Airtable).
 - Draft and iterate on the Sanity adoption spec (`specs/cms/sanity-adoption.md`).
 - Iterate on the frontend domain module (post-MVP refinements).

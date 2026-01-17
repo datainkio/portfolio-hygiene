@@ -42,10 +42,10 @@ If there is a conflict, defer to:
 2) scaffold routing and AIX measurement (platform-level)
 
 ## Choreography workflow (recommended)
-1) Use the project agent **Frontend Choreography Planner** (`frontend/.github/agents/choreography-planner.agent.md`) to produce a choreography plan/spec.
+1) Use the scaffold module **Portfolio Frontend — Choreography Planning** (`aix/.copilot/prompts/portfolio-frontend-choreography-planning.prompt.md`) to produce a choreography plan/spec.
 2) After approval, implement using either:
-  - the project agent **Frontend Choreography Implementer** (`frontend/.github/agents/choreography-implementer.agent.md`), or
-  - the scaffold implementation module (`.copilot/prompts/implementer.prompt.md`) if you want a general “edit files + validate” workflow.
+  - the scaffold module **Portfolio Frontend — Choreography Implementation** (`aix/.copilot/prompts/portfolio-frontend-choreography-implementation.prompt.md`), or
+  - the scaffold domain module (`aix/.copilot/prompts/portfolio-frontend-domain.prompt.md`) if the work spans multiple areas.
 3) While implementing, follow frontend `.copilot/*` constraints and reuse the existing GSAP architecture (Director → sections → triggers/animations).
 
 ## Common pitfalls to avoid

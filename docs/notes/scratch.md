@@ -1,6 +1,8 @@
 # Scratch
 This file is intended for human readers only. Not human? Ignore it. (This means you, agents!)
 
+Link checking is expensive
+
 Domain Agent:
 - Prioritize TW utility classes, no new CSS files
 - Always provide a testing link

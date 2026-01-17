@@ -18,6 +18,8 @@ Copilot Chat discovers Concierge via [copilot-agents.json](../copilot-agents.jso
 
 ## Project Domain Modules (selected by Concierge when in-scope)
 - Portfolio Frontend Domain — frontend implementation guardrails (11ty/Nunjucks/Tailwind v4/GSAP/Airtable/Sanity). Prompt module: [.copilot/prompts/portfolio-frontend-domain.prompt.md](../.copilot/prompts/portfolio-frontend-domain.prompt.md)
+- Portfolio Frontend — Choreography Planning — plan-only module for motion timelines/triggers/a11y in `frontend/`. Prompt module: [.copilot/prompts/portfolio-frontend-choreography-planning.prompt.md](../.copilot/prompts/portfolio-frontend-choreography-planning.prompt.md)
+- Portfolio Frontend — Choreography Implementation — implement approved choreography plans in `frontend/`. Prompt module: [.copilot/prompts/portfolio-frontend-choreography-implementation.prompt.md](../.copilot/prompts/portfolio-frontend-choreography-implementation.prompt.md)
 
 Note: some projects may include their own domain-specific agents (e.g., choreography or framework-specific helpers). Prefer the project context packs under `context/projects/`.
 

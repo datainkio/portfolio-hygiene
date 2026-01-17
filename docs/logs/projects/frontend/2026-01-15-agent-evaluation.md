@@ -2,12 +2,14 @@
 
 Scope: Portfolio frontend repo AIX (Copilot ergonomics, prompt surfaces, discoverability, and risk of misrouting).
 
-Evidence sources (in-repo):
+Evidence sources:
 
-- Copilot instructions: [Portfolio/frontend/.github/copilot-instructions.md](../../../../../Portfolio/frontend/.github/copilot-instructions.md)
-- Prompt authority + modules: [Portfolio/frontend/.copilot/README.md](../../../../../Portfolio/frontend/.copilot/README.md), [Portfolio/frontend/.copilot/prompts/index.md](../../../../../Portfolio/frontend/.copilot/prompts/index.md)
-- AI entrypoint: [Portfolio/frontend/docs/ai/START_HERE.md](../../../../../Portfolio/frontend/docs/ai/START_HERE.md)
-- Existing audit artifacts: [Portfolio/frontend/docs/ai/audits/](../../../../../Portfolio/frontend/docs/ai/audits/README.md)
+- Frontend repo authoritative docs (paths are cross-root; not link-checked from `aix/`):
+	- `frontend/.github/copilot-instructions.md`
+	- `frontend/.copilot/README.md`
+	- `frontend/.copilot/prompts/index.md`
+	- `frontend/docs/ai/START_HERE.md`
+	- `frontend/docs/ai/audits/`
 - Prior evaluation logs: [agent-evaluation.md](agent-evaluation.md)
 
 ---
@@ -16,14 +18,14 @@ Evidence sources (in-repo):
 
 ### Strengths
 
-- Strong project-specific operating context (11ty/Figma/Airtable/Tailwind/GSAP) with concrete commands and “gotchas”: [Portfolio/frontend/.github/copilot-instructions.md](../../../../../Portfolio/frontend/.github/copilot-instructions.md)
-- Clear prompt authority chain and task-scoped prompt modules (reduces hallucinated stacks and wrong patterns): [Portfolio/frontend/.copilot/README.md](../../../../../Portfolio/frontend/.copilot/README.md), [Portfolio/frontend/.copilot/prompts/index.md](../../../../../Portfolio/frontend/.copilot/prompts/index.md)
-- Single AI entrypoint exists and points to the “high-signal pack”: [Portfolio/frontend/docs/ai/START_HERE.md](../../../../../Portfolio/frontend/docs/ai/START_HERE.md)
-- Explicit “do-not-touch” list for generated output reduces noise-driven HF: [Portfolio/frontend/.copilot/context/do-not-touch.md](../../../../../Portfolio/frontend/.copilot/context/do-not-touch.md)
+- Strong project-specific operating context (11ty/Figma/Airtable/Tailwind/GSAP) with concrete commands and “gotchas” (see `frontend/.github/copilot-instructions.md`).
+- Clear prompt authority chain and task-scoped prompt modules (see `frontend/.copilot/README.md`, `frontend/.copilot/prompts/index.md`).
+- Single AI entrypoint exists and points to the “high-signal pack” (see `frontend/docs/ai/START_HERE.md`).
+- Explicit “do-not-touch” list for generated output reduces noise-driven HF (see `frontend/.copilot/context/do-not-touch.md`).
 
 ### Weaknesses / risks
 
-- `.github/agents/` exists in-project and may create agent-selection ambiguity in multi-root workspaces (scaffold also flags this): [Portfolio/frontend/docs/ai/audits/2026-01-15T165423Z--aix-audit--MP.md](../../../../../Portfolio/frontend/docs/ai/audits/2026-01-15T165423Z--aix-audit--MP.md)
+- `.github/agents/` existed in-project and may create agent-selection ambiguity in multi-root workspaces (see `frontend/docs/ai/audits/2026-01-15T165423Z--aix-audit--MP.md`).
 - `docs/logs/` previously lacked an index file, which reduces discoverability and can increase TTUO when a user is trying to find “the latest evaluation” (now handled by the scaffold project-log index).
 
 ---
@@ -32,8 +34,8 @@ Evidence sources (in-repo):
 
 The mounted-project discovery runner produced a scored heuristic snapshot:
 
-- Audit: [Portfolio/frontend/docs/ai/audits/2026-01-15T165423Z--aix-audit--MP.md](../../../../../Portfolio/frontend/docs/ai/audits/2026-01-15T165423Z--aix-audit--MP.md)
-- Snapshot JSON: [Portfolio/frontend/docs/ai/audits/2026-01-15T165423Z--aix-snapshot--MP.json](../../../../../Portfolio/frontend/docs/ai/audits/2026-01-15T165423Z--aix-snapshot--MP.json)
+- Audit: `frontend/docs/ai/audits/2026-01-15T165423Z--aix-audit--MP.md`
+- Snapshot JSON: `frontend/docs/ai/audits/2026-01-15T165423Z--aix-snapshot--MP.json`
 
 Heuristic scores (0–5):
 
@@ -82,7 +84,7 @@ Overall effectiveness (qualitative): 3.4/5
 
 1. Deconflict agent selection in multi-root setups
 
-- Consider moving `.github/agents/*.agent.md` into `docs/ai/legacy-agents/` (or otherwise ensuring they are not active/selectable) when the vitaixmen Concierge is present.
+- Remove `.github/agents/*.agent.md` from the project repo when vitaixmen Concierge is present, and route choreography planning/implementation via AIX prompt modules instead.
 
 2. Add lightweight run evidence
 
@@ -90,4 +92,4 @@ Overall effectiveness (qualitative): 3.4/5
 
 3. Keep the authority chain tight
 
-- Continue the monthly loop in [Portfolio/frontend/docs/ai/aix-maintenance.md](../../../../../Portfolio/frontend/docs/ai/aix-maintenance.md) and prune noise before adding prompts.
+- Continue the monthly loop in `frontend/docs/ai/aix-maintenance.md` and prune noise before adding prompts.

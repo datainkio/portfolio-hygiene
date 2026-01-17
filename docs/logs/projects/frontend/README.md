@@ -2,7 +2,7 @@
 
 This folder stores Concierge/agent maintenance outputs for the `frontend` project.
 
-Project repo (workspace folder): [Portfolio/frontend](../../../../../Portfolio/frontend)
+Project repo (workspace folder): [frontend](../../../../../frontend)
 
 ## Why this lives in the scaffold
 
@@ -16,4 +16,4 @@ These reports are operational artifacts (audits, evaluations, run notes). Keepin
 
 ## Historical note
 
-These reports were originally authored under `Portfolio/frontend/docs/logs/` and have been migrated into the scaffold.
+These reports were originally authored under `frontend/docs/logs/` and have been migrated into the scaffold.
