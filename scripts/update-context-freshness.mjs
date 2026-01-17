@@ -20,6 +20,7 @@ function parseArgs(argv) {
 		init: false,
 		alertThreshold: DEFAULT_ALERT_THRESHOLD,
 		maxAgeDays: DEFAULT_MAX_AGE_DAYS,
+		failOnThreshold: false,
 	};
 
 	for (let i = 0; i < argv.length; i += 1) {
@@ -44,6 +45,10 @@ function parseArgs(argv) {
 			i += 1;
 			continue;
 		}
+		if (token === '--fail-on-threshold') {
+			args.failOnThreshold = true;
+			continue;
+		}
 	}
 
 	return args;
@@ -58,6 +63,7 @@ Options:
   --init         Initialize context/.freshness.json for all context files (one-time)
 	--alert-threshold <n>  Alert on commit when aggregate drift score >= n (default: ${DEFAULT_ALERT_THRESHOLD})
 	--maxAgeDays <n>       Pass-through for drift scoring (default: ${DEFAULT_MAX_AGE_DAYS})
+	--fail-on-threshold    Exit non-zero when the drift threshold is exceeded (commit-blocking)
   -h, --help     Show help
 
 Notes:
@@ -258,6 +264,12 @@ async function main() {
 				process.stdout.write(`- ${f.file} (${tag}, score=${score})\n`);
 			}
 			process.stdout.write('\n');
+
+			if (args.failOnThreshold) {
+				process.stderr.write('context-freshness: commit blocked (threshold exceeded)\n');
+				process.stderr.write('Next: update/review context, or use `git commit --no-verify` to bypass.\n');
+				process.exit(1);
+			}
 		}
 	}
 

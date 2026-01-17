@@ -65,6 +65,11 @@ How it works:
 - It writes/updates `context/.freshness.json` and stages it automatically.
 - You should not manually edit timestamps or the sidecar.
 
+Commit blocking:
+
+- The pre-commit hook also runs a drift threshold check and will fail the commit when drift exceeds the configured threshold.
+- Bypass (use sparingly): `git commit --no-verify`
+
 Optional (legacy; only updates `Last updated:` lines; does not change content):
 
 - Touch recommended files: `node scripts/context-refresh.mjs --touch`

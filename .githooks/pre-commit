@@ -15,7 +15,7 @@ cd "$ROOT"
 
 # Only run if the script exists (safe for partial checkouts).
 if [ -f "scripts/update-context-freshness.mjs" ]; then
-  node scripts/update-context-freshness.mjs
+  node scripts/update-context-freshness.mjs --fail-on-threshold
 fi
 
 exit 0
