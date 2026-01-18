@@ -4,8 +4,8 @@ This file is the single-source-of-truth for what matters *right now*.
 Last updated: 2026-01-18
 
 ## Now
-- Improve drift gate messaging surfaced by VS Code (keep it short and actionable)
-
+- Develop the spec for an animation-focused Concierge module based on specs/animation/choreographer.animation-spec.md
+- Improve DX for running VS Code tasks by adding buttons to the workspace status bar via VS Code Action Buttons extension.
 
 ## Next
 - Define and document command permissions (e.g. zsh) to streamline agent work
@@ -29,6 +29,7 @@ Last updated: 2026-01-18
 - Deliver MVP of the domain-specialized coding agent.
 
 ## Not Now
+- Improve drift gate messaging surfaced by VS Code (keep it short and actionable)
 - Auto-generated global inventories (a full ToC of every log file) in the workspace map.
 - Heavy automation for logging/indexing until the evidence loop stabilizes and proves it saves time.
 - Broad refactors inside mounted projects in the name of “cleanup” (unless explicitly approved).

@@ -64,6 +64,26 @@ Full menu: [docs/concierge-prompt-catalog.md](docs/concierge-prompt-catalog.md)
 
 This scaffold is intentionally **tool-agnostic**. Use what your project needs.
 
+### Agent Ops tasks (recommended)
+
+This workspace defines a small allowlisted task set in [aix/.vscode/tasks.json](aix/.vscode/tasks.json) so routine work can be run via VS Code tasks (less ad-hoc terminal friction).
+
+Key tasks:
+
+- AIX: Pre-PR Check
+- AIX: Pre-PR Check (Strict Sidecar)
+- AIX: Docs Link Check (Local)
+- Agent Ops: Drift Watch (AIX)
+- Agent Ops: Drift Watch (All Repos)
+- Agent Ops: Open File (Safe)
+- Agent Ops: Move/Rename (Safe)
+- Agent Ops: Delete (Safe)
+
+There are also cross-repo shortcuts like:
+
+- Frontend: Dev / Build / Test / Validate / Format
+- Backend: Dev / Build / Migrate
+
 ### Mermaid
 
 Mermaid is great for lightweight diagrams in Markdown. Example prompt:

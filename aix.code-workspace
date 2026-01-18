@@ -12,7 +12,45 @@
   ],
 
   "settings": {
-    "workbench.startupEditor": "readme"
+    "workbench.startupEditor": "readme",
+
+    "actionButtons": {
+      "commands": [
+        {
+          "name": "AIX: Pre-PR",
+          "singleInstance": true,
+          "color": "#2E7D32",
+          "command": "cd \"${workspaceFolder}/../aix\" && node scripts/pre-pr-check.mjs"
+        },
+        {
+          "name": "AIX: Refresh Context",
+          "singleInstance": true,
+          "color": "#1565C0",
+          "command": "cd \"${workspaceFolder}/../aix\" && node scripts/context-refresh.mjs --open"
+        },
+        {
+          "name": "AIX: Freshness (CI)",
+          "singleInstance": true,
+          "color": "#6A1B9A",
+          "command": "cd \"${workspaceFolder}/../aix\" && node scripts/context-freshness-check.mjs --fail-on-update --maxAgeDays 14"
+        },
+        {
+          "name": "AIX: Goals (CI)",
+          "singleInstance": true,
+          "color": "#EF6C00",
+          "command": "cd \"${workspaceFolder}/../aix\" && node scripts/current-goals-check.mjs --fail-on-update --maxAgeDays 14"
+        },
+        {
+          "name": "AIX: Update Sidecar (Staged)",
+          "singleInstance": true,
+          "color": "#455A64",
+          "command": "cd \"${workspaceFolder}/../aix\" && node scripts/update-context-freshness.mjs"
+        }
+      ],
+      "defaultColor": "white",
+      "reloadButton": "↻",
+      "loadNpmCommands": false
+    }
   },
 
   "extensions": {

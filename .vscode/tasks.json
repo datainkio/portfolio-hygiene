@@ -196,6 +196,262 @@
 				}
 			],
 			"problemMatcher": []
+		},
+		{
+			"label": "AIX: Docs Link Check (Local)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/markdown-link-check-local.mjs\" --root docs --max 50",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "AIX: Pre-PR Check",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/pre-pr-check.mjs\"",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "AIX: Pre-PR Check (Strict Sidecar)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/pre-pr-check.mjs\" --strict-sidecar",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Agent Ops: Drift Watch (AIX)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/context-drift-watch.mjs\"",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Agent Ops: Drift Watch (All Repos)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/context-drift-watch.mjs\" --include-frontend --include-backend",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Agent Ops: Open File (Safe)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" open \"${input:agentOpsPath}\"",
+			"presentation": {
+				"reveal": "never",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"inputs": [
+				{
+					"id": "agentOpsPath",
+					"type": "promptString",
+					"description": "Path under aix/, ../frontend/, or ../backend/ (relative to aix workspace folder)"
+				}
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "Agent Ops: Move/Rename (Safe)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" move \"${input:agentOpsFrom}\" \"${input:agentOpsTo}\" --yes",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"inputs": [
+				{
+					"id": "agentOpsFrom",
+					"type": "promptString",
+					"description": "Move from (relative path under aix/, ../frontend/, or ../backend/)"
+				},
+				{
+					"id": "agentOpsTo",
+					"type": "promptString",
+					"description": "Move to (relative path under aix/, ../frontend/, or ../backend/)"
+				}
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "Agent Ops: Delete (Safe)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" delete \"${input:agentOpsDeletePath}\" --yes",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"inputs": [
+				{
+					"id": "agentOpsDeletePath",
+					"type": "promptString",
+					"description": "Delete path (relative to aix workspace folder)"
+				}
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "Agent Ops: Mkdir (Safe)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" mkdir \"${input:agentOpsMkdirPath}\" --yes",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"inputs": [
+				{
+					"id": "agentOpsMkdirPath",
+					"type": "promptString",
+					"description": "Directory path to create (relative to aix workspace folder)"
+				}
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "Agent Ops: Touch (Safe)",
+			"type": "shell",
+			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" touch \"${input:agentOpsTouchPath}\" --yes",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"inputs": [
+				{
+					"id": "agentOpsTouchPath",
+					"type": "promptString",
+					"description": "File path to create if missing (relative to aix workspace folder)"
+				}
+			],
+			"problemMatcher": []
+		},
+		{
+			"label": "Frontend: Dev",
+			"type": "shell",
+			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run dev",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Frontend: Build",
+			"type": "shell",
+			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Frontend: Test",
+			"type": "shell",
+			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run test",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Frontend: Validate",
+			"type": "shell",
+			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run validate",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Frontend: Format",
+			"type": "shell",
+			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run format",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Backend: Dev",
+			"type": "shell",
+			"command": "npm --prefix \"${workspaceFolder}/../backend\" run dev",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Backend: Build",
+			"type": "shell",
+			"command": "npm --prefix \"${workspaceFolder}/../backend\" run build",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
+		},
+		{
+			"label": "Backend: Migrate",
+			"type": "shell",
+			"command": "npm --prefix \"${workspaceFolder}/../backend\" run migrate",
+			"presentation": {
+				"reveal": "always",
+				"panel": "dedicated",
+				"showReuseMessage": false,
+				"clear": true
+			},
+			"problemMatcher": []
 		}
 	]
 }
