@@ -1,18 +1,18 @@
 {
   "files": {
     "context/constraints.md": {
-      "contentHash": "205efbb41ff8ac7fafd4cf3843e7b9d6596e971226c3ee8d8317386a97037ee2",
-      "reviewedAt": "2026-01-17T16:21:50.434Z"
+      "contentHash": "d779a7e392e0f03a51c098717b7c972840b9061617a4d01694cb4d240e423b19",
+      "reviewedAt": "2026-01-18T15:43:48.354Z"
     },
     "context/current-goals.md": {
-      "contentHash": "34b13883d358aa5a16765ae0fbc0742cfccd8cec3f914145c2fbee80736bab99",
-      "reviewedAt": "2026-01-17T16:33:03.670Z"
+      "contentHash": "e2f98d108ab28ea032152931cf4028ab5467fb5c2f2345e43cafad68c46287fd",
+      "reviewedAt": "2026-01-18T15:43:48.354Z"
     },
     "context/decisions.md": {
-      "contentHash": "d043581825c487e35ac3c5f916128aa64969d73511e127e054e0b3aaee5f15ee",
-      "reviewedAt": "2026-01-17T16:21:50.434Z"
+      "contentHash": "0a08c90f4b39e48dd3ef6cb1d0582ee3c148637d3f2d534568f5b5c113a0c324",
+      "reviewedAt": "2026-01-18T15:43:48.354Z"
     }
   },
-  "updatedAt": "2026-01-17T16:33:03.658Z",
+  "updatedAt": "2026-01-18T15:43:48.347Z",
   "version": 1
 }
