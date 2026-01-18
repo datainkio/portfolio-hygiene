@@ -5,23 +5,31 @@ import { spawnSync } from 'node:child_process';
 
 function parseArgs(argv) {
 	const args = {
-		maxAgeDays: 14,
-		strictSidecar: false,
-		includeGitDirty: true,
-		json: false,
-		help: false,
-	};
+			warnThreshold: 10,
+			failThreshold: 20,
+			baseline: null,
+			includeGitDirty: true,
+			json: false,
+			help: false,
+		};
 
 	for (let i = 0; i < argv.length; i += 1) {
 		const token = argv[i];
-		if (token === '--maxAgeDays') {
+		if (token === '--warn-threshold') {
 			const parsed = Number(argv[i + 1]);
-			if (Number.isFinite(parsed)) args.maxAgeDays = parsed;
+			if (Number.isFinite(parsed)) args.warnThreshold = parsed;
 			i += 1;
 			continue;
 		}
-		if (token === '--strict-sidecar') {
-			args.strictSidecar = true;
+		if (token === '--fail-threshold') {
+			const parsed = Number(argv[i + 1]);
+			if (Number.isFinite(parsed)) args.failThreshold = parsed;
+			i += 1;
+			continue;
+		}
+		if (token === '--baseline') {
+			args.baseline = argv[i + 1];
+			i += 1;
 			continue;
 		}
 		if (token === '--no-include-git-dirty') {
@@ -47,11 +55,12 @@ Usage:
   node scripts/pre-pr-check.mjs [options]
 
 Options:
-  --maxAgeDays <n>        Freshness/goals threshold (default: 14)
-  --strict-sidecar        Require context/.freshness.json baseline (no Last updated fallback)
-  --no-include-git-dirty  Do not treat git dirty as a recommendation signal
-  --json                  Emit JSON summary
-  -h, --help              Show help
+	--warn-threshold <n>    Warn when drift score >= n (default: 10)
+	--fail-threshold <n>    Fail when drift score >= n (default: 20)
+	--baseline <hash>       Override baseline hash for drift checks
+	--no-include-git-dirty  Do not treat git dirty as a recommendation signal (passed to goals check only)
+	--json                  Emit JSON summary
+	-h, --help              Show help
 
 What it does:
   1) Check Current Goals (CI mode)
@@ -73,6 +82,20 @@ function runNodeScript({ scriptRel, args }) {
 
 	return {
 		scriptRel,
+		status: result.status ?? 1,
+		stdout: (result.stdout || '').trimEnd(),
+		stderr: (result.stderr || '').trimEnd(),
+	};
+}
+
+function runNodeCheck({ fileRel }) {
+	const result = spawnSync(process.execPath, ['--check', fileRel], {
+		cwd: process.cwd(),
+		encoding: 'utf8',
+	});
+
+	return {
+		scriptRel: `${fileRel} (--check)`,
 		status: result.status ?? 1,
 		stdout: (result.stdout || '').trimEnd(),
 		stderr: (result.stderr || '').trimEnd(),
@@ -113,21 +136,30 @@ async function main() {
 	}
 
 	const includeGitDirtyArgs = args.includeGitDirty ? ['--include-git-dirty'] : [];
-	const strictSidecarArgs = args.strictSidecar ? ['--require-sidecar'] : [];
+	const baselineArgs = args.baseline ? ['--baseline', args.baseline] : [];
+
+	const syntaxChecks = [
+		runNodeCheck({ fileRel: path.join('scripts', 'context-freshness-check.mjs') }),
+		runNodeCheck({ fileRel: path.join('scripts', 'update-context-freshness.mjs') }),
+		runNodeCheck({ fileRel: path.join('scripts', 'lib', 'drift.js') }),
+		runNodeCheck({ fileRel: path.join('scripts', 'pre-pr-check.mjs') }),
+	];
 
 	const results = [
+		...syntaxChecks,
 		runNodeScript({
 			scriptRel: path.join('scripts', 'current-goals-check.mjs'),
-			args: ['--fail-on-update', '--maxAgeDays', String(args.maxAgeDays), ...includeGitDirtyArgs],
+			args: ['--fail-on-update', ...includeGitDirtyArgs],
 		}),
 		runNodeScript({
 			scriptRel: path.join('scripts', 'context-freshness-check.mjs'),
 			args: [
 				'--fail-on-update',
-				'--maxAgeDays',
-				String(args.maxAgeDays),
-				...includeGitDirtyArgs,
-				...strictSidecarArgs,
+				'--warn-threshold',
+				String(args.warnThreshold),
+				'--fail-threshold',
+				String(args.failThreshold),
+				...baselineArgs,
 			],
 		}),
 		runNodeScript({

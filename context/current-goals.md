@@ -4,7 +4,7 @@ This file is the single-source-of-truth for what matters *right now*.
 Last updated: 2026-01-18T18:45:00Z
 
 ## Now
-- Confirm implementation of status bar action buttons for VS Code tasks
+- Address weaknesses of determining freshness by timestamp. Requires user input, which will lead to false negatives when forgotten.
 - Develop the spec for an animation-focused Concierge module based on specs/animation/choreographer.animation-spec.md
 
 ## Next
@@ -17,6 +17,7 @@ Last updated: 2026-01-18T18:45:00Z
 - Create 11ty pages for rapid iterating on the UX of landing page section design (e.g. Hero, Bio, Organizations, etc.).
 
 ## Done (recent)
+- Confirm implementation of status bar action buttons for VS Code tasks
 
 ## Not Now
 - Improve drift gate messaging surfaced by VS Code (keep it short and actionable)

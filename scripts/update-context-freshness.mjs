@@ -3,58 +3,49 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { execFileSync } from 'node:child_process';
-import crypto from 'node:crypto';
+import { computeDriftReport, resolveBaseline, DEFAULTS } from './lib/drift.js';
 
-const SIDECAR_REL = 'context/.freshness.json';
-const CONTEXT_FILES = [
-	'context/current-goals.md',
-	'context/constraints.md',
-	'context/decisions.md',
-];
-
-const DEFAULT_ALERT_THRESHOLD = 6;
-const DEFAULT_MAX_AGE_DAYS = 14;
-
-const ANSI = {
-	reset: '\x1b[0m',
-	bold: '\x1b[1m',
-	red: '\x1b[31m',
-	green: '\x1b[32m',
-};
+const BASELINE_FILE = 'context/drift-baseline.json';
 
 function parseArgs(argv) {
 	const args = {
-		init: false,
-		markReviewed: false,
-		alertThreshold: DEFAULT_ALERT_THRESHOLD,
-		maxAgeDays: DEFAULT_MAX_AGE_DAYS,
+		setBaseline: false,
+		baseline: null,
+		note: null,
+		warnThreshold: DEFAULTS.warnThreshold,
+		failThreshold: DEFAULTS.failThreshold,
 		failOnThreshold: false,
-		noColor: false,
+		json: false,
+		help: false,
 	};
 
 	for (let i = 0; i < argv.length; i += 1) {
 		const token = argv[i];
-		if (token === '--init') {
-			args.init = true;
-			continue;
-		}
-		if (token === '--mark-reviewed' || token === '--markReviewed') {
-			args.markReviewed = true;
-			continue;
-		}
-		if (token === '--help' || token === '-h') {
-			args.help = true;
-			continue;
-		}
-		if (token === '--alert-threshold') {
-			const n = Number(argv[i + 1]);
-			if (Number.isFinite(n) && n >= 0) args.alertThreshold = n;
+		if (token === '--set-baseline') {
+			args.setBaseline = true;
+			args.baseline = argv[i + 1] || 'HEAD';
 			i += 1;
 			continue;
 		}
-		if (token === '--maxAgeDays') {
+		if (token === '--baseline') {
+			args.baseline = argv[i + 1];
+			i += 1;
+			continue;
+		}
+		if (token === '--note') {
+			args.note = argv[i + 1] || null;
+			i += 1;
+			continue;
+		}
+		if (token === '--warn-threshold') {
 			const n = Number(argv[i + 1]);
-			if (Number.isFinite(n) && n > 0) args.maxAgeDays = n;
+			if (Number.isFinite(n)) args.warnThreshold = n;
+			i += 1;
+			continue;
+		}
+		if (token === '--fail-threshold') {
+			const n = Number(argv[i + 1]);
+			if (Number.isFinite(n)) args.failThreshold = n;
 			i += 1;
 			continue;
 		}
@@ -62,8 +53,12 @@ function parseArgs(argv) {
 			args.failOnThreshold = true;
 			continue;
 		}
-		if (token === '--no-color' || token === '--noColor') {
-			args.noColor = true;
+		if (token === '--json') {
+			args.json = true;
+			continue;
+		}
+		if (token === '--help' || token === '-h') {
+			args.help = true;
 			continue;
 		}
 	}
@@ -77,110 +72,63 @@ Usage:
   node scripts/update-context-freshness.mjs [options]
 
 Options:
-  --init         Initialize context/.freshness.json for all context files (one-time)
-	--mark-reviewed        Update sidecar reviewedAt for all context files (records a review without editing files)
-	--alert-threshold <n>  Alert on commit when aggregate drift score >= n (default: ${DEFAULT_ALERT_THRESHOLD})
-	--maxAgeDays <n>       Pass-through for drift scoring (default: ${DEFAULT_MAX_AGE_DAYS})
-	--fail-on-threshold    Exit non-zero when the drift threshold is exceeded (commit-blocking)
-	--no-color             Disable ANSI color output
-  -h, --help     Show help
+  --set-baseline [hash]  Write context/drift-baseline.json with the given hash (default: HEAD)
+  --baseline <hash>      Override baseline used for drift calculation
+  --note <text>          Note to record in baseline file when setting baseline
+  --warn-threshold <n>   Warn when aggregate drift score >= n (default: ${DEFAULTS.warnThreshold})
+  --fail-threshold <n>   Fail when aggregate drift score >= n (default: ${DEFAULTS.failThreshold})
+  --fail-on-threshold    Exit non-zero when aggregate >= warn threshold
+  --json                 Emit JSON payload
+  -h, --help             Show help
 
 Notes:
-  Default mode runs during pre-commit and only updates entries for staged context files.
-	It also runs a commit-time drift threshold check and prints an alert when exceeded.
+  This replaces timestamp-based freshness tracking with drift-score baselines.
 `);
 }
 
-function tryExecGit(args, { cwd } = {}) {
+function tryExecGit(args, { cwd }) {
 	try {
-		return execFileSync('git', args, {
-			cwd,
-			encoding: 'utf8',
-			stdio: ['ignore', 'pipe', 'pipe'],
-		}).trim();
+		return execFileSync('git', args, { cwd, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
 	} catch {
 		return null;
 	}
 }
 
-function execGit(args, { cwd } = {}) {
-	return execFileSync('git', args, {
-		cwd,
-		encoding: 'utf8',
-		stdio: ['ignore', 'pipe', 'pipe'],
-	}).trim();
-}
-
-function tryExecNodeJson(scriptArgs, { cwd } = {}) {
-	try {
-		const raw = execFileSync(process.execPath, scriptArgs, {
-			cwd,
-			encoding: 'utf8',
-			stdio: ['ignore', 'pipe', 'ignore'],
-		}).trim();
-		return JSON.parse(raw);
-	} catch {
-		return null;
-	}
-}
-
-function style(text, { color, bold = false, enabled = true } = {}) {
-	if (!enabled) return text;
-	const colorCode = color && ANSI[color] ? ANSI[color] : '';
-	const boldCode = bold ? ANSI.bold : '';
-	return `${boldCode}${colorCode}${text}${ANSI.reset}`;
-}
-
-function sha256(text) {
-	return crypto.createHash('sha256').update(text).digest('hex');
-}
-
-async function readJsonIfExists(absolutePath) {
-	try {
-		const raw = await fs.readFile(absolutePath, 'utf8');
-		return JSON.parse(raw);
-	} catch {
-		return null;
-	}
-}
-
-function isoNowUtc() {
-	return new Date().toISOString();
-}
-
-function stableStringify(value) {
-	// Stable-ish stringify: sort top-level keys and per-file keys.
-	const sortObject = (obj) => {
-		if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return obj;
-		const out = {};
-		for (const key of Object.keys(obj).sort()) {
-			out[key] = sortObject(obj[key]);
-		}
-		return out;
+function writeBaselineFile({ cwd, baselineHash, note }) {
+	const branch = tryExecGit(['rev-parse', '--abbrev-ref', 'HEAD'], { cwd });
+	const payload = {
+		baselineHash,
+		branch: branch || 'unknown',
+		notes: note || undefined,
 	};
-	return `${JSON.stringify(sortObject(value), null, 2)}\n`;
+	const target = path.join(cwd, BASELINE_FILE);
+	return fs
+		.mkdir(path.dirname(target), { recursive: true })
+		.then(() => fs.writeFile(target, `${JSON.stringify(payload, null, 2)}\n`, 'utf8'))
+		.then(() => target);
 }
 
-function getStagedContent(relPath, { cwd }) {
-	// Reads the staged version (index) of a file.
-	// Returns null if file isn't in index.
-	try {
-		return execFileSync('git', ['show', `:${relPath}`], {
-			cwd,
-			encoding: 'utf8',
-			stdio: ['ignore', 'pipe', 'ignore'],
-		});
-	} catch {
-		return null;
-	}
+function exitCode({ aggregate, warnThreshold, failThreshold, failOnThreshold }) {
+	if (aggregate >= failThreshold) return 2;
+	if (aggregate >= warnThreshold) return failOnThreshold ? 2 : 1;
+	return 0;
 }
 
-async function getWorkingTreeContent(relPath, { rootDir }) {
-	try {
-		return await fs.readFile(path.join(rootDir, relPath), 'utf8');
-	} catch {
-		return null;
+function printHumanReport({ report, warnThreshold, failThreshold }) {
+	const { aggregate, baselineHash, files } = report;
+	process.stdout.write(`Baseline: ${baselineHash}\n`);
+	process.stdout.write(`Aggregate drift: ${aggregate.toFixed(2)} (warn ${warnThreshold}, fail ${failThreshold})\n`);
+	if (!files.length) {
+		process.stdout.write('No drift detected.\n');
+		return;
 	}
+	const sorted = [...files].sort((a, b) => b.score - a.score);
+	for (const f of sorted.slice(0, 10)) {
+		process.stdout.write(
+			`- ${f.path}: score ${f.score.toFixed(2)} (+${f.added}/-${f.deleted}, crit ${f.criticalityWeight}, sem ${f.semanticWeight} ${f.semanticBucket})\n`
+		);
+	}
+	process.stdout.write('\nTo accept current state as baseline: node scripts/update-context-freshness.mjs --set-baseline HEAD --note "reason"\n');
 }
 
 async function main() {
@@ -191,142 +139,44 @@ async function main() {
 	}
 
 	const cwd = process.cwd();
-	const gitRoot = tryExecGit(['rev-parse', '--show-toplevel'], { cwd });
-	if (!gitRoot) {
-		process.stdout.write('update-context-freshness: not a git repo; skipping\n');
+
+	if (args.setBaseline) {
+		const resolved = await resolveBaseline({ cwd, baselineArg: args.baseline || 'HEAD' });
+		const target = await writeBaselineFile({ cwd, baselineHash: resolved.baselineHash, note: args.note });
+		process.stdout.write(`Set baseline to ${resolved.baselineHash} (${resolved.source}) -> ${target}\n`);
 		process.exit(0);
 	}
 
-	const rootDir = gitRoot;
+	const baseline = await resolveBaseline({ cwd, baselineArg: args.baseline });
+	const report = computeDriftReport({ cwd, baselineHash: baseline.baselineHash, includePaths: ['context', 'specs', 'docs'] });
 
-	let targetFiles = [];
-	if (args.init || args.markReviewed) {
-		targetFiles = [...CONTEXT_FILES];
-	} else {
-		const staged = execGit(['diff', '--cached', '--name-only'], { cwd: rootDir })
-			.split('\n')
-			.map((s) => s.trim())
-			.filter(Boolean);
+	const payload = {
+		baseline,
+		aggregate: report.aggregate,
+		warnThreshold: args.warnThreshold,
+		failThreshold: args.failThreshold,
+		files: report.files,
+	};
 
-		targetFiles = CONTEXT_FILES.filter((p) => staged.includes(p));
+	if (args.json) {
+		process.stdout.write(JSON.stringify(payload, null, 2) + '\n');
+		process.exit(exitCode({
+			aggregate: report.aggregate,
+			warnThreshold: args.warnThreshold,
+			failThreshold: args.failThreshold,
+			failOnThreshold: args.failOnThreshold,
+		}));
 	}
 
-	const sidecarAbs = path.join(rootDir, SIDECAR_REL);
-
-	// 1) Update sidecar when:
-	//    - init mode (one-time bootstrap)
-	//    - mark-reviewed mode (records review time)
-	//    - staged context files exist (normal pre-commit behavior)
-	if (args.init || args.markReviewed || targetFiles.length > 0) {
-		const existing = (await readJsonIfExists(sidecarAbs)) || {};
-		const next = {
-			version: 1,
-			updatedAt: isoNowUtc(),
-			files: {
-				...(existing.files || {}),
-			},
-		};
-
-		let changed = false;
-		for (const relPath of targetFiles) {
-			const content = args.init || args.markReviewed
-				? await getWorkingTreeContent(relPath, { rootDir })
-				: getStagedContent(relPath, { cwd: rootDir });
-
-			if (content == null) continue;
-
-			const hash = sha256(content);
-			const prev = next.files[relPath];
-
-			// In mark-reviewed mode, always bump reviewedAt even if contentHash hasn't changed.
-			if (args.markReviewed) {
-				next.files[relPath] = {
-					reviewedAt: isoNowUtc(),
-					contentHash: hash,
-				};
-				changed = true;
-				continue;
-			}
-
-			if (!prev || prev.contentHash !== hash) {
-				next.files[relPath] = {
-					reviewedAt: isoNowUtc(),
-					contentHash: hash,
-				};
-				changed = true;
-			}
-		}
-
-		if (changed) {
-			await fs.mkdir(path.dirname(sidecarAbs), { recursive: true });
-			await fs.writeFile(sidecarAbs, stableStringify(next), 'utf8');
-
-			// Stage the sidecar so the commit includes the freshness record.
-			execGit(['add', SIDECAR_REL], { cwd: rootDir });
-
-			let msg = `update-context-freshness: updated and staged ${SIDECAR_REL}\n`;
-			if (args.init) msg = `update-context-freshness: initialized and staged ${SIDECAR_REL}\n`;
-			if (args.markReviewed) msg = `update-context-freshness: marked reviewed and staged ${SIDECAR_REL}\n`;
-			process.stdout.write(msg);
-		}
-	}
-
-	// 2) On commit, alert (do not block) if drift has accumulated beyond threshold.
-	if (!args.init && args.alertThreshold >= 0) {
-		const payload = tryExecNodeJson(
-			[
-				'scripts/context-freshness-check.mjs',
-				'--json',
-				'--require-sidecar',
-				'--maxAgeDays',
-				String(args.maxAgeDays),
-			],
-			{ cwd: rootDir }
-		);
-
-		const useColor = !args.noColor && !process.env.NO_COLOR;
-		const files = Array.isArray(payload?.files) ? payload.files : [];
-		const aggregateScore = files.reduce((sum, f) => sum + (Number(f?.score) || 0), 0);
-
-		if (aggregateScore >= args.alertThreshold && aggregateScore > 0) {
-			process.stdout.write(
-				`\n${style('CONTEXT FRESHNESS: THRESHOLD EXCEEDED', { color: 'red', bold: true, enabled: useColor })}\n` +
-				`${style(`drift score ${aggregateScore} >= ${args.alertThreshold}`, { color: 'red', enabled: useColor })}\n` +
-				`Consider reviewing/updating context (task: \"Refresh Context (Guided)\").\n`
-			);
-
-			const toShow = files
-				.filter((f) => (Number(f?.score) || 0) > 0)
-				.sort((a, b) => (Number(b?.score) || 0) - (Number(a?.score) || 0))
-				.slice(0, 3);
-
-			for (const f of toShow) {
-				const score = Number(f?.score) || 0;
-				const tag = f?.recommended ? 'RECOMMENDED' : 'drift';
-				process.stdout.write(`- ${f.file} (${tag}, score=${score})\n`);
-			}
-			process.stdout.write('\n');
-
-			if (args.failOnThreshold) {
-				process.stderr.write(
-					`${style('context-freshness: commit blocked (threshold exceeded)', {
-						color: 'red',
-						bold: true,
-						enabled: useColor,
-					})}\n`
-				);
-				process.stderr.write('Next: update/review context, or use `git commit --no-verify` to bypass.\n');
-				process.exit(1);
-			}
-		} else {
-			process.stdout.write(
-				`${style('context-freshness: OK', { color: 'green', bold: true, enabled: useColor })} ` +
-				`(drift score ${aggregateScore} < ${args.alertThreshold})\n`
-			);
-		}
-	}
-
-	process.exit(0);
+	printHumanReport({ report, warnThreshold: args.warnThreshold, failThreshold: args.failThreshold });
+	process.exit(
+		exitCode({
+			aggregate: report.aggregate,
+			warnThreshold: args.warnThreshold,
+			failThreshold: args.failThreshold,
+			failOnThreshold: args.failOnThreshold,
+		})
+	);
 }
 
 main().catch((err) => {

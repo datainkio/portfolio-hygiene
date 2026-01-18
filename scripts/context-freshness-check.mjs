@@ -1,41 +1,45 @@
 #!/usr/bin/env node
 
-import fs from 'node:fs/promises';
-import path from 'node:path';
-import { execFileSync } from 'node:child_process';
-import crypto from 'node:crypto';
-
-const SIDECAR_REL = 'context/.freshness.json';
+import { computeDriftReport, resolveBaseline, DEFAULTS } from './lib/drift.js';
 
 function parseArgs(argv) {
 	const args = {
-		maxAgeDays: 7,
+		warnThreshold: DEFAULTS.warnThreshold,
+		failThreshold: DEFAULTS.failThreshold,
+		baseline: null,
 		failOnUpdate: false,
-		includeGitDirty: false,
-		requireSidecar: false,
 		json: false,
 		help: false,
+		paths: [],
 	};
 
 	for (let i = 0; i < argv.length; i += 1) {
 		const token = argv[i];
-		if (token === '--maxAgeDays') {
-			const raw = argv[i + 1];
-			const parsed = Number(raw);
-			if (Number.isFinite(parsed)) args.maxAgeDays = parsed;
+		if (token === '--warn-threshold') {
+			const n = Number(argv[i + 1]);
+			if (Number.isFinite(n)) args.warnThreshold = n;
+			i += 1;
+			continue;
+		}
+		if (token === '--fail-threshold') {
+			const n = Number(argv[i + 1]);
+			if (Number.isFinite(n)) args.failThreshold = n;
+			i += 1;
+			continue;
+		}
+		if (token === '--baseline') {
+			args.baseline = argv[i + 1];
+			i += 1;
+			continue;
+		}
+		if (token === '--path') {
+			const p = argv[i + 1];
+			if (p) args.paths.push(p);
 			i += 1;
 			continue;
 		}
 		if (token === '--fail-on-update') {
 			args.failOnUpdate = true;
-			continue;
-		}
-		if (token === '--include-git-dirty') {
-			args.includeGitDirty = true;
-			continue;
-		}
-		if (token === '--require-sidecar') {
-			args.requireSidecar = true;
 			continue;
 		}
 		if (token === '--json') {
@@ -57,383 +61,44 @@ Usage:
   node scripts/context-freshness-check.mjs [options]
 
 Options:
-	--maxAgeDays <n>      Recommend update if freshness baseline is older than N days (default: 7)
-  --fail-on-update      Exit 1 if any context file update is recommended
-  --include-git-dirty   Treat uncommitted changes as a recommendation signal
-	--require-sidecar     Require context/.freshness.json for freshness (no Last updated fallback)
-  --json                Emit JSON payload to stdout
-  -h, --help            Show help
+  --warn-threshold <n>   Warn when aggregate drift score >= n (default: ${DEFAULTS.warnThreshold})
+  --fail-threshold <n>   Fail when aggregate drift score >= n (default: ${DEFAULTS.failThreshold})
+  --baseline <hash>      Override baseline hash (default: context/drift-baseline.json or origin/main)
+  --path <glob>          Limit drift calculation to paths (repeatable)
+  --fail-on-update       Exit 2 when score >= warn threshold (strict CI)
+  --json                 Emit JSON payload to stdout
+  -h, --help             Show help
 `);
 }
 
-function sha256(text) {
-	return crypto.createHash('sha256').update(text).digest('hex');
+function formatNumber(n) {
+	return Number(n).toFixed(2);
 }
 
-function tryExecGit(args, { cwd } = {}) {
-	try {
-		return execFileSync('git', args, {
-			cwd,
-			encoding: 'utf8',
-			stdio: ['ignore', 'pipe', 'ignore'],
-		}).trim();
-	} catch {
-		return null;
-	}
+function exitCode({ aggregate, warnThreshold, failThreshold, failOnUpdate }) {
+	if (aggregate >= failThreshold) return 2;
+	if (aggregate >= warnThreshold) return failOnUpdate ? 2 : 1;
+	return 0;
 }
 
-async function pathExists(absolutePath) {
-	try {
-		await fs.access(absolutePath);
-		return true;
-	} catch {
-		return false;
-	}
-}
+function printHuman({ report, warnThreshold, failThreshold }) {
+	const { aggregate, baselineHash, files } = report;
+	process.stdout.write(`Context drift (baseline ${baselineHash})\n`);
+	process.stdout.write(`Aggregate score: ${formatNumber(aggregate)} (warn ${warnThreshold}, fail ${failThreshold})\n`);
 
-async function readJsonIfExists(absolutePath) {
-	try {
-		const raw = await fs.readFile(absolutePath, 'utf8');
-		return JSON.parse(raw);
-	} catch {
-		return null;
-	}
-}
-
-function parseIsoDate(raw) {
-	if (!raw) return null;
-	const date = new Date(raw);
-	if (Number.isNaN(date.getTime())) return null;
-	return date;
-}
-
-function parseLastUpdated(markdown) {
-	const match = markdown.match(
-		/^\s*Last updated:\s*(\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?(?:Z|[+-]\d{2}:\d{2})?)?)\s*$/m
-	);
-	if (!match) return null;
-
-	const raw = match[1];
-	const date = raw.includes('T') ? new Date(raw) : new Date(`${raw}T00:00:00Z`);
-	if (Number.isNaN(date.getTime())) return null;
-	return { raw, date, hasTime: raw.includes('T') };
-}
-
-function daysBetweenUtc(a, b) {
-	const msPerDay = 24 * 60 * 60 * 1000;
-	const start = Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate());
-	const end = Date.UTC(b.getUTCFullYear(), b.getUTCMonth(), b.getUTCDate());
-	return Math.floor((end - start) / msPerDay);
-}
-
-async function listRecentFiles({ absoluteDir, sinceMs, maxResults = 20 }) {
-	const results = [];
-	const IGNORE_DIRS = new Set([
-		'.git',
-		'node_modules',
-		'_site',
-		'dist',
-		'build',
-		'coverage',
-		'.next',
-		'.nuxt',
-		'.turbo',
-		'.cache',
-		'.parcel-cache',
-		'logs',
-	]);
-
-	async function walk(dir) {
-		let entries;
-		try {
-			entries = await fs.readdir(dir, { withFileTypes: true });
-		} catch {
-			return;
-		}
-
-		for (const entry of entries) {
-			const absolutePath = path.join(dir, entry.name);
-			if (entry.isDirectory()) {
-				if (IGNORE_DIRS.has(entry.name)) continue;
-				await walk(absolutePath);
-				continue;
-			}
-			if (!entry.isFile()) continue;
-			if (entry.name === '.DS_Store') continue;
-			if (entry.name === '.freshness.json') continue;
-
-			let stat;
-			try {
-				stat = await fs.stat(absolutePath);
-			} catch {
-				continue;
-			}
-
-			if (stat.mtimeMs > sinceMs) {
-				results.push({ path: absolutePath, mtimeMs: stat.mtimeMs });
-			}
-		}
+	if (!files.length) {
+		process.stdout.write('No drift detected.\n');
+		return;
 	}
 
-	await walk(absoluteDir);
-
-	results.sort((a, b) => b.mtimeMs - a.mtimeMs);
-	return results.slice(0, maxResults);
-}
-
-function toRelative(absolutePath, rootDir) {
-	return path.relative(rootDir, absolutePath) || '.';
-}
-
-function summarizePaths(files, rootDir) {
-	return files.map((f) => toRelative(f.path, rootDir));
-}
-
-function normalizePosix(p) {
-	return p.split(path.sep).join('/');
-}
-
-function matchStrengthRules({ insideRootPaths, rules }) {
-	if (!Array.isArray(rules) || rules.length === 0) return { bonus: 0, hits: [] };
-	const hits = [];
-	let bonus = 0;
-
-	for (const rule of rules) {
-		const prefixes = Array.isArray(rule?.prefixes) ? rule.prefixes : [];
-		const exact = Array.isArray(rule?.exact) ? rule.exact : [];
-		const didMatch = insideRootPaths.some((p) =>
-			exact.includes(p) || prefixes.some((prefix) => p.startsWith(prefix))
+	const sorted = [...files].sort((a, b) => b.score - a.score);
+	const top = sorted.slice(0, 10);
+	process.stdout.write('Top contributors:\n');
+	for (const f of top) {
+		process.stdout.write(
+			`- ${f.path} (score ${formatNumber(f.score)}, +${f.added}/-${f.deleted}, crit ${f.criticalityWeight}, sem ${f.semanticWeight} ${f.semanticBucket})\n`
 		);
-		if (!didMatch) continue;
-		hits.push(rule.id);
-		bonus += Number(rule.bonus) || 0;
 	}
-
-	return { bonus, hits };
-}
-
-function isoTodayUtc() {
-	const now = new Date();
-	const pad = (n) => String(n).padStart(2, '0');
-	return `${now.getUTCFullYear()}-${pad(now.getUTCMonth() + 1)}-${pad(now.getUTCDate())}`;
-}
-
-const CONTEXT_FILES = [
-	{
-		id: 'current-goals',
-		rel: 'context/current-goals.md',
-		label: 'current-goals',
-		watchRoots: [
-			{ id: 'context', rel: 'context', weight: 2 },
-			{ id: 'specs', rel: 'specs', weight: 2 },
-			{ id: 'decisions', rel: 'docs/decisions', weight: 3 },
-			{ id: 'logs', rel: 'docs/logs', weight: 1 },
-			{
-				id: 'frontend',
-				rel: '../frontend',
-				weight: 1,
-				scaleWithCount: true,
-				maxResults: 30,
-				strengthRules: [
-					{ id: 'pages', bonus: 2, prefixes: ['njk/_pages/'] },
-					{ id: 'includes', bonus: 1, prefixes: ['njk/_includes/'] },
-					{ id: 'choreography', bonus: 2, prefixes: ['js/choreography/'] },
-					{ id: 'eleventy', bonus: 2, prefixes: ['eleventy/'], exact: ['.eleventy.js', '.eleventyignore'] },
-					{ id: 'styles', bonus: 1, prefixes: ['styles/'] },
-				],
-			},
-		],
-	},
-	{
-		id: 'constraints',
-		rel: 'context/constraints.md',
-		label: 'constraints',
-		watchRoots: [
-			{ id: 'context', rel: 'context', weight: 1 },
-			{ id: 'specs', rel: 'specs', weight: 2 },
-			{ id: 'decisions', rel: 'docs/decisions', weight: 2 },
-		],
-	},
-	{
-		id: 'decisions',
-		rel: 'context/decisions.md',
-		label: 'decisions',
-		watchRoots: [
-			{ id: 'decisions', rel: 'docs/decisions', weight: 3 },
-			{
-				id: 'frontend',
-				rel: '../frontend',
-				weight: 1,
-				scaleWithCount: true,
-				maxResults: 30,
-				strengthRules: [
-					{ id: 'pages', bonus: 2, prefixes: ['njk/_pages/'] },
-					{ id: 'includes', bonus: 1, prefixes: ['njk/_includes/'] },
-					{ id: 'choreography', bonus: 2, prefixes: ['js/choreography/'] },
-					{ id: 'eleventy', bonus: 2, prefixes: ['eleventy/'], exact: ['.eleventy.js', '.eleventyignore'] },
-					{ id: 'styles', bonus: 1, prefixes: ['styles/'] },
-				],
-			},
-		],
-	},
-];
-
-async function evaluateFile({ rootDir, relPath, maxAgeDays, includeGitDirty }) {
-	const absolutePath = path.join(rootDir, relPath);
-
-	if (!(await pathExists(absolutePath))) {
-		return {
-			ok: false,
-			recommended: true,
-			score: 3,
-			file: relPath,
-			lastUpdated: null,
-			reasons: [`Missing file at ${relPath}`],
-			signals: [],
-		};
-	}
-
-	const content = await fs.readFile(absolutePath, 'utf8');
-	const lastUpdated = parseLastUpdated(content);
-	const now = new Date();
-	const contentHash = sha256(content);
-
-	const reasons = [];
-	const signals = [];
-	let score = 0;
-
-	// Freshness is primarily tracked via the sidecar (context/.freshness.json).
-	// We keep the in-file Last updated for observability and as a fallback signal.
-	signals.push({ id: 'lastUpdatedInFile', value: lastUpdated?.raw || null });
-
-	const isGitRepo = Boolean(tryExecGit(['rev-parse', '--is-inside-work-tree'], { cwd: rootDir }));
-	if (isGitRepo) {
-		const status = tryExecGit(['status', '--porcelain'], { cwd: rootDir });
-		const dirty = Boolean(status);
-		signals.push({ id: 'gitDirty', value: dirty });
-		if (dirty && includeGitDirty) {
-			reasons.push('Working tree has uncommitted changes');
-			score += 1;
-		}
-	}
-
-	const sinceMs = lastUpdated ? lastUpdated.date.getTime() : now.getTime() - 14 * 24 * 60 * 60 * 1000;
-	return {
-		ok: true,
-		recommended: false,
-		score,
-		file: relPath,
-		lastUpdated: lastUpdated?.raw || null,
-		contentHash,
-		reasons,
-		signals,
-		sinceMs,
-	};
-}
-
-
-async function evaluateFileWithDrift({ rootDir, config, maxAgeDays, includeGitDirty, freshnessSidecar, requireSidecar }) {
-	const base = await evaluateFile({ rootDir, relPath: config.rel, maxAgeDays, includeGitDirty });
-	const now = new Date();
-	const signals = [...(base.signals || [])];
-	const reasons = [...(base.reasons || [])];
-	let score = base.score || 0;
-
-	const sidecarEntry = freshnessSidecar?.files?.[config.rel] || null;
-	const reviewedAtRaw = sidecarEntry?.reviewedAt || null;
-	const reviewedAtDate = parseIsoDate(reviewedAtRaw);
-	const sidecarContentHash = sidecarEntry?.contentHash || null;
-
-	if (sidecarContentHash && base.contentHash && sidecarContentHash !== base.contentHash) {
-		reasons.push('Freshness sidecar is out of sync with file content (run git commit hook to refresh)');
-		score += 3;
-	}
-
-	let baselineDate = null;
-	let baselineSource = null;
-	if (reviewedAtDate) {
-		baselineDate = reviewedAtDate;
-		baselineSource = 'sidecar.reviewedAt';
-	} else if (!requireSidecar && base.lastUpdated) {
-		// base.lastUpdated can be either YYYY-MM-DD or full ISO.
-		const fallbackRaw = base.lastUpdated.includes('T') ? base.lastUpdated : `${base.lastUpdated}T00:00:00Z`;
-		const fallbackDate = parseIsoDate(fallbackRaw);
-		if (fallbackDate) {
-			baselineDate = fallbackDate;
-			baselineSource = 'file.lastUpdated';
-		}
-	}
-
-	signals.push({ id: 'freshnessBaseline', value: { source: baselineSource, reviewedAt: reviewedAtRaw } });
-
-	if (!baselineDate) {
-		reasons.push('No freshness baseline found (missing sidecar reviewedAt and missing/invalid Last updated)');
-		score += 3;
-	} else {
-		const ageDays = daysBetweenUtc(baselineDate, now);
-		signals.push({ id: 'ageDays', value: ageDays });
-		if (ageDays > maxAgeDays) {
-			reasons.push(`Freshness baseline is ${ageDays}d old (>${maxAgeDays}d)`);
-			score += 2;
-		}
-	}
-
-	const absoluteSelf = path.join(rootDir, config.rel);
-	const selfRel = toRelative(absoluteSelf, rootDir);
-	const sinceMs = baselineDate ? baselineDate.getTime() : base.sinceMs ?? (now.getTime() - 14 * 24 * 60 * 60 * 1000);
-
-	for (const root of config.watchRoots) {
-		const absoluteDir = path.join(rootDir, root.rel);
-		if (!(await pathExists(absoluteDir))) continue;
-
-		const maxResults = root.maxResults ?? 10;
-		const recent = await listRecentFiles({ absoluteDir, sinceMs, maxResults });
-		if (recent.length === 0) continue;
-
-		const relativePaths = summarizePaths(recent, rootDir);
-		signals.push({ id: `recent:${root.id}`, value: relativePaths });
-		const insideRootPaths = recent
-			.map((f) => normalizePosix(path.relative(absoluteDir, f.path)))
-			.filter((p) => p && p !== '.');
-
-		const nonSelf = relativePaths.filter((p) => p !== selfRel);
-		if (nonSelf.length === 0) continue;
-
-		const saturated = recent.length >= maxResults;
-		const shown = Math.min(nonSelf.length, maxResults);
-		const { bonus: strengthBonus, hits: strengthHits } = matchStrengthRules({
-			insideRootPaths,
-			rules: root.strengthRules,
-		});
-
-		const strengthSuffix =
-			strengthHits.length > 0 ? `; strong signals: ${strengthHits.join(', ')}` : '';
-
-		reasons.push(
-			`New/updated ${root.id} artifacts since last update (${shown}${saturated ? '+' : ''} shown${strengthSuffix})`
-		);
-
-		let multiplier = 1;
-		if (root.scaleWithCount) {
-			// Scale with count so a small-but-realistic set of frontend edits can trip the threshold.
-			// 1-2 files => x1, 3-4 => x2, 5-6 => x3 (capped)
-			multiplier = Math.min(3, Math.max(1, Math.ceil(nonSelf.length / 2)));
-		}
-
-		score += root.weight * multiplier;
-		score += strengthBonus;
-	}
-
-	const recommended = score >= 3;
-	return {
-		...base,
-		ok: base.ok,
-		recommended,
-		score,
-		reasons,
-		signals,
-		sinceMs: undefined,
-	};
 }
 
 async function main() {
@@ -444,56 +109,43 @@ async function main() {
 	}
 
 	const cwd = process.cwd();
-	const gitRoot = tryExecGit(['rev-parse', '--show-toplevel'], { cwd });
-	const rootDir = gitRoot || cwd;
+	const baseline = await resolveBaseline({ cwd, baselineArg: args.baseline });
+	const includePaths = args.paths.length > 0 ? args.paths : ['context', 'specs', 'docs'];
+	const report = computeDriftReport({ cwd, baselineHash: baseline.baselineHash, includePaths });
 
-	const freshnessSidecar = await readJsonIfExists(path.join(rootDir, SIDECAR_REL));
+	const payload = {
+		ok: report.aggregate < args.warnThreshold,
+		aggregate: report.aggregate,
+		warnThreshold: args.warnThreshold,
+		failThreshold: args.failThreshold,
+		baseline,
+		files: report.files,
+	};
 
-	const results = [];
-	for (const config of CONTEXT_FILES) {
-		results.push(
-			await evaluateFileWithDrift({
-				rootDir,
-				config,
-				maxAgeDays: args.maxAgeDays,
-				includeGitDirty: args.includeGitDirty,
-				freshnessSidecar,
-				requireSidecar: args.requireSidecar,
+	if (args.json) {
+		process.stdout.write(JSON.stringify(payload, null, 2) + '\n');
+		process.exit(
+			exitCode({
+				aggregate: report.aggregate,
+				warnThreshold: args.warnThreshold,
+				failThreshold: args.failThreshold,
+				failOnUpdate: args.failOnUpdate,
 			})
 		);
 	}
 
-	const recommendedAny = results.some((r) => r.recommended);
-	const payload = {
-		ok: true,
-		recommended: recommendedAny,
-		files: results,
-		todayUtc: isoTodayUtc(),
-		maxAgeDays: args.maxAgeDays,
-	};
-
-	if (args.json) {
-		process.stdout.write(`${JSON.stringify(payload, null, 2)}\n`);
-		process.exit(args.failOnUpdate && recommendedAny ? 1 : 0);
-	}
-
-	if (!recommendedAny) {
-		process.stdout.write('Context looks fresh enough.\n');
-		process.exit(0);
-	}
-
-	process.stdout.write('Context update recommended.\n\n');
-	for (const result of results) {
-		if (!result.recommended) continue;
-		process.stdout.write(`- ${result.file}\n`);
-		for (const reason of result.reasons || []) process.stdout.write(`  - ${reason}\n`);
-	}
-	process.stdout.write('\nNext: run the task "Refresh Context (Guided)" or open the files under context/.\n');
-
-	process.exit(args.failOnUpdate && recommendedAny ? 1 : 0);
+	printHuman({ report, warnThreshold: args.warnThreshold, failThreshold: args.failThreshold });
+	process.exit(
+		exitCode({
+			aggregate: report.aggregate,
+			warnThreshold: args.warnThreshold,
+			failThreshold: args.failThreshold,
+			failOnUpdate: args.failOnUpdate,
+		})
+	);
 }
 
 main().catch((err) => {
-	process.stderr.write(`context-freshness-check failed: ${err?.message || String(err)}\n`);
+	process.stderr.write(String(err?.stack || err) + '\n');
 	process.exit(2);
 });

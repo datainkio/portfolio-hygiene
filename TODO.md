@@ -1,7 +1,7 @@
 # TODO
 
 ## AIX / DX
-
+- [ ] Reduce syntax errors from AI edits (e.g. "SyntaxError: Unexpected token '}'")
 - [ ] Run a benchmark-grade AIX snapshot (fresh Copilot Chat thread) using 2–3 probes from [docs/maintenance/aix-probe-bank.md](docs/maintenance/aix-probe-bank.md) and paste the prompt + first response excerpts into a dated log under [docs/logs/](docs/logs/).
 - [x] Add a lightweight Markdown link-existence checker for `docs/` (existence only; no network) and document it in a runbook.
 - [ ] Extend the probe bank with an explicit multi-root safety probe (“do not touch mounted projects”) and add scoring notes for scope discipline.
