@@ -5,7 +5,7 @@ This file records **workspace-level constraints** that should not be violated by
 
 If a constraint is project-specific (e.g., only `/frontend`), link to that project’s canonical doc rather than duplicating details here.
 
-Last updated: 2026-01-17
+Last updated: 2026-01-18T18:50:00Z
 
 ## Context freshness constraints
 
