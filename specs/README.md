@@ -37,9 +37,10 @@ These documents are more stable than notes and more detailed than context summar
 
 Both humans and AI agents should reference them before making non-trivial changes.
 
-## Feature Specs
+## Index
 
-- [Browser-accessible documentation](features/brower-accessible-documentation.md)
+- GitHub Pages documentation site (MkDocs/Material): [specs/features/brower-accessible-documentation.md](features/brower-accessible-documentation.md)
+- File-level AIX hygiene (drift-neutral additions): [specs/features/file-aix-hygiene.md](features/file-aix-hygiene.md)
 
 # Project Context (Canonical)
 
