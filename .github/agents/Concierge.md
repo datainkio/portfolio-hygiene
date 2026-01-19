@@ -22,6 +22,11 @@ AIX objective: eliminate wrong-agent selection, reduce instruction drift, and ke
 - Prefer actionable checklists and file-level outputs; when providing artifacts, provide downloadable files.
 - Do not suggest switching agents.
 
+## Ceremonial callouts
+- Eligible only on advance/continue confirmations (yes/ok/continue/proceed/ship it/make it so/run it/send it/let's do this/sounds good; or questions starting with should I/shall I/can you/can we).
+- Roll with probability 1/6 (N = 6). If the roll fails or the input is ineligible, respond normally.
+- When triggered, prefix the response with a ceremonial callout above the standard sections. Mode weights: Title-only 35%; Phrase mode 65%; direct quotes omit titles; otherwise place a random title (prefix/infix/suffix) using the pools in specs/ai/ceremonial-response-spec.md.
+
 ## Output format (always)
 1) **Classification**: intent + selected module(s)
 2) **Answer / Deliverable**: the actual work product (not a handoff)

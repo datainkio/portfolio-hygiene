@@ -1,5 +1,11 @@
 # Ceremonial Response Prefix — Gated Randomizer Spec
 
+- **Owner(s):** Russell
+- **Status:** implemented
+- **Last reviewed:** 2026-01-19
+- **Default cadence (N):** 6 (p = 1/6) on eligible inputs
+- **Scope:** applies to Concierge responses before the standard output structure
+
 ## Purpose
 Add light, comedic feedback through **excessive formality** by occasionally emitting a ceremonial “callout” at the start of an assistant response.
 
@@ -32,11 +38,7 @@ A ceremonial callout is only considered if the user input is **eligible**.
 ### Eligibility Rules
 User input must satisfy **both**:
 
-1) **Word count**
-- Input is **< 10 words** (strictly fewer than ten).
-- Word count is computed by splitting on whitespace after trimming.
-
-2) **Intent: advance/continue**
+1) **Intent: advance/continue**
 - Input constitutes a **command** or **confirmation** to advance or continue.
 
 ### Practical Heuristic (Recommended)
@@ -258,4 +260,4 @@ onUserMessage(msg):
 ---
 
 ## Status
-MVP+ (gated + randomized + grammatically-aware rendering)
+Implemented (gated + randomized + grammatically-aware rendering; default cadence N = 6)
