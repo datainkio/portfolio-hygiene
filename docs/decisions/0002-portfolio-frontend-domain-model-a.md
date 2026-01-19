@@ -35,5 +35,5 @@ Adopt **Model A**.
 - For deeply specialized requests, we may still benefit from dedicated modules later (selected directly by Concierge).
 
 ## Related
-- [Spec: Domain-Specialized AI Coding Agent](../../specs/ai/domain-specialized-coding-agent.md)
+- [Spec: Domain-Specialized AI Coding Agent](../../specs/ai/domain-specialized-coding-agent.spec.md)
 - [Prompt module: portfolio-frontend-domain](../../.copilot/prompts/portfolio-frontend-domain.prompt.md)

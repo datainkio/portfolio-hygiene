@@ -1,5 +1,5 @@
 {
-  "baselineHash": "3629a0167fe72937577425e97b1263269c121fc2",
+  "baselineHash": "fd9a66e82d8b23aa588cc50207aedccd01a74b8f",
   "branch": "main",
-  "notes": "set via Action Button"
+  "notes": "Auto-set via Update Context after automation (below-warn)"
 }

@@ -29,8 +29,8 @@
         {
           "name": "Update Context",
           "singleInstance": true,
-          "command": "cd \"${workspaceFolder}/../aix\" && node scripts/context-refresh.mjs",
-          "tooltip": "Calculates context/doc/spec drift without opening files"
+          "command": "cd \"${workspaceFolder}/../aix\" && node scripts/update-context-auto.mjs",
+          "tooltip": "Checks drift, groups causes, auto-runs available hygiene tasks; no auto-baseline"
         },
         {
           "name": "Drift: Active File",
