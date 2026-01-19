@@ -7,7 +7,6 @@ import { execFileSync } from 'node:child_process';
 function parseArgs(argv) {
 	const args = {
 		file: 'context/current-goals.md',
-		maxAgeDays: 7,
 		failOnUpdate: false,
 		includeGitDirty: false,
 		json: false,
@@ -17,13 +16,6 @@ function parseArgs(argv) {
 		const token = argv[i];
 		if (token === '--file') {
 			args.file = argv[i + 1] || args.file;
-			i += 1;
-			continue;
-		}
-		if (token === '--maxAgeDays') {
-			const raw = argv[i + 1];
-			const parsed = Number(raw);
-			if (Number.isFinite(parsed)) args.maxAgeDays = parsed;
 			i += 1;
 			continue;
 		}
@@ -54,7 +46,6 @@ Usage:
 
 Options:
   --file <path>         Path to current-goals markdown (default: context/current-goals.md)
-  --maxAgeDays <n>      Recommend update if older than N days (default: 7)
   --fail-on-update      Exit 1 if update is recommended
 	--include-git-dirty   Treat uncommitted changes as a recommendation signal
   --json                Emit JSON payload to stdout
@@ -83,69 +74,6 @@ async function pathExists(absolutePath) {
 	}
 }
 
-function parseLastUpdated(markdown) {
-	const match = markdown.match(
-		/^\s*Last updated:\s*(\d{4}-\d{2}-\d{2}(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?(?:Z|[+-]\d{2}:\d{2})?)?)\s*$/m
-	);
-	if (!match) return null;
-
-	const raw = match[1];
-	const iso = raw;
-	const date = raw.includes('T') ? new Date(raw) : new Date(`${raw}T00:00:00Z`);
-	if (Number.isNaN(date.getTime())) return null;
-	return { iso, date };
-}
-
-function daysBetweenUtc(a, b) {
-	const msPerDay = 24 * 60 * 60 * 1000;
-	const start = Date.UTC(a.getUTCFullYear(), a.getUTCMonth(), a.getUTCDate());
-	const end = Date.UTC(b.getUTCFullYear(), b.getUTCMonth(), b.getUTCDate());
-	return Math.floor((end - start) / msPerDay);
-}
-
-async function listRecentFiles({ absoluteDir, sinceMs, maxResults = 20 }) {
-	const results = [];
-
-	async function walk(dir) {
-		let entries;
-		try {
-			entries = await fs.readdir(dir, { withFileTypes: true });
-		} catch {
-			return;
-		}
-
-		for (const entry of entries) {
-			const absolutePath = path.join(dir, entry.name);
-			if (entry.isDirectory()) {
-				if (entry.name === 'node_modules' || entry.name === '.git') continue;
-				await walk(absolutePath);
-				continue;
-			}
-			if (!entry.isFile()) continue;
-
-			let stat;
-			try {
-				stat = await fs.stat(absolutePath);
-			} catch {
-				continue;
-			}
-
-			// Use strict comparison to reduce false positives when mtimes match the
-			// last-updated timestamp at coarse filesystem resolution.
-			if (stat.mtimeMs > sinceMs) {
-				results.push({
-					path: absolutePath,
-					mtimeMs: stat.mtimeMs,
-				});
-			}
-		}
-	}
-
-	await walk(absoluteDir);
-
-	results.sort((a, b) => b.mtimeMs - a.mtimeMs);
-	return results.slice(0, maxResults);
-}
 
 function toRelative(absolutePath, rootDir) {
 	return path.relative(rootDir, absolutePath) || '.';
@@ -153,12 +81,6 @@ function toRelative(absolutePath, rootDir) {
 
 function summarizePaths(files, rootDir) {
 	return files.map((f) => toRelative(f.path, rootDir));
-}
-
-function isoTodayUtc() {
-	const now = new Date();
-	const pad = (n) => String(n).padStart(2, '0');
-	return `${now.getUTCFullYear()}-${pad(now.getUTCMonth() + 1)}-${pad(now.getUTCDate())}`;
 }
 
 async function main() {
@@ -184,25 +106,10 @@ async function main() {
 		process.exit(args.failOnUpdate ? 1 : 0);
 	}
 
-	const content = await fs.readFile(goalsPath, 'utf8');
-	const lastUpdated = parseLastUpdated(content);
-	const now = new Date();
-
+	// Timestamp-free: only honor git-dirty signal when explicitly requested.
 	const reasons = [];
 	const signals = [];
 	let score = 0;
-
-	if (!lastUpdated) {
-		reasons.push('No parseable "Last updated: YYYY-MM-DD" line found');
-		score += 3;
-	} else {
-		const ageDays = daysBetweenUtc(lastUpdated.date, now);
-		if (ageDays > args.maxAgeDays) {
-			reasons.push(`Last updated ${ageDays}d ago (>${args.maxAgeDays}d)`);
-			score += 2;
-		}
-		signals.push({ id: 'ageDays', value: ageDays });
-	}
 
 	const isGitRepo = Boolean(tryExecGit(['rev-parse', '--is-inside-work-tree'], { cwd: rootDir }));
 	let dirty = false;
@@ -216,46 +123,14 @@ async function main() {
 		signals.push({ id: 'gitDirty', value: dirty });
 	}
 
-	const sinceMs = lastUpdated ? lastUpdated.date.getTime() : now.getTime() - 14 * 24 * 60 * 60 * 1000;
-	const watchRoots = [
-		{ id: 'context', rel: 'context', weight: 2 },
-		{ id: 'specs', rel: 'specs', weight: 2 },
-		{ id: 'decisions', rel: 'docs/decisions', weight: 3 },
-		{ id: 'logs', rel: 'docs/logs', weight: 1 },
-	];
-
-	for (const root of watchRoots) {
-		const absoluteDir = path.join(rootDir, root.rel);
-		if (!(await pathExists(absoluteDir))) continue;
-
-		const recent = await listRecentFiles({ absoluteDir, sinceMs, maxResults: 10 });
-		if (recent.length === 0) continue;
-
-		const relativePaths = summarizePaths(recent, rootDir);
-		signals.push({ id: `recent:${root.id}`, value: relativePaths });
-
-		// If the goal file itself is the only thing that changed recently, don't count it as drift.
-		const nonSelf = relativePaths.filter((p) => p !== toRelative(goalsPath, rootDir));
-		if (nonSelf.length === 0) continue;
-
-		if (root.id === 'logs') {
-			reasons.push(`New/updated logs since last update (${Math.min(nonSelf.length, 10)} shown)`);
-		} else {
-			reasons.push(`New/updated ${root.id} artifacts since last update (${Math.min(nonSelf.length, 10)} shown)`);
-		}
-		score += root.weight;
-	}
-
-	const recommended = score >= 3;
+	const recommended = score >= 1;
 
 	const payload = {
 		ok: true,
 		recommended,
 		score,
 		file: toRelative(goalsPath, rootDir),
-		lastUpdated: lastUpdated?.iso || null,
-		todayUtc: isoTodayUtc(),
-		maxAgeDays: args.maxAgeDays,
+		lastUpdated: null,
 		reasons,
 		signals,
 	};
