@@ -1,48 +1,100 @@
 {
   "folders": [
     {
-      "path": "."
+      "path": ".",
     },
     {
-      "path": "../frontend"
+      "path": "../frontend",
     },
     {
-      "path": "../backend"
-    }
+      "path": "../backend",
+    },
   ],
 
   "settings": {
     "workbench.startupEditor": "readme",
-
+    "search.exclude": {
+      "**/.git/**": true,
+      ".obsidian/**": true,
+      ".obsidian-workspace": true,
+      "**/node_modules/**": true,
+      "**/.cache/**": true,
+      "**/dist/**": true,
+      "**/build/**": true,
+      "**/_site/**": true,
+      "**/.sanity/**": true,
+      "**/temp/**": true,
+      "**/cache/**": true,
+      "**/models/**": true,
+      "**/output/**": true,
+      "**/logs/**": true,
+      "**/docs/logs/**": true
+    },
+    "files.watcherExclude": {
+      "**/.git/**": true,
+      ".obsidian/**": true,
+      ".obsidian-workspace": true,
+      "**/node_modules/**": true,
+      "**/.cache/**": true,
+      "**/dist/**": true,
+      "**/build/**": true,
+      "**/_site/**": true,
+      "**/.sanity/**": true,
+      "**/temp/**": true,
+      "**/cache/**": true,
+      "**/models/**": true,
+      "**/output/**": true,
+      "**/logs/**": true,
+      "**/docs/logs/**": true
+    },
+    "files.exclude": {
+      "**/.git/**": true,
+      ".obsidian/**": true,
+      ".obsidian-workspace": true,
+      "**/node_modules/**": true,
+      "**/.cache/**": true,
+      "**/dist/**": true,
+      "**/build/**": true,
+      "**/_site/**": true,
+      "**/.sanity/**": true,
+      "**/temp/**": true,
+      "**/cache/**": true,
+      "**/models/**": true,
+      "**/output/**": true,
+      "**/logs/**": true,
+      "**/docs/logs/**": true
+    },
+    "search.useIgnoreFiles": true,
+    "search.useGlobalIgnoreFiles": true,
     "actionButtons": {
       "commands": [
         {
           "name": "$(dashboard)Workspace Hygiene   |",
-          "tooltip": "Section header for workspace hygiene shortcuts"
+          "tooltip": "Section header for workspace hygiene shortcuts",
         },
         {
           "name": "Review",
           "singleInstance": true,
           "command": "cd \"${workspaceFolder}/../aix\" && node scripts/pre-pr-check.mjs",
-          "tooltip": "Runs the pre-PR hygiene script from the aix root and reports blocking issues"
+          "tooltip": "Runs the pre-PR hygiene script from the aix root and reports blocking issues",
         },
         {
           "name": "Refresh",
           "singleInstance": true,
           "command": "cd \"${workspaceFolder}/../aix\" && node scripts/update-context-auto.mjs",
-          "tooltip": "Checks drift, groups causes, auto-runs available hygiene tasks; no auto-baseline"
+          "tooltip": "Checks drift, groups causes, auto-runs available hygiene tasks; no auto-baseline",
         },
         {
           "name": "File Drift",
           "singleInstance": true,
           "command": "cd \"${workspaceFolder}/../aix\" && node scripts/drift-file-report.mjs --file \"${file}\"",
-          "tooltip": "Plain-language drift readout for the focused editor file plus aggregate drift"
+          "tooltip": "Plain-language drift readout for the focused editor file plus aggregate drift",
         },
       ],
       "defaultColor": "#EF6C00",
       "reloadButton": "↻",
-      "loadNpmCommands": false
-    }
+      "loadNpmCommands": false,
+    },
   },
 
   "extensions": {
@@ -58,21 +110,14 @@
       // Web / 11ty / Sanity
       "dbaeumer.vscode-eslint",
       "bradlc.vscode-tailwindcss",
-      "samuelcolvin.jinjahtml",
-
-      // Python
-      "ms-python.python",
-      "ms-python.vscode-pylance",
 
       // JSON / YAML
       "redhat.vscode-yaml",
 
       // Optional quality-of-life
-      "usernamehw.errorlens"
+      "usernamehw.errorlens",
     ],
 
-    "unwantedRecommendations": [
-      "ms-vscode.cpptools"
-    ]
-  }
+    "unwantedRecommendations": ["ms-vscode.cpptools"],
+  },
 }
