@@ -3,9 +3,6 @@
 This file is the single-source-of-truth for what matters *right now*.
 
 ## Now
-- Address weaknesses of determining freshness by timestamp. Requires user input, which will lead to false negatives when forgotten.
-	- Remove inline "Last updated" stamps across context/specs; rely on sidecar + git signals (hash/commit metadata) instead.
-	- Update constraints/runbook to codify repo-signal policy; rerun the freshness gate after removal.
 - Develop the spec for an animation-focused Concierge module based on specs/animation/choreographer.animation-spec.md
 - Develop the browser-accessibile-documentation spec for making documentation available to remote agents
 
@@ -19,6 +16,7 @@ This file is the single-source-of-truth for what matters *right now*.
 - Create 11ty pages for rapid iterating on the UX of landing page section design (e.g. Hero, Bio, Organizations, etc.).
 
 ## Done (recent)
+- Removed inline "Last updated" stamps; codified repo-signal freshness policy; set context baseline at HEAD after verification.
 - Confirm implementation of status bar action buttons for VS Code tasks
 
 ## Not Now

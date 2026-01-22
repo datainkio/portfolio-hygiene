@@ -5,6 +5,13 @@
 - **Scope:** All animated UI and page choreography across the site/app (11ty/NJK templates, components, and views). Applies to micro-interactions (Tailwind-first candidates) and choreographed sequences (GSAP-first candidates).
 - **Links:** context {{/context/motion.md}}, ADRs {{/docs/decisions/motion-*.md}}, runbooks {{/docs/runbooks/motion-debug.md}}
 
+## Work plan (2026-01-22)
+- Define Concierge module contract (inputs, triggers, outputs, acceptance criteria) so routing can target it.
+- Convert the rubric into an explicit scoring/decision procedure the module must emit in outputs.
+- Add a response template (recommendation, rationale, plan, reduced motion, performance, file paths).
+- Capture file-path conventions and hook naming for scene registration so answers stay deterministic.
+- Resolve open questions: canonical GSAP scene layout and whether to elevate the rubric to an ADR.
+
 ## Motion Principles
 - **Cohesion over novelty:** Motion should feel like a single system: shared timing, easing families, and interaction intent.
 - **Transform/opacity first:** Prefer GPU-friendly properties (transform, opacity, filter sparingly). Avoid animating layout properties unless justified.
@@ -132,6 +139,32 @@ Required output from the module:
 - Reduced-motion behavior
 - Performance notes and measurement guidance
 
+### Concierge module contract (draft)
+- **Triggers:** animation/choreography requests, GSAP/Tailwind choice, motion system questions, reduced-motion handling, performance/ScrollTrigger guidance.
+- **Inputs:** user request + assets/links; this spec; motion tokens/config files; project routes/templates if provided; reduce-motion policy.
+- **Outputs (template):**
+  - Decision: GSAP vs Tailwind (include score table: Tailwind score, GSAP score, winner, tie-break applied?).
+  - Rationale: 3–5 bullets mapped to rubric factors (timeline, scroll, measurement, element count, DX).
+  - Implementation plan: file destinations, hooks/selectors, token usage, reduced-motion adjustments, teardown expectations.
+  - Performance: risks + mitigations (property choice, ScrollTrigger count, batching, lazy init).
+  - Reduced motion: explicit behavior (disable/simplify) and how to gate it.
+  - Validation: what to test (functional, visual, performance, reduced motion).
+- **Acceptance criteria:**
+  - Fills the template above.
+  - References token sources and hook conventions.
+  - Chooses winner via the rubric; shows scores and tie-break.
+  - Names concrete file paths for scenes/templates (or states “path TBD” if unknown).
+  - Includes reduced-motion plan and performance callouts.
+
+### Scorecard example (include in responses)
+```
+Decision: GSAP (tie-breaker not needed)
+Scores: Tailwind 3 vs GSAP 7
+Tailwind points: +2 single 2-state? no; +1 CSS-native? yes (1); +1 <=6 targets, no sequencing? yes (1) => 2 total (round to 3 if another applies)
+GSAP points: +2 timeline? yes (2); +2 scroll? yes (2); +2 measurement? no; +1 reversible? yes (1); +1 >6 targets? no => 5 (plus base +2 bias = 7)
+```
+Always show which factors contributed so tie-break decisions are auditable.
+
 ## Performance & Budget
 - **Frame budget:** target 60fps; avoid long main-thread work during scroll.
 - **Property budget:** prefer transform/opacity; avoid animating layout (top/left/width/height) unless necessary.
@@ -189,3 +222,5 @@ Required output from the module:
 ## Open Questions
 - Standard file structure for GSAP scenes and registration (exact paths)?
 - Do we need an ADR for the decision rubric and tie-break rule?
+- Should the Concierge module response always include a mini scorecard table? (Proposed: yes.)
+- Should we add a short prompt module in `.copilot/prompts/` for this? (Proposed: yes, once contract above is frozen.)
