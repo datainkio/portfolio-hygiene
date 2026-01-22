@@ -1,5 +1,5 @@
 {
-  "baselineHash": "21f6a501b09e467b076511486fb18896a44f8d89",
+  "baselineHash": "124fc1b43f845e5af644de0969b66a47f14acc4a",
   "branch": "main",
-  "notes": "remove inline stamps; repo-signal policy"
+  "notes": "align baseline to current HEAD after inline stamp removal"
 }
