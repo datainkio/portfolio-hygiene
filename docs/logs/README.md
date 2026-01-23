@@ -1,21 +1,21 @@
 ---
 aix:
-	id: aix.docs.logs.readme
-	role: Log index and hygiene report guidance.
-	status: stable
-	surface: internal
-	owner: AIX
-	tags:
-		- logs
-		- hygiene
-		- audits
-	type: guide
-	scope: aix
-	audience: maintainers
-	perf:
-		readPriority: medium
-		cacheSafe: true
-		critical: false
+  id: aix.docs.logs.readme
+  role: Log index and hygiene report guidance.
+  status: stable
+  surface: internal
+  owner: AIX
+  tags:
+    - logs
+    - hygiene
+    - audits
+  type: guide
+  scope: aix
+  audience: maintainers
+  perf:
+    readPriority: medium
+    cacheSafe: true
+    critical: false
 ---
 
 # Logs

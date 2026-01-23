@@ -1,21 +1,21 @@
 ---
 aix:
-	id: aix.context.design-philosophy
-	role: Durable design philosophy and decision posture.
-	status: stable
-	surface: internal
-	owner: AIX
-	tags:
-		- context
-		- design-philosophy
-		- principles
-	type: context
-	scope: aix
-	audience: maintainers
-	perf:
-		readPriority: medium
-		cacheSafe: true
-		critical: false
+  id: aix.context.design-philosophy
+  role: Durable design philosophy and decision posture.
+  status: stable
+  surface: internal
+  owner: AIX
+  tags:
+    - context
+    - design-philosophy
+    - principles
+  type: context
+  scope: aix
+  audience: maintainers
+  perf:
+    readPriority: medium
+    cacheSafe: true
+    critical: false
 ---
 
 # Design Philosophy

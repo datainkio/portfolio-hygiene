@@ -1,21 +1,21 @@
 ---
 aix:
-	id: aix.specs.readme
-	role: Specs index and usage guidance.
-	status: stable
-	surface: internal
-	owner: AIX
-	tags:
-		- specs
-		- index
-		- guidance
-	type: guide
-	scope: aix
-	audience: maintainers
-	perf:
-		readPriority: high
-		cacheSafe: true
-		critical: true
+  id: aix.specs.readme
+  role: Specs index and usage guidance.
+  status: stable
+  surface: internal
+  owner: AIX
+  tags:
+    - specs
+    - index
+    - guidance
+  type: guide
+  scope: aix
+  audience: maintainers
+  perf:
+    readPriority: high
+    cacheSafe: true
+    critical: true
 ---
 
 # Technical & Product Specifications

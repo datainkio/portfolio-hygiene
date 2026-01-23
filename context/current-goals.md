@@ -1,21 +1,21 @@
 ---
 aix:
-	id: aix.context.current-goals
-	role: Time-bound priorities for the workspace.
-	status: stable
-	surface: internal
-	owner: AIX
-	tags:
-		- goals
-		- priorities
-		- context
-	type: context
-	scope: aix
-	audience: maintainers
-	perf:
-		readPriority: high
-		cacheSafe: true
-		critical: true
+  id: aix.context.current-goals
+  role: Time-bound priorities for the workspace.
+  status: stable
+  surface: internal
+  owner: AIX
+  tags:
+    - goals
+    - priorities
+    - context
+  type: context
+  scope: aix
+  audience: maintainers
+  perf:
+    readPriority: high
+    cacheSafe: true
+    critical: true
 ---
 
 # Current Goals
