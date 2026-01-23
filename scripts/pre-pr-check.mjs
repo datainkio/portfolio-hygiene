@@ -200,10 +200,11 @@ async function main() {
 	const includeGitDirtyArgs = args.includeGitDirty ? ['--include-git-dirty'] : [];
 	const baselineArgs = args.baseline ? ['--baseline', args.baseline] : [];
 	const notices = [];
+	const workspaceRoot = path.resolve(__dirname, '..', '..');
 	const rootMap = {
-		aix: '.',
-		frontend: '../frontend',
-		backend: '../backend',
+		aix: 'aix',
+		frontend: 'frontend',
+		backend: 'backend',
 	};
 
 	const syntaxChecks = [
@@ -216,7 +217,7 @@ async function main() {
 	const results = [...syntaxChecks];
 
 	for (const target of targets) {
-		const targetRoot = path.resolve(process.cwd(), rootMap[target]);
+		const targetRoot = path.resolve(workspaceRoot, rootMap[target]);
 
 		results.push(
 			runNodeScript({

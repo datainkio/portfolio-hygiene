@@ -1,5 +1,5 @@
 {
-  "baselineHash": "124fc1b43f845e5af644de0969b66a47f14acc4a",
+  "baselineHash": "9a54bedbe7780f081abcf7dcd74dba7ea71dd4f8",
   "branch": "main",
-  "notes": "align baseline to current HEAD after inline stamp removal"
+  "notes": "align baseline to current HEAD after frontmatter additions"
 }

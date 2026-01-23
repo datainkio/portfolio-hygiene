@@ -67,7 +67,7 @@ This folder is the **human-facing docs hub** for the workspace.
 
 ## AI configuration
 
-- Workspace Copilot instructions: [../.github/copilot-instructions.md](../.github/copilot-instructions.md)
+- Workspace Copilot instructions: [../../.github/copilot-instructions.md](../../.github/copilot-instructions.md)
 
 ## Authority note
 
