@@ -23,7 +23,7 @@ aix:
 This file is the single-source-of-truth for what matters *right now*.
 
 ## Now
-- Address duplication among and conflicts between Choreographer files through refactoring and consolidation.
+- Confirm adherence to choreographer spec. Test by defining animations for homepage sections.
 - Document coding conventions and standards.
 	- Generate a tag taxonomy for easy findability and discovery
 	- Establish a frontmatter schema
