@@ -1,8 +1,14 @@
 # Workspace Map
-This file describes where everything lives in the Vitaixmen workspace and what each folder contains.
+This file describes where everything lives in the workspace and what each folder contains.
 Focus: keep AI agents oriented and fast.
 
-Note: Vitaixmen is a workspace starter (hygiene + docs + agent workflows). It does not include a concrete `/frontend` or `/backend` project by default.
+This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend/`, and `backend/`.
+
+## Workspace Roots (repo-level)
+- [aix/](../../../aix/) — AIX scaffold, docs, specs, and agent workflows.
+- [frontend/](../../../frontend/) — frontend project (11ty + Nunjucks + Tailwind + GSAP).
+- [backend/](../../../backend/) — backend/CMS tooling and schemas.
+- [notes/](../../../notes/) — workspace notes.
 
 ## Copilot Configuration
 - Copilot/agent configuration hub: [.copilot/README.md](../README.md)
@@ -46,9 +52,9 @@ Note: Vitaixmen is a workspace starter (hygiene + docs + agent workflows). It do
 		- [specs/ai/domain-agent-probes.spec.md](../../specs/ai/domain-agent-probes.spec.md)
 		- [specs/ai/domain-specialized-coding-agent.spec.md](../../specs/ai/domain-specialized-coding-agent.spec.md)
 	- Animation (frontend-owned):
-		- [frontend/specs/animation/README.md](../../frontend/specs/animation/README.md)
-		- [frontend/specs/animation/template.md](../../frontend/specs/animation/template.md)
-		- [frontend/specs/animation/motion-accessibility-policy.md](../../frontend/specs/animation/motion-accessibility-policy.md)
+			- [frontend/specs/animation/README.md](../../../frontend/specs/animation/README.md)
+			- [frontend/specs/animation/template.md](../../../frontend/specs/animation/template.md)
+			- [frontend/specs/animation/motion-accessibility-policy.md](../../../frontend/specs/animation/motion-accessibility-policy.md)
 	- Architecture: [specs/architecture/](../../specs/architecture/)
 		- [specs/architecture/README.md](../../specs/architecture/README.md)
 		- [specs/architecture/template.md](../../specs/architecture/template.md)
@@ -129,12 +135,13 @@ Note: Vitaixmen is a workspace starter (hygiene + docs + agent workflows). It do
 - Welcoming Party entrypoint: [.github/agents/WelcomingParty.md](../../.github/agents/WelcomingParty.md)
 
 ## Workspace Config
-- [vitaixmen.code-workspace](../../vitaixmen.code-workspace) — VS Code workspace definition.
-- VS Code settings/tasks live in [.vscode/](../../.vscode/) (includes the “New Project” task).
-- Root README: [README.md](../../README.md) — scaffold intent + quick actions.
-- Template notes: [template_notes.md](../../template_notes.md)
-- Workspace Copilot instructions: [../.github/copilot-instructions.md](../../.github/copilot-instructions.md)
-- Obsidian vault config: `.obsidian/` (optional; intentionally ignored to avoid editor state creep).
+- [portfolio.code-workspace](../../../portfolio.code-workspace) — VS Code workspace definition.
+- AIX workspace: [aix/aix.code-workspace](../../../aix/aix.code-workspace)
+- VS Code settings/tasks live in [.vscode/](../../../.vscode/) (includes the “New Project” task).
+- Root README: [README.md](../../../README.md) — workspace intent + quick actions.
+- Template notes: [template_notes.md](../../../template_notes.md)
+- Workspace Copilot instructions: [.github/copilot-instructions.md](../../../.github/copilot-instructions.md)
+- Obsidian vault config: [.obsidian/](../../../.obsidian/) (optional; intentionally ignored to avoid editor state creep).
 
 ## Agent Roles
 - Concierge: router; registered in Copilot; emits handoff requests to specialists.
