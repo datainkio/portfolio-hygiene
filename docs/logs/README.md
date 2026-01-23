@@ -1,3 +1,23 @@
+---
+aix:
+	id: aix.docs.logs.readme
+	role: Log index and hygiene report guidance.
+	status: stable
+	surface: internal
+	owner: AIX
+	tags:
+		- logs
+		- hygiene
+		- audits
+	type: guide
+	scope: aix
+	audience: maintainers
+	perf:
+		readPriority: medium
+		cacheSafe: true
+		critical: false
+---
+
 # Logs
 
 Use this folder to store Concierge/agent operational artifacts for the scaffold itself and for mounted projects.
@@ -58,6 +78,8 @@ Use this folder to store scaffold hygiene reports produced by agents (housekeepe
 
 ## Recent AIX logs
 
+- [2026-01-23-aix-performance-metrics.md](2026-01-23-aix-performance-metrics.md)
+- [2026-01-23-hygiene.md](2026-01-23-hygiene.md)
 - [2026-01-13-hygiene-aix.md](2026-01-13-hygiene-aix.md)
 - [2026-01-15-hygiene.md](2026-01-15-hygiene.md)
 - [2026-01-14-agent-performance-evaluation.md](2026-01-14-agent-performance-evaluation.md)

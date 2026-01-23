@@ -1,21 +1,20 @@
 ---
-aix:
-	id: aix.routing.pointer
-	role: Pointer to the canonical routing rules.
-	status: stable
-	surface: internal
-	owner: AIX
-	tags:
-		- routing
-		- concierge
-		- pointer
-	type: guide
-	scope: aix
-	audience: maintainers
-	perf:
-		readPriority: high
-		cacheSafe: true
-		critical: true
+id: aix.routing.pointer
+role: Pointer to the canonical routing rules.
+status: stable
+surface: internal
+owner: AIX
+tags:
+- routing
+- concierge
+- pointer
+type: guide
+scope: aix
+audience: maintainers
+perf:
+- readPriority: high
+- cacheSafe: true
+- critical: true
 ---
 
 # Routing Canon (Pointer)
