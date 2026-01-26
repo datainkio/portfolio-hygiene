@@ -45,14 +45,31 @@ Add a Concierge module (“Taskmaster”) that manages task framing and persiste
    - Require explicit approval to create/switch tasks when ambiguity exists.
 3. **Single Active Task**
    - Maintain one Active Task and surface it on-demand.
-4. **Task Persistence**
+4. **Resume Paused Task**
+   - When the user starts a paused task, pause the current Active Task (if any) and make the selected task active.
+5. **Task Persistence**
    - Persist tasks as file-embedded TODO items (and update them as progress is made).
-   - Enforce a 1:1 relationship: each task maps to exactly one file-embedded TODO anchor.
+   - Each task has exactly one primary TODO anchor; additional related TODOs may exist where locality requires.
 5. **Task Snapshot**
-   - Always report what task the user is working on, the phase, and the next action.
-6. **Drift Detection**
-   - When drift occurs, prompt to: continue, capture as TODO, or pause/switch.
-7. **Prefix Taxonomy**
+   - Emit Task Snapshots on task start, drift, explicit status requests, and phase changes.
+7. **Drift Detection**
+   - When drift occurs, prompt to: continue the current task, pause and start a new task, or capture the new work as a TODO that creates a paused task.
+8. **Judgment Feedback & Adaptation**
+   - Accept immediate user feedback when:
+     - a task should have been created but wasn’t
+     - a task should not have been created
+     - drift was over- or under-detected
+   - Acknowledge feedback explicitly.
+   - Bias future decisions in the same session.
+   - Optionally persist feedback as a lightweight preference signal (not a hard rule).
+    - Canonical phrases (examples):
+       - “We should have created a task for that.”
+       - “Don’t create a task for that.”
+       - “That’s still the same task.”
+       - “That’s a different task.”
+       - “You’re over-detecting drift.”
+       - “You missed drift there.”
+9. **Prefix Taxonomy**
    - Use descriptive prefixes with the following meanings:
      | Prefix   | Meaning                         |
      | -------- | ------------------------------- |
@@ -65,23 +82,23 @@ Add a Concierge module (“Taskmaster”) that manages task framing and persiste
      | A11Y     | Accessibility                   |
      | SEC      | Security                        |
      | REFACTOR | Restructure w/o behavior change |
-8. **File Localization**
+10. **File Localization**
    - Embed TODOs in the most relevant file(s), near the relevant section.
    - The TODO must live next to the thing it refers to.
-9. **Task Discovery**
+11. **Task Discovery**
    - Identify TODOs in file content.
-10. **Formatting Rules**
+12. **Formatting Rules**
    - Avoid multiline TODOs.
    - Avoid emojis in TODOs.
    - Avoid Markdown checkboxes as tasks.
    - Avoid natural-language prefixes; use the taxonomy.
    - Avoid chat-only task tracking.
    - Avoid tool-specific syntax (e.g., @todo, FIXME!!!).
-11. **Canonical Grammar**
+13. **Canonical Grammar**
    - Use: `<PREFIX>(<SCOPE>): <imperative description> [optional metadata]`
    - Scope should be a short, stable noun (not a sentence).
    - Metadata must be appended in square brackets (never inline).
-12. **Native Comment Syntax**
+14. **Native Comment Syntax**
    - Use native comment syntax only; no universal wrapper.
      | File type      | Format                             |
      | -------------- | ---------------------------------- |
@@ -90,10 +107,10 @@ Add a Concierge module (“Taskmaster”) that manages task framing and persiste
      | HTML           | `<!-- TODO(...) -->`               |
      | Markdown       | `<!-- TODO(...) -->` *(preferred)* |
      | YAML / TOML    | `# TODO(...)`                      |
-13. **Task Completion**
+15. **Task Completion**
    - Determine when a task is complete based on its Definition of Done.
    - Verify the Definition of Done is satisfied before closing.
-14. **TODO Lifecycle**
+16. **TODO Lifecycle**
    - Treat TODO items as short-lived, file-embedded signals, not long-term backlog artifacts.
    - Lifecycle state must be immediately readable in plain text without parsing or external tooling.
    - State is expressed primarily through the TODO marker and inline tags; metadata is secondary.
@@ -123,7 +140,8 @@ Add a Concierge module (“Taskmaster”) that manages task framing and persiste
 
 ## State Model
 - `active_task`: { title, phase, definition_of_done[], todo_refs[] }
-- `paused_tasks[]`: optional list (MVP may omit and just keep one paused title in chat)
+- `paused_tasks[]`: optional list (MVP may omit and just keep one paused title in chat); capture creates a paused task entry.
+- `judgment_feedback`: { corrections[], last_adjustment, preference_signal? }
 
 ## Drift Heuristics (MVP)
 Drift is suspected when:
@@ -131,6 +149,7 @@ Drift is suspected when:
 - new files/areas are introduced that are unrelated to current TODO refs,
 - user asks a new “how do I…” unrelated to current task,
 - the assistant is asked to “switch topics” or similar.
+Judgment feedback should bias these heuristics over time.
 
 ## Acceptance Criteria
 - User can ask “what task are we on?” and get a clear answer.
@@ -138,6 +157,7 @@ Drift is suspected when:
 - Taskmaster refuses to silently change tasks.
 - TODO items are formatted consistently and can be searched (e.g., TODO Tree).
 - Drift prompts are clear and require an explicit choice.
+- Users can provide judgment feedback and Taskmaster adapts.
 - The system works across a multi-repo workspace (frontend/backend/aix) without assuming paths.
 - Taskmaster identifies the correct prefix for the current use case.
 - Taskmaster proposes a new task when the content of a conversation warrants it.
@@ -169,7 +189,19 @@ Taskmaster:
 ### Example 2: Drift
 User: “Also, can we fix the build failing in frontend?”
 Taskmaster:
-- “That’s a different task. Continue current / capture as TODO / pause and switch?”
+- “That’s a different task. Continue current / pause and start new task / capture as TODO (paused task)?”
+
+### Example 4: Judgment Feedback
+User: “We should have created a task for that.”
+Taskmaster:
+- Acknowledges the feedback
+- Biases task framing decisions in this session
+
+### Example 5: Resume Paused Task
+User: “Resume the ‘Fix nav layout’ task.”
+Taskmaster:
+- Pauses the current active task (if any)
+- Sets “Fix nav layout” as the Active Task
 
 ### Example 3: Capture as TODO
 User: “We should add prefix taxonomy to the README later.”

@@ -32,8 +32,46 @@ Prefer:
  - The TODO must live next to the thing it refers to.
 
 ## 1:1 Task ↔ TODO
-- Each task maps to exactly one file-embedded TODO anchor.
+- Each task has exactly one primary TODO anchor; additional related TODOs may exist where locality requires.
 - Track substeps in chat or the task spec, not as additional TODOs.
+
+## Task Snapshot triggers
+Task Snapshots should be emitted:
+- on task start
+- on drift
+- on explicit status requests
+- on phase changes
+
+## Drift handling
+When drift is detected, Taskmaster must prompt the user to choose:
+- **Continue current task**
+- **Pause current and start a new task**
+- **Capture as TODO** (creates a paused task; active task stays the same)
+Taskmaster must not switch tasks without an explicit user choice.
+
+## Judgment Feedback & Adaptation
+Taskmaster should accept immediate feedback when:
+- a task should have been created but wasn’t
+- a task should not have been created
+- drift was over- or under-detected
+
+This feedback should:
+- be acknowledged explicitly
+- bias future decisions in the same session
+- optionally persist as a lightweight preference signal (not a hard rule)
+
+### Canonical feedback phrases (examples)
+- “We should have created a task for that.”
+- “Don’t create a task for that.”
+- “That’s still the same task.”
+- “That’s a different task.”
+- “You’re over-detecting drift.”
+- “You missed drift there.”
+
+## Resuming paused tasks
+When a user asks to begin a paused task:
+- The current active task (if any) is paused.
+- The selected paused task becomes the active task.
 
 ## Task completion
 - Determine completion by checking the Definition of Done.

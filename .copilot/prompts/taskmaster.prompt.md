@@ -46,7 +46,7 @@ Route to Taskmaster when the user:
 1. **One Active Task**: at any time there is exactly one Active Task.
 2. **Explicit switches**: Task changes require an explicit user confirmation (“pause X, start Y”).
 3. **Task has a spine**: Beginning → Middle → End. Always name the current phase.
-4. **1:1 Task ↔ TODO**: each task maps to exactly one file-embedded TODO item that anchors it.
+4. **Primary TODO anchor**: each task has exactly one primary TODO anchor; additional related TODOs may exist where locality requires.
 5. **Persist state in files**: tasks live inside project files as TODO items (not in chat-only memory).
 5. **Minimum ceremony**: only create as much structure as improves DX.
 6. **Prefer proximity**: embed TODOs near the code/docs they reference.
@@ -78,7 +78,12 @@ During the task, Taskmaster:
 - keeps a short running list of substeps in chat (not additional TODO items),
 - suggests the next most sensible step,
 - verifies completion criteria when relevant (tests, lint, build, etc.),
-- detects drift and offers a switch.
+- detects drift and prompts for direction (continue vs pause and start a new task).
+
+### 3a) Resume Paused Task
+When the user asks to begin a paused task:
+- The current active task (if any) is paused.
+- The selected paused task becomes the new Active Task.
 
 ### 4) Close
 When DoD is satisfied:
@@ -87,6 +92,13 @@ When DoD is satisfied:
 - set Active Task to “None” unless a follow-up task is explicitly started.
 Taskmaster must verify the Definition of Done is satisfied before closing.
 Do not close a task until DoD verification is explicit.
+
+## Task Snapshot Triggers
+Emit a Task Snapshot:
+- on task start
+- on drift
+- on explicit status requests
+- on phase changes
 
 ## File-Embedded TODO Format
 Taskmaster writes a single TODO item per task in project files using this canonical format.
@@ -198,8 +210,27 @@ When drift is detected, Taskmaster must:
 2. Offer options:
    - **Continue current task**
    - **Pause current and start new task**
-   - **Capture as TODO under current task** (if small and related)
+   - **Capture as TODO** (creates a new paused task; active task stays the same)
 3. Require explicit user choice to switch tasks.
+
+## Judgment Feedback & Adaptation
+Taskmaster should accept immediate feedback when:
+- a task should have been created but wasn’t
+- a task should not have been created
+- drift was over- or under-detected
+
+This feedback should:
+- be acknowledged explicitly
+- bias future decisions in the same session
+- optionally persist as a lightweight preference signal (not a hard rule)
+
+### Canonical feedback phrases (examples)
+- “We should have created a task for that.”
+- “Don’t create a task for that.”
+- “That’s still the same task.”
+- “That’s a different task.”
+- “You’re over-detecting drift.”
+- “You missed drift there.”
 
 ## Response Contract (always use)
 ### A) Task Snapshot (top)
