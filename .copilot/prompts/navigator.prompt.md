@@ -1,3 +1,23 @@
+---
+aix:
+	id: aix.copilot.prompts.navigator
+	role: Locate relevant files, modules, and repo entry points.
+	status: stable
+	surface: internal
+	owner: AIX
+	tags:
+		- copilot
+		- prompts
+		- navigation
+	type: guide
+	scope: aix
+	audience: maintainers
+	perf:
+		readPriority: medium
+		cacheSafe: true
+		critical: false
+---
+
 # Copilot Prompt Module: Navigator
 > Produce a minimal, authoritative context bundle for the task and point to where the answers live.
 

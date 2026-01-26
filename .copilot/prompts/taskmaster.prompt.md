@@ -1,22 +1,24 @@
 ---
 aix:
-   id: aix.prompt.taskmaster
-   role: Concierge Taskmaster prompt module.
-   status: draft
-   surface: internal
-   owner: Concierge
-   tags:
-      - prompt
-      - module
-      - dx
-      - task-management
-      - todo
-      - workflow
-   type: prompt
-   scope: aix
-   audience: maintainers
-   perf:
-      readPriority: medium
+  id: aix.copilot.prompts.taskmaster
+  role: Manage tasks, priorities, and checklists.
+  status: stable
+  surface: internal
+  owner: AIX
+  tags:
+    - copilot
+    - prompts
+    - tasks
+  type: guide
+  scope: aix
+  audience: maintainers
+  perf:
+    readPriority: medium
+    cacheSafe: true
+    critical: false
+---
+
+# Taskmaster Module Prompt
       cacheSafe: true
       critical: false
 ---

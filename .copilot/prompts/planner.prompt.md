@@ -1,3 +1,23 @@
+---
+aix:
+	id: aix.copilot.prompts.planner
+	role: Produce plans, steps, and task breakdowns.
+	status: stable
+	surface: internal
+	owner: AIX
+	tags:
+		- copilot
+		- prompts
+		- planning
+	type: guide
+	scope: aix
+	audience: maintainers
+	perf:
+		readPriority: medium
+		cacheSafe: true
+		critical: false
+---
+
 # Copilot Prompt Module: Planner
 > Produce a concrete, verifiable execution plan from an ambiguous or multi-step request.
 

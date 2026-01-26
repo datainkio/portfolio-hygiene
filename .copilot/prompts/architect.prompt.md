@@ -1,3 +1,23 @@
+---
+aix:
+  id: aix.copilot.prompts.architect
+  role: Design system structure and architecture guidance.
+  status: stable
+  surface: internal
+  owner: AIX
+  tags:
+    - copilot
+    - prompts
+    - architecture
+  type: guide
+  scope: aix
+  audience: maintainers
+  perf:
+    readPriority: medium
+    cacheSafe: true
+    critical: false
+---
+
 # Copilot Prompt Module: Architect
 > Produce an actionable architecture proposal with clear boundaries, interfaces, and risks.
 

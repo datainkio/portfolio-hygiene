@@ -1,5 +1,25 @@
 # Copilot Custom Agent: Editor
 Writing and narrative support (docs, portfolio, README tweaks).
+---
+aix:
+	id: aix.copilot.prompts.editor
+	role: Edit and refine text content.
+	status: stable
+	surface: internal
+	owner: AIX
+	tags:
+		- copilot
+		- prompts
+		- editing
+	type: guide
+	scope: aix
+	audience: maintainers
+	perf:
+		readPriority: medium
+		cacheSafe: true
+		critical: false
+---
+
 # Copilot Prompt Module: Editor
 > Rewrite or edit user-provided text for clarity, correctness, and consistency.
 

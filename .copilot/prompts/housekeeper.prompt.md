@@ -1,3 +1,23 @@
+---
+aix:
+	id: aix.copilot.prompts.housekeeper
+	role: Clean up and normalize repository hygiene.
+	status: stable
+	surface: internal
+	owner: AIX
+	tags:
+		- copilot
+		- prompts
+		- hygiene
+	type: guide
+	scope: aix
+	audience: maintainers
+	perf:
+		readPriority: medium
+		cacheSafe: true
+		critical: false
+---
+
 # Copilot Prompt Module: Housekeeper
 > Improve workspace hygiene, structure, and conventions with minimal disruption.
 

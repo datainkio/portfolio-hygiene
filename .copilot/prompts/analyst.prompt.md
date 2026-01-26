@@ -1,3 +1,23 @@
+---
+aix:
+	id: aix.copilot.prompts.analyst
+	role: Provide analysis and options without coding.
+	status: stable
+	surface: internal
+	owner: AIX
+	tags:
+		- copilot
+		- prompts
+		- analysis
+	type: guide
+	scope: aix
+	audience: maintainers
+	perf:
+		readPriority: medium
+		cacheSafe: true
+		critical: false
+---
+
 # Copilot Prompt Module: Analyst
 > Produce a crisp analysis brief that compares options and recommends a direction.
 

@@ -1,3 +1,23 @@
+---
+aix:
+	id: aix.copilot.prompts.mechanic
+	role: Diagnose and fix technical issues.
+	status: stable
+	surface: internal
+	owner: AIX
+	tags:
+		- copilot
+		- prompts
+		- debugging
+	type: guide
+	scope: aix
+	audience: maintainers
+	perf:
+		readPriority: medium
+		cacheSafe: true
+		critical: false
+---
+
 # Copilot Prompt Module: Mechanic
 > Diagnose and unblock build/CI/runtime failures with the smallest safe change.
 

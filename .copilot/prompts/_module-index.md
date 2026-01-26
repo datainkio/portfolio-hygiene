@@ -1,3 +1,23 @@
+---
+aix:
+  id: aix.copilot.prompts.module-index
+  role: Index of Copilot prompt modules and routing contract.
+  status: stable
+  surface: internal
+  owner: AIX
+  tags:
+    - copilot
+    - prompts
+    - routing
+  type: guide
+  scope: aix
+  audience: maintainers
+  perf:
+    readPriority: high
+    cacheSafe: true
+    critical: true
+---
+
 # Prompt Module Index (Concierge Routing)
 
 This index is the primary routing surface for Concierge. Each module lists a one-line purpose, top triggers, and its **Primary Output type**.
@@ -7,7 +27,6 @@ This index is the primary routing surface for Concierge. Each module lists a one
 ---
 
 ## concierge.prompt.md (Router Contract)
-**Purpose:** Defines routing policy + mandatory response schema used by Concierge.
 **Top triggers:** route, select module, routing rubric, response schema, AIX constraints
 **Primary Output type:** Contract / Output Schema
 
@@ -33,6 +52,14 @@ This index is the primary routing surface for Concierge. Each module lists a one
 **Top triggers:** rewrite, tighten, tone, clarity, restructure, editing
 **Primary Output type:** Edited Draft
 **File:** [aix/.copilot/prompts/editor.prompt.md](editor.prompt.md)
+
+---
+
+## content-strategist.prompt.md
+**Purpose:** Produce content strategy and draft copy for long-form prose and microtext (labels, headings, CTAs).
+**Top triggers:** write copy, content strategy, messaging, voice/tone, CTA, microcopy, labels, headings
+**Primary Output type:** Content Draft + Strategy Notes
+**File:** [aix/.copilot/prompts/content-strategist.prompt.md](content-strategist.prompt.md)
 
 ---
 

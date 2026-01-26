@@ -1,3 +1,23 @@
+---
+aix:
+	id: aix.copilot.prompts.concierge
+	role: Canonical routing contract for Concierge.
+	status: stable
+	surface: internal
+	owner: AIX
+	tags:
+		- copilot
+		- prompts
+		- routing
+	type: guide
+	scope: aix
+	audience: maintainers
+	perf:
+		readPriority: high
+		cacheSafe: true
+		critical: true
+---
+
 # Copilot Prompt Module: Concierge Router Contract
 
 This is the canonical routing contract used by the Concierge agent. It is optimized for AIX: predictable module selection, low follow-up burden, and minimal instruction drift.
@@ -17,6 +37,10 @@ Select:
 Decision rule:
 - If two modules are plausible, pick the one that best matches the *deliverable* the user wants.
 - Never load more than 2 modules.
+
+Content guidance:
+- Use `content-strategist.prompt.md` for copywriting, messaging, tone/voice, CTAs, or content strategy (long-form or microtext).
+- Use `editor.prompt.md` for editing/refining existing text without changing intent or strategy.
 
 Domain-module rule:
 - Only select a domain-specific module (e.g., project-specific frontend modules) when the user request clearly targets that repo/domain (explicit `frontend/` references or unmistakable stack keywords).
