@@ -24,8 +24,8 @@ Report-only, dependency-free discovery runner that writes timestamped audit arti
 - Usage: `node scripts/mounted-project-aix-audit.mjs --project /absolute/path/to/mounted/project --probeSubset MP`
 - Output (default): `/project-root/docs/ai/audits/<timestamp>--aix-audit--MP.md` and `/project-root/docs/ai/audits/<timestamp>--aix-snapshot--MP.json`
 - Notes:
-	- The manifest is optional; if present, its `auditsDir` hint is used when possible.
-	- This runner is discovery-only (no LLM scoring) and does not modify existing project files.
+  - The manifest is optional; if present, its `auditsDir` hint is used when possible.
+  - This runner is discovery-only (no LLM scoring) and does not modify existing project files.
 
 ### context-refresh.mjs
 
@@ -45,7 +45,15 @@ Installs the repo-managed git hooks (e.g., to refresh context sidecar on commit)
 
 ### markdown-link-check.mjs / markdown-link-check-local.mjs
 
-Validates Markdown links (remote-aware vs local-only variants). Used in Pre-PR and docs tasks.
+Validates Markdown links.
+
+- `markdown-link-check-local.mjs` is the preferred checker for docs/workspace hygiene tasks.
+  - Existence-only checks for local links.
+  - Better behavior for repo-root-style links (for example, `/docs/...`).
+  - Used by Pre-PR and AIX docs link-check tasks.
+- `markdown-link-check.mjs` is retained for compatibility and ad hoc scans.
+  - Emits `Warnings` instead of crashing on unreadable paths/files.
+  - Skips common build/cache directories and symlink entries by default.
 
 ### pre-pr-check.mjs
 

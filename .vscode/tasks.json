@@ -1,492 +1,492 @@
 {
-	"version": "2.0.0",
-	"tasks": [
-		{
-			"label": "New Project",
-			"type": "shell",
-			"command": "true",
-			"presentation": {
-				"reveal": "never",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": [],
-			"inputs": [
-				{
-					"id": "newProjectName",
-					"type": "promptString",
-					"description": "Enter a workspace name"
-				},
-				{
-					"id": "newProjectType",
-					"type": "pickString",
-					"description": "Select a workspace type",
-					"options": ["front", "back", "ai", "empty"],
-					"default": "front"
-				}
-			],
-			"options": {
-				"env": {
-					"NEW_PROJECT_NAME": "${input:newProjectName}",
-					"NEW_PROJECT_TYPE": "${input:newProjectType}"
-				}
-			}
-		},
-		{
-			"label": "Check Current Goals",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/current-goals-check.mjs\"",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Check Current Goals (CI Mode)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/current-goals-check.mjs\" --fail-on-update --maxAgeDays 14",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Check Context Drift (All)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/context-refresh.mjs\"",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Check Context Drift (CI Mode)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/context-refresh.mjs\" --warn-threshold 10 --fail-threshold 10",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Check Context Drift (Strict Sidecar)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/context-refresh.mjs\" --warn-threshold 10 --fail-threshold 10",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Drift: Active File",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/drift-file-report.mjs\" --file \"${file}\"",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"detail": "Plain-language drift readout for the focused editor file plus the aggregate drift score.",
-			"runOptions": {
-				"reevaluateOnRerun": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Refresh Context (Guided)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/context-refresh.mjs\" --open",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Install Git Hooks (core.hooksPath)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/install-git-hooks.mjs\"",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Init Context Freshness Sidecar",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\" --init",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Mark Context Reviewed (Sidecar)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\" --mark-reviewed",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Set Context Drift Baseline",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\" --set-baseline HEAD --note \"${input:baselineNote}\"",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Update Context Freshness Sidecar (From Staged)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\"",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Open Current Goals",
-			"type": "shell",
-			"command": "code \"${workspaceFolder}/context/current-goals.md\"",
-			"presentation": {
-				"reveal": "never",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Open Agent Index",
-			"type": "shell",
-			"command": "code \"${workspaceFolder}/docs/agents.md\"",
-			"presentation": {
-				"reveal": "never",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Link Check Frontend Markdown",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/markdown-link-check.mjs\" --root \"${input:frontendRoot}\" --text --max 50",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"inputs": [
-				{
-					"id": "frontendRoot",
-					"type": "promptString",
-					"description": "Enter the absolute path to the frontend repo root (e.g., /Users/<you>/Projects/Portfolio/frontend)"
-				}
-			],
-			"problemMatcher": []
-		},
-		{
-			"label": "AIX: Docs Link Check (Local)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/markdown-link-check-local.mjs\" --root docs --max 50",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "AIX: Pre-PR Check",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/pre-pr-check.mjs\" --targets aix",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "AIX: Pre-PR Check (Strict Sidecar)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/pre-pr-check.mjs\" --strict-sidecar --targets aix",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Agent Ops: Drift Watch (AIX)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/context-drift-watch.mjs\"",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Agent Ops: Drift Watch (All Repos)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/context-drift-watch.mjs\" --include-frontend --include-backend",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Agent Ops: Open File (Safe)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" open \"${input:agentOpsPath}\"",
-			"presentation": {
-				"reveal": "never",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"inputs": [
-				{
-					"id": "agentOpsPath",
-					"type": "promptString",
-					"description": "Path under aix/, ../frontend/, or ../backend/ (relative to aix workspace folder)"
-				}
-			],
-			"problemMatcher": []
-		},
-		{
-			"label": "Agent Ops: Move/Rename (Safe)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" move \"${input:agentOpsFrom}\" \"${input:agentOpsTo}\" --yes",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"inputs": [
-				{
-					"id": "agentOpsFrom",
-					"type": "promptString",
-					"description": "Move from (relative path under aix/, ../frontend/, or ../backend/)"
-				},
-				{
-					"id": "agentOpsTo",
-					"type": "promptString",
-					"description": "Move to (relative path under aix/, ../frontend/, or ../backend/)"
-				}
-			],
-			"problemMatcher": []
-		},
-		{
-			"label": "Agent Ops: Delete (Safe)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" delete \"${input:agentOpsDeletePath}\" --yes",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"inputs": [
-				{
-					"id": "agentOpsDeletePath",
-					"type": "promptString",
-					"description": "Delete path (relative to aix workspace folder)"
-				}
-			],
-			"problemMatcher": []
-		},
-		{
-			"label": "Agent Ops: Mkdir (Safe)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" mkdir \"${input:agentOpsMkdirPath}\" --yes",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"inputs": [
-				{
-					"id": "agentOpsMkdirPath",
-					"type": "promptString",
-					"description": "Directory path to create (relative to aix workspace folder)"
-				}
-			],
-			"problemMatcher": []
-		},
-		{
-			"label": "Agent Ops: Touch (Safe)",
-			"type": "shell",
-			"command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" touch \"${input:agentOpsTouchPath}\" --yes",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"inputs": [
-				{
-					"id": "agentOpsTouchPath",
-					"type": "promptString",
-					"description": "File path to create if missing (relative to aix workspace folder)"
-				}
-			],
-			"problemMatcher": []
-		},
-		{
-			"label": "Frontend: Dev",
-			"type": "shell",
-			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run dev",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Frontend: Build",
-			"type": "shell",
-			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Frontend: Test",
-			"type": "shell",
-			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run test",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Frontend: Validate",
-			"type": "shell",
-			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run validate",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Frontend: Format",
-			"type": "shell",
-			"command": "npm --prefix \"${workspaceFolder}/../frontend\" run format",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Backend: Dev",
-			"type": "shell",
-			"command": "npm --prefix \"${workspaceFolder}/../backend\" run dev",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Backend: Build",
-			"type": "shell",
-			"command": "npm --prefix \"${workspaceFolder}/../backend\" run build",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		},
-		{
-			"label": "Backend: Migrate",
-			"type": "shell",
-			"command": "npm --prefix \"${workspaceFolder}/../backend\" run migrate",
-			"presentation": {
-				"reveal": "always",
-				"panel": "dedicated",
-				"showReuseMessage": false,
-				"clear": true
-			},
-			"problemMatcher": []
-		}
-	],
-	"inputs": [
-		{
-			"id": "baselineNote",
-			"type": "promptString",
-			"description": "Optional note to record with the new context drift baseline",
-			"default": "set via VS Code task"
-		}
-	]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "New Project",
+      "type": "shell",
+      "command": "true",
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": [],
+      "inputs": [
+        {
+          "id": "newProjectName",
+          "type": "promptString",
+          "description": "Enter a workspace name"
+        },
+        {
+          "id": "newProjectType",
+          "type": "pickString",
+          "description": "Select a workspace type",
+          "options": ["front", "back", "ai", "empty"],
+          "default": "front"
+        }
+      ],
+      "options": {
+        "env": {
+          "NEW_PROJECT_NAME": "${input:newProjectName}",
+          "NEW_PROJECT_TYPE": "${input:newProjectType}"
+        }
+      }
+    },
+    {
+      "label": "Check Current Goals",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/current-goals-check.mjs\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Check Current Goals (CI Mode)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/current-goals-check.mjs\" --fail-on-update --maxAgeDays 14",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Check Context Drift (All)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/context-refresh.mjs\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Check Context Drift (CI Mode)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/context-refresh.mjs\" --warn-threshold 10 --fail-threshold 10",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Check Context Drift (Strict Sidecar)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/context-refresh.mjs\" --warn-threshold 10 --fail-threshold 10",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Drift: Active File",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/drift-file-report.mjs\" --file \"${file}\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "detail": "Plain-language drift readout for the focused editor file plus the aggregate drift score.",
+      "runOptions": {
+        "reevaluateOnRerun": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Refresh Context (Guided)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/context-refresh.mjs\" --open",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Install Git Hooks (core.hooksPath)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/install-git-hooks.mjs\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Init Context Freshness Sidecar",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\" --init",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Mark Context Reviewed (Sidecar)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\" --mark-reviewed",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Set Context Drift Baseline",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\" --set-baseline HEAD --note \"${input:baselineNote}\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Update Context Freshness Sidecar (From Staged)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/update-context-freshness.mjs\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Open Current Goals",
+      "type": "shell",
+      "command": "code \"${workspaceFolder}/context/current-goals.md\"",
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Open Agent Index",
+      "type": "shell",
+      "command": "code \"${workspaceFolder}/docs/agents.md\"",
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Link Check Frontend Markdown",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/markdown-link-check-local.mjs\" --root \"${input:frontendRoot}\" --max 50",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "inputs": [
+        {
+          "id": "frontendRoot",
+          "type": "promptString",
+          "description": "Enter the absolute path to the frontend repo root (e.g., /Users/<you>/Projects/Portfolio/frontend)"
+        }
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "AIX: Docs Link Check (Local)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/markdown-link-check-local.mjs\" --root docs --max 50",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AIX: Pre-PR Check",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/pre-pr-check.mjs\" --targets aix",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "AIX: Pre-PR Check (Strict Sidecar)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/pre-pr-check.mjs\" --strict-sidecar --targets aix",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Agent Ops: Drift Watch (AIX)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/context-drift-watch.mjs\"",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Agent Ops: Drift Watch (All Repos)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/context-drift-watch.mjs\" --include-frontend --include-backend",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Agent Ops: Open File (Safe)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" open \"${input:agentOpsPath}\"",
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "inputs": [
+        {
+          "id": "agentOpsPath",
+          "type": "promptString",
+          "description": "Path under aix/, ../frontend/, or ../backend/ (relative to aix workspace folder)"
+        }
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Agent Ops: Move/Rename (Safe)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" move \"${input:agentOpsFrom}\" \"${input:agentOpsTo}\" --yes",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "inputs": [
+        {
+          "id": "agentOpsFrom",
+          "type": "promptString",
+          "description": "Move from (relative path under aix/, ../frontend/, or ../backend/)"
+        },
+        {
+          "id": "agentOpsTo",
+          "type": "promptString",
+          "description": "Move to (relative path under aix/, ../frontend/, or ../backend/)"
+        }
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Agent Ops: Delete (Safe)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" delete \"${input:agentOpsDeletePath}\" --yes",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "inputs": [
+        {
+          "id": "agentOpsDeletePath",
+          "type": "promptString",
+          "description": "Delete path (relative to aix workspace folder)"
+        }
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Agent Ops: Mkdir (Safe)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" mkdir \"${input:agentOpsMkdirPath}\" --yes",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "inputs": [
+        {
+          "id": "agentOpsMkdirPath",
+          "type": "promptString",
+          "description": "Directory path to create (relative to aix workspace folder)"
+        }
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Agent Ops: Touch (Safe)",
+      "type": "shell",
+      "command": "node \"${workspaceFolder}/scripts/agent-ops.mjs\" touch \"${input:agentOpsTouchPath}\" --yes",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "inputs": [
+        {
+          "id": "agentOpsTouchPath",
+          "type": "promptString",
+          "description": "File path to create if missing (relative to aix workspace folder)"
+        }
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend: Dev",
+      "type": "shell",
+      "command": "npm --prefix \"${workspaceFolder}/../frontend\" run dev",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend: Build",
+      "type": "shell",
+      "command": "npm --prefix \"${workspaceFolder}/../frontend\" run build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend: Test",
+      "type": "shell",
+      "command": "npm --prefix \"${workspaceFolder}/../frontend\" run test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend: Validate",
+      "type": "shell",
+      "command": "npm --prefix \"${workspaceFolder}/../frontend\" run validate",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Frontend: Format",
+      "type": "shell",
+      "command": "npm --prefix \"${workspaceFolder}/../frontend\" run format",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend: Dev",
+      "type": "shell",
+      "command": "npm --prefix \"${workspaceFolder}/../backend\" run dev",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend: Build",
+      "type": "shell",
+      "command": "npm --prefix \"${workspaceFolder}/../backend\" run build",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "Backend: Migrate",
+      "type": "shell",
+      "command": "npm --prefix \"${workspaceFolder}/../backend\" run migrate",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "showReuseMessage": false,
+        "clear": true
+      },
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "baselineNote",
+      "type": "promptString",
+      "description": "Optional note to record with the new context drift baseline",
+      "default": "set via VS Code task"
+    }
+  ]
 }

@@ -15,10 +15,23 @@
  */
 /** @format */
 
-import fs from 'node:fs';
-import path from 'node:path';
+import fs from "node:fs";
+import path from "node:path";
 
-const DEFAULT_SKIP_DIRS = new Set(['node_modules', '.git', '_site']);
+const DEFAULT_SKIP_DIRS = new Set([
+  "node_modules",
+  ".git",
+  "_site",
+  "dist",
+  "build",
+  "coverage",
+  ".next",
+  ".nuxt",
+  ".turbo",
+  ".cache",
+  ".parcel-cache",
+  ".obsidian",
+]);
 
 function parseArgs(argv) {
   const args = {
@@ -31,26 +44,29 @@ function parseArgs(argv) {
   for (let i = 0; i < argv.length; i += 1) {
     const token = argv[i];
 
-    if (token === '--root') {
+    if (token === "--root") {
       args.root = argv[i + 1];
       i += 1;
       continue;
     }
 
-    if (token === '--max') {
+    if (token === "--max") {
       args.max = Number(argv[i + 1] ?? args.max);
       i += 1;
       continue;
     }
 
-    if (token === '--text') {
+    if (token === "--text") {
       args.json = false;
       continue;
     }
 
-    if (token === '--skip') {
-      const val = argv[i + 1] ?? '';
-      for (const item of val.split(',').map(s => s.trim()).filter(Boolean)) {
+    if (token === "--skip") {
+      const val = argv[i + 1] ?? "";
+      for (const item of val
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)) {
         args.skip.add(item);
       }
       i += 1;
@@ -61,17 +77,33 @@ function parseArgs(argv) {
   return args;
 }
 
-function* walk(dir, skipDirs) {
-  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+function* walk(dir, skipDirs, warnings) {
+  let entries;
+  try {
+    entries = fs.readdirSync(dir, { withFileTypes: true });
+  } catch (err) {
+    warnings.push({
+      type: "walk",
+      path: dir,
+      message: err?.message || String(err),
+    });
+    return;
+  }
+
+  for (const ent of entries) {
     const fullPath = path.join(dir, ent.name);
 
-    if (ent.isDirectory()) {
-      if (skipDirs.has(ent.name)) continue;
-      yield* walk(fullPath, skipDirs);
+    if (ent.isSymbolicLink()) {
       continue;
     }
 
-    if (ent.isFile() && ent.name.endsWith('.md')) {
+    if (ent.isDirectory()) {
+      if (skipDirs.has(ent.name)) continue;
+      yield* walk(fullPath, skipDirs, warnings);
+      continue;
+    }
+
+    if (ent.isFile() && ent.name.endsWith(".md")) {
       yield fullPath;
     }
   }
@@ -79,7 +111,7 @@ function* walk(dir, skipDirs) {
 
 function stripFencedCode(markdown) {
   // Remove triple-backtick blocks (common fenced code); leaves inline code alone.
-  return markdown.replace(/```[\s\S]*?```/g, '');
+  return markdown.replace(/```[\s\S]*?```/g, "");
 }
 
 function extractLinks(markdown) {
@@ -104,15 +136,15 @@ function extractLinks(markdown) {
 
 function isSkippableHref(href) {
   if (!href) return true;
-  if (href.startsWith('#')) return true;
+  if (href.startsWith("#")) return true;
   if (/^(https?:|mailto:|tel:)/i.test(href)) return true;
-  if (href.startsWith('/')) return true; // site-root, not a local file check
+  if (href.startsWith("/")) return true; // site-root, not a local file check
   return false;
 }
 
 function resolveTarget(fromFile, href) {
   const baseDir = path.dirname(fromFile);
-  const target = href.split('#')[0];
+  const target = href.split("#")[0];
   return path.resolve(baseDir, target);
 }
 
@@ -126,12 +158,24 @@ function main() {
   }
 
   const broken = [];
+  const warnings = [];
   let filesScanned = 0;
   let linksChecked = 0;
 
-  for (const fileAbs of walk(rootAbs, args.skip)) {
+  for (const fileAbs of walk(rootAbs, args.skip, warnings)) {
     filesScanned += 1;
-    const raw = fs.readFileSync(fileAbs, 'utf8');
+    let raw;
+    try {
+      raw = fs.readFileSync(fileAbs, "utf8");
+    } catch (err) {
+      warnings.push({
+        type: "read",
+        file: path.relative(rootAbs, fileAbs),
+        message: err?.message || String(err),
+      });
+      continue;
+    }
+
     const text = stripFencedCode(raw);
     const links = extractLinks(text);
 
@@ -155,6 +199,8 @@ function main() {
     root: rootAbs,
     filesScanned,
     linksChecked,
+    warningCount: warnings.length,
+    warnings,
     brokenCount: broken.length,
     broken: broken.slice(0, args.max),
   };
@@ -165,9 +211,16 @@ function main() {
     process.stdout.write(`Root: ${result.root}\n`);
     process.stdout.write(`Files scanned: ${result.filesScanned}\n`);
     process.stdout.write(`Links checked: ${result.linksChecked}\n`);
+    process.stdout.write(`Warnings: ${result.warningCount}\n`);
     process.stdout.write(`Broken: ${result.brokenCount}\n`);
+    for (const warn of result.warnings) {
+      const itemPath = warn.file || path.relative(rootAbs, warn.path || "");
+      process.stdout.write(`! ${warn.type}: ${itemPath} (${warn.message})\n`);
+    }
     for (const item of result.broken) {
-      process.stdout.write(`- ${item.file} -> ${item.href} (missing: ${item.resolved})\n`);
+      process.stdout.write(
+        `- ${item.file} -> ${item.href} (missing: ${item.resolved})\n`,
+      );
     }
   }
 
