@@ -20,12 +20,14 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Now
 
-- [ ] Conduct AIX hygiene pass to return agents to optimal performance.
 - [ ] Complete the active landing-page UX flow with seamless choreography (video -> hero -> bio -> awards) and a clean handoff into downstream content.
-- [ ] Execute cinematic pacing pass: tighten video/hero handoff overlap and verify scroll re-entry behavior.
+- [ ] Display block content within the Bio section.
 
 ## Next
 
+- [ ] Execute cinematic pacing pass: tighten video/hero handoff overlap and verify scroll re-entry behavior.
+- [ ] Complete AIX hygiene pass closeout: canonicalize backlog ownership and record a dated validation snapshot.
+- [ ] Build the migration plan away from the current state of prod to this newest version.
 - [ ] Validate landing sequence behavior with focused runtime checks and update choreography docs/context where behavior contracts changed.
 - [ ] Tune cinematic pacing and overlap between sections (video/hero handoff, hero/bio/awards transitions, reduced-motion behavior).
 - [ ] Support content strategy through frontmatter and templates.
