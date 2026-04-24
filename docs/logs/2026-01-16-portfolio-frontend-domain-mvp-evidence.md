@@ -1,13 +1,13 @@
 # Portfolio Frontend Domain Module — MVP Evidence (AIX) — 2026-01-16
 
-Scope: Multi-root workspace evaluation for **frontend-domain work routed through Concierge modules**. This log covers the new module in `aix/.copilot/prompts/` and its observed behavior while implementing changes in `frontend/`.
+Scope: Multi-root workspace evaluation for **frontend-domain work routed through Concierge modules**. This log covers the mounted project module in `frontend/.copilot/prompts/` and its observed behavior while implementing changes in `frontend/`.
 
 Evidence sources:
 - AIX rubric: [../../specs/performance/aix.md](../../specs/performance/aix.md)
 - Domain spec: [../../specs/ai/domain-specialized-coding-agent.md](../../specs/ai/domain-specialized-coding-agent.md)
 - Probe bank: [../../specs/ai/domain-agent-probes.md](../../specs/ai/domain-agent-probes.md)
 - Project boundary context: [../../context/projects/portfolio-frontend.md](../../context/projects/portfolio-frontend.md)
-- Domain module: [../../.copilot/prompts/portfolio-frontend-domain.prompt.md](../../.copilot/prompts/portfolio-frontend-domain.prompt.md)
+- Domain module: [../../../frontend/.copilot/prompts/domain.prompt.md](../../../frontend/.copilot/prompts/domain.prompt.md)
 
 Constraint discovered mid-run:
 - Avoid choreography bundling in local dev: prefer `npm run start:nobundle` (no `assets/js/choreography/bundle.js`) until explicitly re-enabled.
@@ -18,7 +18,7 @@ Constraint discovered mid-run:
 
 ### Platform (aix)
 - Domain spec: [../../specs/ai/domain-specialized-coding-agent.md](../../specs/ai/domain-specialized-coding-agent.md)
-- Domain module: [../../.copilot/prompts/portfolio-frontend-domain.prompt.md](../../.copilot/prompts/portfolio-frontend-domain.prompt.md)
+- Domain module: [../../../frontend/.copilot/prompts/domain.prompt.md](../../../frontend/.copilot/prompts/domain.prompt.md)
 - Module index updated: [../../.copilot/prompts/_module-index.md](../../.copilot/prompts/_module-index.md)
 - Router contract tightened (domain-module selection rule): [../../.copilot/prompts/concierge.prompt.md](../../.copilot/prompts/concierge.prompt.md)
 - Probe bank created: [../../specs/ai/domain-agent-probes.md](../../specs/ai/domain-agent-probes.md)

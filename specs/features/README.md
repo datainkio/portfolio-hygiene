@@ -12,3 +12,6 @@ This folder defines product features end-to-end so AIX can align implementation 
 - GitHub Pages documentation site (MkDocs/Material): [specs/features/brower-accessible-documentation.md](brower-accessible-documentation.md)
 - File-level AIX hygiene (drift-neutral additions): [specs/features/file-aix-hygiene.md](file-aix-hygiene.md)
 - Workspace link maintenance automation: [specs/features/workspace-link-maintenance.md](workspace-link-maintenance.md)
+- Concierge 11ty module boundary: [specs/features/concierge-11ty-module-boundary.md](concierge-11ty-module-boundary.md)
+- Concierge Sanity module boundary: [specs/features/concierge-sanity-module-boundary.md](concierge-sanity-module-boundary.md)
+- TODO format for GitHub + Obsidian/VS Code discoverability: [specs/features/todo-format-discoverability.md](todo-format-discoverability.md)

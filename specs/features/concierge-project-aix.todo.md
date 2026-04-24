@@ -24,7 +24,7 @@
 - [ ] Define doc-optimization policy for mounted projects (allowed: improve discoverability/cross-linking, consolidate prompts/modules, reduce duplication; forbidden: rewrite product docs for style)
 - [ ] Define doc-optimization allowlist (which doc areas may be changed, e.g. docs/ai/, prompt indexes)
 - [ ] Define doc-optimization denylist (product docs / marketing copy / narrative docs unless explicitly requested)
-- [x] Define guardrails for ignored paths (don’t touch vendor/build/.obsidian/_site etc.)
+- [x] Define guardrails for ignored paths (don’t touch vendor/build/.obsidian/\_site etc.)
 - [x] Define safety rules for build artifacts (ensure bundles/dist output are ignored; do not add generated files)
 - [x] Define dependency policy (auto-fix must not add new deps; can only adjust docs/prompts/ignores)
 
@@ -33,7 +33,7 @@
 - [x] Allowlist: `.copilot/**` (prompt modules, context packs, indexes)
 - [x] Allowlist: `docs/ai/**` (AIX docs, examples, entrypoints)
 - [x] Allowlist: `.github/agents/**` (only for relocating/disabling conflicting selectable agents)
-- [x] Allowlist: `.github/copilot-instructions.md` (only to clarify scope/authority; no broad rewrites)
+- [x] Allowlist: `<mounted-project>/.github/copilot-instructions.md` (only to clarify scope/authority; no broad rewrites)
 - [x] Allowlist: `.gitignore` (only for AIX-relevant noise reduction: generated bundles, build outputs)
 - [x] Denylist: build outputs (`_site/**`, `dist/**`, `.cache/**`, `node_modules/**`, vendor bundles)
 - [x] Denylist: user-private/workspace folders (`.obsidian/**`, IDE state)
@@ -78,11 +78,11 @@
 - [x] MP2 — Explain authority chain (scaffold vs mounted project) (expects: `analyst` or `architect`)
 - [x] MP3 — Recommend 3 highest-leverage AIX improvements inside mounted project (expects: `analyst`)
 - [x] MP4 — Propose optional auto-fix plan with dry-run diff + rollback notes (expects: `implementer` or `housekeeper`)
-- [x] MP5 — Denylist enforcement test (“try to edit _site/ or node_modules”) and confirm refusal (expects: correct refusal + safe alternative)
+- [x] MP5 — Denylist enforcement test (“try to edit \_site/ or node_modules”) and confirm refusal (expects: correct refusal + safe alternative)
 
 ## Discovery (Mounted Project Profiling)
 
-- [ ] Inventory current AIX surfaces in imported projects (.copilot/, docs/ai/, .github/copilot-instructions.md, legacy agents)
+- [ ] Inventory current AIX surfaces in imported projects (.copilot/, docs/ai/, <mounted-project>/.github/copilot-instructions.md, legacy agents)
 - [ ] Design “Project AIX Profile” format (derived facts: prompts, context packs, entrypoints, ignored paths, build artifacts)
 - [ ] Specify discovery algorithm (multi-root scan + heuristic scoring + duplicate/overlap detection)
 
@@ -107,8 +107,8 @@
 
 - [x] Create validation steps (format check, tests, build smoke checks) per project type
 - [x] Draft the first pilot runbook: “Optimize AIX for frontend” (inputs, outputs, expected diffs)
-	- [x] Capture edge cases (multiple projects, conflicting prompt authorities, missing prompts, monorepos)
-	- [x] Add acceptance checklist for release (docs, safety checks, example audit output)
+  - [x] Capture edge cases (multiple projects, conflicting prompt authorities, missing prompts, monorepos)
+  - [x] Add acceptance checklist for release (docs, safety checks, example audit output)
 
 ## Spec Drafting (start now)
 

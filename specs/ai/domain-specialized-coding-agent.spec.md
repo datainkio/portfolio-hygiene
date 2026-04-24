@@ -9,8 +9,8 @@
 
 Links:
 
-- Decision: `docs/decisions/0002-portfolio-frontend-domain-model-a.md`
-- MVP evidence: `docs/logs/2026-01-16-portfolio-frontend-domain-mvp-evidence.md`
+- Decision: `/aix/docs/decisions/0002-portfolio-frontend-domain-model-a.md`
+- MVP evidence: `/aix/docs/logs/2026-01-16-portfolio-frontend-domain-mvp-evidence.md`
 
 ## Problem Statement
 
@@ -26,33 +26,33 @@ This spec defines a domain-specialized agent behavior that is _predictable_, _co
 
 In this workspace:
 
-- Platform scaffold authority: `aix/` (routing policy, AIX evaluation, workspace hygiene)
-- Frontend authority: `frontend/` (implementation conventions, build workflows, file-scoped prompts)
+- Platform scaffold authority: `/aix/` (routing policy, AIX evaluation, workspace hygiene)
+- Frontend authority: `/frontend/` (implementation conventions, build workflows, file-scoped prompts)
 
 Precedence (highest → lowest):
 
-1. File-scoped prompts and repo-specific instructions in `frontend/` (when editing frontend files)
-2. `aix/context/projects/portfolio-frontend.md` (multi-root boundary + pitfalls)
-3. `aix/context/*` + `aix/specs/*` (platform constraints + evaluation)
+1. File-scoped prompts and repo-specific instructions in `/frontend/` (when editing frontend files)
+2. `/aix/context/projects/portfolio-frontend.md` (multi-root boundary + pitfalls)
+3. `/aix/context/*` + `/aix/specs/*` (platform constraints + evaluation)
 
 ## Non-goals
 
-- Replacing Concierge as the only registered Copilot agent in `aix/`.
-- Broad refactors inside `frontend/` that aren’t required to satisfy the current request.
-- Editing generated outputs (e.g., `frontend/_site/`) or generated design token files.
+- Replacing Concierge as the only registered Copilot agent in `/aix/`.
+- Broad refactors inside `/frontend/` that aren’t required to satisfy the current request.
+- Editing generated outputs (e.g., `/frontend/_site/`) or generated design token files.
 
 ## Domain Capabilities (Must-Have)
 
 ### 11ty + Nunjucks
 
-- Correctly locate pages/templates/components under `frontend/njk/`.
+- Correctly locate pages/templates/components under `/frontend/njk/`.
 - Prefer Nunjucks macros for reusable components.
-- Respect existing atomic design structure under `frontend/njk/_includes/`.
+- Respect existing atomic design structure under `/frontend/njk/_includes/`.
 
 ### Tailwind v4 + Design Tokens
 
 - Use the project’s npm scripts for CSS builds; do not call Tailwind directly.
-- Respect `frontend/styles/main.css` import order and layer strategy.
+- Respect `/frontend/styles/main.css` import order and layer strategy.
 - Never hand-edit Figma-generated token files (they are overwritten).
 
 ### GSAP Choreography
@@ -61,24 +61,26 @@ Precedence (highest → lowest):
 - Prefer `AnimationBus` events for cross-section coordination.
 - Respect reduced-motion handling.
 - Treat runtime gating as a contract: `director:ready` must precede preloader exit, and sequence start must follow `preloader:out`.
-- Use choreography config from `frontend/js/choreography/config/index.js` and `frontend/js/choreography/config/events.js` (do not reference `config/runtime.js`).
+- Use choreography config from `/frontend/js/choreography/config/index.js` and `/frontend/js/choreography/config/contracts/events.js` (do not reference legacy runtime config modules).
+- For runtime sequencing references, use current paths: `/frontend/js/choreography/AnimationDirector.js`, `/frontend/js/preloader/Preloader.js`, `/frontend/js/preloader/readiness.js`, and `/frontend/js/choreography/sequences/landing/LandingSequence.js`.
 
-### CMS-backed content (Sanity or Airtable)
+### CMS-backed content (Sanity primary; Airtable legacy)
 
-- Treat content as build-time data for 11ty.
-- Use `frontend/eleventy/` patterns for collections/filters/shortcodes.
+- Treat Sanity as the canonical CMS source for build-time data in 11ty.
+- Treat Airtable references as legacy migration context only, not active implementation guidance.
+- Use `/frontend/eleventy/` patterns for collections/filters/shortcodes.
 
 ## Guardrails (Hard Constraints)
 
 The domain-specialized agent must:
 
 - verify file existence before citing paths (avoid hallucinations)
-- avoid editing `frontend/_site/` (generated)
+- avoid editing `/frontend/_site/` (generated)
 - avoid editing Figma-generated CSS token outputs
 - avoid invoking Tailwind CLI directly; use npm scripts
-- default to `npm run start:nobundle` for local dev (avoid `assets/js/choreography/bundle.js`) until explicitly told otherwise
-- avoid inventing non-existent sections (e.g., “Work” section if not implemented)
-- when naming active landing sections, prefer the current registry in `frontend/js/choreography/sections/registry.js` (`hero`, `video`, `bio`, `awards`) unless changed in code
+- default to `npm run start:nobundle` for local dev (avoid legacy choreography bundle artifacts) until explicitly told otherwise
+- verify section names against the live registry in `/frontend/js/choreography/sections/registry.js` before proposing changes
+- when naming active landing sections, use the current registry set: `hero`, `video`, `bio`, `awards`, `organizations`, `work` (unless changed in code)
 
 ## Deliverables
 
@@ -90,13 +92,13 @@ Defines scope, constraints, deliverables, and acceptance criteria.
 
 A dedicated prompt module that Concierge can route to for frontend-domain work.
 
-- Location: `aix/.copilot/prompts/portfolio-frontend-domain.prompt.md`
-- Add to: `aix/.copilot/prompts/_module-index.md`
-- Concierge routing update: `aix/.copilot/prompts/concierge.prompt.md` (minimal new triggers)
+- Location: `/frontend/.copilot/prompts/domain.prompt.md`
+- Add to: `/aix/.copilot/prompts/_module-index.md`
+- Concierge routing update: `/aix/.copilot/prompts/concierge.prompt.md` (minimal new triggers)
 
 Routing note:
 
-- The domain module uses **Model A** (internal routing map inside a single module); Concierge remains the only router. See `docs/decisions/0002-portfolio-frontend-domain-model-a.md`.
+- The domain module uses **Model A** (internal routing map inside a single module); Concierge remains the only router. See `/aix/docs/decisions/0002-portfolio-frontend-domain-model-a.md`.
 
 Current state (MVP):
 
@@ -106,14 +108,14 @@ Current state (MVP):
 
 A stable, low-churn “what to read first” bundle for frontend tasks.
 
-- Location: `aix/context/projects/portfolio-frontend.md` (already exists; may be extended)
-- Optional curated references: `frontend/docs/` links to choreography + build workflow
+- Location: `/aix/context/projects/portfolio-frontend.md` (already exists; may be extended)
+- Optional curated references: `/frontend/docs/` links to choreography + build workflow
 
 ### D4 — Probe Task Bank (to be created in MVP)
 
 A small set of canonical tasks used to evaluate AIX improvements.
 
-- Location suggestion: `aix/specs/ai/domain-agent-probes.md`
+- Location suggestion: `/aix/specs/ai/domain-agent-probes.spec.md`
 
 ## MVP Acceptance Criteria
 
@@ -128,17 +130,17 @@ An MVP is complete when:
 
 MVP status:
 
-- Complete; see `docs/logs/2026-01-16-portfolio-frontend-domain-mvp-evidence.md`.
+- Complete; see `/aix/docs/logs/2026-01-16-portfolio-frontend-domain-mvp-evidence.md`.
 
 ## Evaluation Plan (AIX)
 
-Use the AIX scorecard in `aix/specs/performance/aix.md`.
+Use the AIX scorecard in `/aix/specs/performance/aix.md`.
 
 Minimum evaluation set (first-response emphasized):
 
-1. Add a small Nunjucks macro component under `frontend/njk/_includes/`.
+1. Add a small Nunjucks macro component under `/frontend/njk/_includes/`.
 2. Update a GSAP section controller without breaking Director initialization.
-3. Add/adjust an 11ty collection or filter under `frontend/eleventy/`.
+3. Add/adjust an 11ty collection or filter under `/frontend/eleventy/`.
 
 Record:
 
@@ -153,5 +155,5 @@ Record:
 
 ## Open Questions
 
-- Should the domain module live only in `aix/`, or should we also create a project-local agent in `frontend/.github/agents/` for direct usage?
-- Where should the probe bank live long-term (`aix/specs/ai/` vs `aix/data/`)?
+- Should the domain module live only in `/aix/`, or should we also create a project-local agent in `/frontend/.github/agents/` for direct usage?
+- Where should the probe bank live long-term (`/aix/specs/ai/` vs `/aix/data/`)?

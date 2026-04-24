@@ -5,7 +5,7 @@
 - **Status:** draft
 - **Last reviewed:** 2026-01-19
 - **Scope:** Markdown link targets across aix plus sibling repos (`../frontend`, `../backend`) for specs, docs, context, and runbooks; excludes generated artifacts and vendor folders.
-- **Links:** context `/context/project.md`, goals `/context/current-goals.md`, agent map `/docs/agents.md`, file hygiene `/specs/features/file-aix-hygiene.md`
+- **Links:** context `/aix/context/project.md`, goals `/aix/context/current-goals.md`, agent map `/aix/docs/agents.md`, file hygiene `/aix/specs/features/file-aix-hygiene.md`
 
 ## Goals & Non-Goals
 
@@ -33,7 +33,7 @@
 
 - **FR1: Input modes** — Support operations `rename/move` (requires `--from` and `--to`), `delete` (requires `--from`), and `add` (requires `--to`). Optional `--ensure-index` flag can be used to add links to selected index files.
 - **FR2: Scope & ignores** — Scan only Markdown-family files (`.md`, `.mdx`) plus workspace maps/index JSON where paths are stored (e.g., `.code-workspace`, `copilot-agents.json`), across `aix/`, `../frontend/`, and `../backend/`. Exclude `.git`, `.obsidian`, `node_modules`, `.next`, `dist`, `_site`, `coverage`, `cache-export`, and other generated outputs.
-- **FR3: Link rewrite rules** — Update link destinations while preserving link text and anchors; prefer repo-root relative paths (e.g., `/specs/features/foo.md`). Maintain hash fragments when present; do not change display text unless `--delete` is used.
+- **FR3: Link rewrite rules** — Update link destinations while preserving link text and anchors; prefer repo-root relative paths (e.g., `/aix/specs/features/<feature>.md`). Maintain hash fragments when present; do not change display text unless `--delete` is used.
 - **FR4: Delete handling** — For `--delete`, convert links that target the removed path into plain text and emit a warning in the summary for each removed target. Optional `--marker` can append `(removed)` if requested.
 - **FR5: Dry-run default** — Default run is dry-run: print a table of proposed edits (file, count, preview) and exit non-zero if changes would occur. `--apply` writes edits to disk.
 - **FR6: Safety** — Do not modify binary files. Validate that `--to` exists (unless `--delete`); warn and skip if `--from` is not referenced. Preserve file formatting (no auto-format). Abort if attempting to write outside allowed roots.
@@ -59,7 +59,7 @@
 ## Rollout & Analytics
 
 - Implement script and add VS Code task + action button.
-- Document usage in `docs/agents.md` or a short runbook under `docs/runbooks/`.
+- Document usage in `/aix/docs/agents.md` or a short runbook under `/aix/docs/runbooks/`.
 - Optional: add lightweight metric by counting updated links in the JSON report for future trend tracking.
 
 ## Decisions

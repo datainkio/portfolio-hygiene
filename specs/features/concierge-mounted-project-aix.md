@@ -32,30 +32,30 @@
 
 ### Journey 0 — Onboard a newly mounted project (DX first)
 
-1) User adds a new project folder to the workspace (mounted project).
-2) User creates `/project-root/aix.manifest.yaml` as the first onboarding step.
-3) Concierge uses the manifest to reliably discover AIX surfaces and apply project preferences (e.g., audit destination).
+1. User adds a new project folder to the workspace (mounted project).
+2. User creates `<project-root>/aix.manifest.yaml` as the first onboarding step.
+3. Concierge uses the manifest to reliably discover AIX surfaces and apply project preferences (e.g., audit destination).
 
 ### Journey A — Benchmark a mounted project’s AIX
 
-1) User mounts /frontend alongside the scaffold.
-2) User asks Concierge to benchmark /frontend AIX.
-3) Concierge discovers the mounted project’s AIX surfaces and runs the benchmark harness (report-only).
-4) Concierge logs baseline scores and highlights top findings.
+1. User mounts /frontend alongside the scaffold.
+2. User asks Concierge to benchmark /frontend AIX.
+3. Concierge discovers the mounted project’s AIX surfaces and runs the benchmark harness (report-only).
+4. Concierge logs baseline scores and highlights top findings.
 
 ### Journey B — Optimize AIX (optional auto-fix)
 
-1) Concierge produces a prioritized set of recommendations with a patch plan.
-2) User opts in to apply a selected subset.
-3) Concierge applies changes only within allowlisted AIX surfaces.
-4) Concierge re-runs the benchmark subset and reports deltas.
+1. Concierge produces a prioritized set of recommendations with a patch plan.
+2. User opts in to apply a selected subset.
+3. Concierge applies changes only within allowlisted AIX surfaces.
+4. Concierge re-runs the benchmark subset and reports deltas.
 
 ### Journey C — Maintain AIX (drift detection)
 
-1) User runs maintenance periodically or when Copilot quality drops.
-2) Concierge compares current state to baseline (and/or last known good run).
-3) Concierge reports drift (new noise, broken entrypoints, duplication, conflicting authority).
-4) User optionally applies safe fixes and re-scores.
+1. User runs maintenance periodically or when Copilot quality drops.
+2. Concierge compares current state to baseline (and/or last known good run).
+3. Concierge reports drift (new noise, broken entrypoints, duplication, conflicting authority).
+4. User optionally applies safe fixes and re-scores.
 
 ### Permissions + safety expectations
 
@@ -97,43 +97,43 @@ Default output destination for reports and benchmark snapshots is `/project-root
 
 ### System flow (v1)
 
-1) **Select mounted project**
+1. **Select mounted project**
 
 - Input: explicit path or inferred workspace root.
 - Output: a single mounted project target.
 
-2) **Discover AIX surfaces (best-effort)**
+2. **Discover AIX surfaces (best-effort)**
 
 - Scan for known surfaces and detect conflicts (e.g., multiple competing entrypoints; active `.github/agents`).
 - If `aix.manifest.yaml` exists, apply its overrides and discovery hints.
 - Assign a **discovery confidence** level: `high | medium | low`.
 
-3) **Build Mounted Project Profile**
+3. **Build Mounted Project Profile**
 
 - Normalize discovered facts into a structured profile (see Data model).
 - Record any denylist conflicts and discovery ambiguities.
 
-4) **Run benchmark subset (MP1–MP5 by default)**
+4. **Run benchmark subset (MP1–MP5 by default)**
 
 - Use scaffold-owned prompts and score with FRA/CR/HF/TTUO/CUS.
 - Produce a baseline snapshot if one doesn’t exist (timestamped).
 
-5) **Generate report (default)**
+5. **Generate report (default)**
 
 - Summarize scores, findings, risks, and recommended changes.
 - If discovery confidence is low, recommend creating `aix.manifest.yaml`.
 
-6) **Optional: build patch plan (dry-run)**
+6. **Optional: build patch plan (dry-run)**
 
 - Only for allowlisted paths.
 - Provide file list, diff preview, and rollback notes.
 
-7) **Optional: apply selected changes (explicit opt-in)**
+7. **Optional: apply selected changes (explicit opt-in)**
 
 - Re-check denylist before apply.
 - Apply selected changes.
 
-8) **Re-score + validate progress**
+8. **Re-score + validate progress**
 
 - Re-run MP subset (or selected prompts).
 - Produce score deltas and a “progress validated” conclusion.
@@ -158,8 +158,15 @@ Example (JSON-ish):
   "manifestPath": "/Users/me/Projects/frontend/aix.manifest.yaml",
   "discoveryConfidence": "medium",
   "surfaces": {
-    "copilot": { "dir": ".copilot", "promptsDir": ".copilot/prompts", "contextDir": ".copilot/context" },
-    "docsAi": { "dir": "docs/ai", "entrypoints": ["docs/ai/START_HERE.md", "docs/ai/README.md"] },
+    "copilot": {
+      "dir": ".copilot",
+      "promptsDir": ".copilot/prompts",
+      "contextDir": ".copilot/context"
+    },
+    "docsAi": {
+      "dir": "docs/ai",
+      "entrypoints": ["docs/ai/START_HERE.md", "docs/ai/README.md"]
+    },
     "githubAgents": { "dir": ".github/agents", "active": false },
     "gitignore": { "path": ".gitignore" }
   },
@@ -220,10 +227,10 @@ Recommended additional fields:
 
 All Concierge responses for this feature should follow:
 
-1) Classification (intent + module)
-2) Answer / Deliverable (report, plan, or applied changes)
-3) Assumptions (especially discovery confidence)
-4) Next actions (explicit, runnable steps)
+1. Classification (intent + module)
+2. Answer / Deliverable (report, plan, or applied changes)
+3. Assumptions (especially discovery confidence)
+4. Next actions (explicit, runnable steps)
 
 Report mode output should always include:
 
@@ -235,7 +242,7 @@ Report mode output should always include:
 
 Within allowlisted paths only, auto-fix may perform:
 
-- create new files (e.g., create `/project-root/aix.manifest.yaml`; create `docs/ai/audits/`)
+- create new files (e.g., create `<project-root>/aix.manifest.yaml`; create `docs/ai/audits/`)
 - edit existing files (docs/prompts/ignores)
 - move/rename files (agent deconfliction and doc consolidation)
 - delete files only when explicitly confirmed and when a legacy reference is preserved elsewhere
@@ -268,14 +275,14 @@ Each patch plan must include rollback notes that are specific to the change cate
 For **newly mounted projects**, make no assumptions about directory structure. If `aix.manifest.yaml` is missing, Concierge should:
 
 - treat discovery as best-effort and explicitly mark findings as low-confidence
-- recommend creating `/project-root/aix.manifest.yaml`
+- recommend creating `<project-root>/aix.manifest.yaml`
 - if the user opts into auto-fix, offer “create manifest” as the first safe action and avoid broader edits until discovery confidence improves
 
 ### Mounted Project manifest (optional)
 
 Mounted projects may provide optional metadata to improve discovery accuracy and DX.
 
-- **Recommended location:** `/project-root/aix.manifest.yaml`
+- **Recommended location:** `<project-root>/aix.manifest.yaml`
 - **Fallback discovery (to preserve compatibility):** if not found at root, also check `/project-root/docs/ai/aix.manifest.yaml`.
 - **Primary DX purpose:** allow project owners to express preferences and override safe defaults (e.g., audit destination).
 - **Primary discovery purpose:** reduce ambiguity by declaring where AIX surfaces live (docs, prompts, legacy agents) and how to interpret authority.
@@ -297,9 +304,9 @@ If present, Concierge uses the manifest to:
 
 **Precedence** (highest to lowest):
 
-1) Explicit user instruction in the current request
-2) Mounted project manifest overrides
-3) Scaffold defaults defined in this spec
+1. Explicit user instruction in the current request
+2. Mounted project manifest overrides
+3. Scaffold defaults defined in this spec
 
 ### Benchmarking rules (reuse-first)
 
@@ -319,17 +326,17 @@ If present, Concierge uses the manifest to:
 
 Auto-fix may edit only the following within a mounted project:
 
-- .copilot/** (prompt modules, context packs, indexes)
-- docs/ai/** (AIX docs, entrypoints, canonical examples)
-- .github/agents/** (only for deconflicting selectable agents by relocating/disabling; preserve legacy references)
+- .copilot/\*\* (prompt modules, context packs, indexes)
+- docs/ai/\*\* (AIX docs, entrypoints, canonical examples)
+- .github/agents/\*\* (only for deconflicting selectable agents by relocating/disabling; preserve legacy references)
 - .github/copilot-instructions.md (only to clarify scope/authority; no broad rewrites)
 - .gitignore (only for AIX-relevant noise reduction: generated bundles, build outputs)
 
 ### Denylist (never edit)
 
-- Generated outputs and build artifacts: _site/**, dist/**, .cache/**, node_modules/**
+- Generated outputs and build artifacts: \_site/**, dist/**, .cache/**, node_modules/**
 - Vendor folders and minified bundles
-- Editor/private workspace state: .obsidian/**
+- Editor/private workspace state: .obsidian/\*\*
 - Product source behavior files (templates/JS/CSS) unless explicitly requested in a separate task
 
 ### Error handling + stop conditions
@@ -528,9 +535,9 @@ This section specifies concrete mechanics for file IO and comparison so the feat
 
 ### Manifest discovery (deterministic)
 
-1) Check `/project-root/aix.manifest.yaml`
-2) If missing, check `/project-root/docs/ai/aix.manifest.yaml`
-3) If both exist, root wins
+1. Check `/project-root/aix.manifest.yaml`
+2. If missing, check `/project-root/docs/ai/aix.manifest.yaml`
+3. If both exist, root wins
 
 If manifest parsing fails:
 
@@ -542,9 +549,9 @@ If manifest parsing fails:
 
 Resolved `auditOutputDir` is computed as:
 
-1) explicit request override (if provided)
-2) manifest `overrides.outputs.auditsDir` (if provided)
-3) default `docs/ai/audits`
+1. explicit request override (if provided)
+2. manifest `overrides.outputs.auditsDir` (if provided)
+3. default `docs/ai/audits`
 
 If the directory does not exist:
 
@@ -596,9 +603,9 @@ All command execution is confirmation-gated.
 
 Command sources, in order:
 
-1) Explicit user-provided command list in the request
-2) Manifest `validation.commands`
-3) Heuristic suggestions (do not auto-run)
+1. Explicit user-provided command list in the request
+2. Manifest `validation.commands`
+3. Heuristic suggestions (do not auto-run)
 
 If commands are executed:
 

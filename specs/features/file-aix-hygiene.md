@@ -5,17 +5,19 @@
 - **Status:** draft
 - **Last reviewed:** 2026-01-19
 - **Scope:** Any new or updated files intended to be part of the curated AIX surface (primarily Markdown docs/specs/runbooks/context).
-- **Links:** context `/context/project.md`, goals `/context/current-goals.md`, agent map `/docs/agents.md`, workspace map `.copilot/context/workspace-map.md`
+- **Links:** context `/aix/context/project.md`, goals `/aix/context/current-goals.md`, agent map `/aix/docs/agents.md`, workspace map `/aix/.copilot/context/workspace-map.md`
 
 ## Goals & Non-Goals
 
 ### Goals
+
 - Ensure any new or updated file is **drift-neutral**: discoverable, indexed, and grounded for agents.
 - Provide a **repeatable checklist** so contributors dont guess how to wire files into AIX surfaces.
 - Keep **agent grounding stable** by updating canonical maps (indexes, context hooks, agent maps).
 - Minimize **false drift** from unlinked docs while keeping the doc surface bounded.
 
 ### Non-Goals
+
 - Does not define content standards beyond AIX discoverability (style/tone live elsewhere).
 - Does not automate linking; it specifies the manual/PR checklist.
 - Does not cover non-doc assets (images/binaries) except when they require doc pointers.
@@ -28,21 +30,21 @@
 
 ## Functional Requirements
 
-- FR1: **Canonical index**  every new doc/spec must be linked from its nearest index (e.g., `specs/README.md`, `specs/features/README.md`, or sibling index where applicable).
-- FR2: **Context hook**  when the file affects project-wide understanding, add a pointer under the relevant section in `context/project.md` (e.g., Docs/Publishing).
-- FR3: **Goals touchpoint**  if the work is active/near-term, add a one-liner in `context/current-goals.md` referencing the file/spec.
-- FR4: **Agent map**  add a line in `docs/agents.md` (or the relevant agent map) indicating where the spec/doc lives for grounding.
-- FR5: **Workspace map**  if the file materially changes the curated map, update `.copilot/context/workspace-map.md` (or confirm its already covered).
-- FR6: **Drift check**  run `node scripts/drift-file-report.mjs --file <path>` (or broader drift watch) to verify the addition is drift-neutral; fix links if flagged.
-- FR7: **Scope control**  avoid adding non-doc/non-context files to published or indexed surfaces unless required; respect existing ignore/exclude rules.
-- FR8: **Link health**  use repo-root-relative links that work in both GitHub and rendered contexts (MkDocs/Pages, if applicable).
+- FR1: **Canonical index** every new doc/spec must be linked from its nearest index (e.g., `/aix/specs/README.md`, `/aix/specs/features/README.md`, or sibling index where applicable).
+- FR2: **Context hook** when the file affects project-wide understanding, add a pointer under the relevant section in `/aix/context/project.md` (e.g., Docs/Publishing).
+- FR3: **Goals touchpoint** if the work is active/near-term, add a one-liner in `/aix/context/current-goals.md` referencing the file/spec.
+- FR4: **Agent map** add a line in `/aix/docs/agents.md` (or the relevant agent map) indicating where the spec/doc lives for grounding.
+- FR5: **Workspace map** if the file materially changes the curated map, update `/aix/.copilot/context/workspace-map.md` (or confirm it is already covered).
+- FR6: **Drift check** run `node scripts/drift-file-report.mjs --file <path>` (or broader drift watch) to verify the addition is drift-neutral; fix links if flagged.
+- FR7: **Scope control** avoid adding non-doc/non-context files to published or indexed surfaces unless required; respect existing ignore/exclude rules.
+- FR8: **Link health** use repo-root-relative links that work in both GitHub and rendered contexts (MkDocs/Pages, if applicable).
 
 ## Acceptance Criteria
 
 - AC1: The new/updated file is referenced from at least one canonical index appropriate to its folder.
-- AC2: Relevant context hooks are present in `context/project.md` (if the file affects project-wide context).
-- AC3: If active/near-term, the file is mentioned in `context/current-goals.md` with a short pointer.
-- AC4: Agent-facing map (`docs/agents.md`) notes where to find the file/spec.
+- AC2: Relevant context hooks are present in `/aix/context/project.md` (if the file affects project-wide context).
+- AC3: If active/near-term, the file is mentioned in `/aix/context/current-goals.md` with a short pointer.
+- AC4: Agent-facing map (`/aix/docs/agents.md`) notes where to find the file/spec.
 - AC5: Drift check reports no new drift contribution for the file after links are added.
 
 ## Risks & Mitigations
@@ -53,10 +55,10 @@
 
 ## Rollout Plan
 
-1) Adopt this checklist in PR review (manual initially).
-2) For new docs/specs, apply FR1FR4 (and FR5 if map changes) before merge.
-3) Run drift check (FR6) and fix any flagged missing links.
-4) Optionally add a brief entry to `docs/changes/` when notable specs/docs are added.
+1. Adopt this checklist in PR review (manual initially).
+2. For new docs/specs, apply FR1FR4 (and FR5 if map changes) before merge.
+3. Run drift check (FR6) and fix any flagged missing links.
+4. Optionally add a brief entry to `/aix/docs/changes/` when notable specs/docs are added.
 
 ## Open Questions
 
