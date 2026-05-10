@@ -20,7 +20,7 @@ If a constraint is project-specific (e.g., only `/frontend`), link to that proje
 - **Accessibility is non-negotiable**: semantic structure, keyboard support, and reduced-motion respect by default.
 - **Performance is intentional**: avoid unnecessary JS/deps; measure or justify animation cost.
 - **Noise control / indexing hygiene**: keep search + watcher excludes aligned with `.gitignore` and avoid indexing build outputs, caches, and vendor directories.
-- **Secret handling**: never commit tokens; prefer `.env` / CI secrets for `FIGMA_TOKEN`, `SANITY_*`, etc. Treat any `AIRTABLE_*` usage as legacy migration-only.
+- **Secret handling**: never commit tokens; prefer `.env` / CI secrets for `FIGMA_TOKEN`, `SANITY_*`, and other provider credentials.
 
 ## Decision authority
 

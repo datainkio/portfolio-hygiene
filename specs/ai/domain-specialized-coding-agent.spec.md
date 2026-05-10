@@ -64,10 +64,10 @@ Precedence (highest → lowest):
 - Use choreography config from `/frontend/js/choreography/config/index.js` and `/frontend/js/choreography/config/contracts/events.js` (do not reference legacy runtime config modules).
 - For runtime sequencing references, use current paths: `/frontend/js/choreography/AnimationDirector.js`, `/frontend/js/preloader/Preloader.js`, `/frontend/js/preloader/readiness.js`, and `/frontend/js/choreography/sequences/landing/LandingSequence.js`.
 
-### CMS-backed content (Sanity primary; Airtable legacy)
+### CMS-backed content (Sanity primary)
 
 - Treat Sanity as the canonical CMS source for build-time data in 11ty.
-- Treat Airtable references as legacy migration context only, not active implementation guidance.
+- Treat legacy source-system references as historical migration context only, not active implementation guidance.
 - Use `/frontend/eleventy/` patterns for collections/filters/shortcodes.
 
 ## Guardrails (Hard Constraints)

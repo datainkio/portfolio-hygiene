@@ -22,7 +22,7 @@ Concierge occasionally emits a ceremonial callout (p = 1/6) before the standard 
 
 ## Project Domain Modules (selected by Concierge when in-scope)
 
-- Portfolio Frontend Domain — frontend implementation guardrails (11ty/Nunjucks/Tailwind v4/GSAP/Sanity; Airtable references are legacy migration-only). Prompt module: [frontend/.copilot/prompts/domain.prompt.md](../../frontend/.copilot/prompts/domain.prompt.md)
+- Portfolio Frontend Domain — frontend implementation guardrails (11ty/Nunjucks/Tailwind v4/GSAP/Sanity). Prompt module: [frontend/.copilot/prompts/domain.prompt.md](../../frontend/.copilot/prompts/domain.prompt.md)
 - Portfolio Frontend — Choreography Planning — plan-only module for motion timelines/triggers/a11y in `frontend/`. Prompt module: [frontend/.copilot/prompts/choreography-planning.prompt.md](../../frontend/.copilot/prompts/choreography-planning.prompt.md)
 - Portfolio Frontend — Choreography Implementation — implement approved choreography plans in `frontend/`. Prompt module: [frontend/.copilot/prompts/choreography-implementation.prompt.md](../../frontend/.copilot/prompts/choreography-implementation.prompt.md)
 

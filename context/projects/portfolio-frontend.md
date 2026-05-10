@@ -21,7 +21,6 @@ It is not trying to re-document the frontend repo; it captures only the high-sig
 - Default local dev constraint: prefer `npm run start:nobundle` until explicitly re-enabling choreography bundling.
 - MVP evidence log: `/aix/docs/logs/2026-01-16-portfolio-frontend-domain-mvp-evidence.md`.
 - Decision record: `/aix/docs/decisions/0002-portfolio-frontend-domain-model-a.md`.
-- Legacy note: any Airtable mentions in ADRs/logs are migration history only and not active implementation guidance.
 
 ## Runtime truth snapshot (landing choreography)
 

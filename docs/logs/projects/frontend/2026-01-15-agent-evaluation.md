@@ -18,7 +18,7 @@ Evidence sources:
 
 ### Strengths
 
-- Strong project-specific operating context (11ty/Figma/Airtable/Tailwind/GSAP) with concrete commands and “gotchas” (see `frontend/.github/copilot-instructions.md`).
+- Strong project-specific operating context (11ty/Figma/Sanity/Tailwind/GSAP) with concrete commands and “gotchas” (see `frontend/.github/copilot-instructions.md`).
 - Clear prompt authority chain and task-scoped prompt modules (see `frontend/.copilot/README.md`, `frontend/.copilot/prompts/index.md`).
 - Single AI entrypoint exists and points to the “high-signal pack” (see `frontend/docs/ai/START_HERE.md`).
 - Explicit “do-not-touch” list for generated output reduces noise-driven HF (see `frontend/.copilot/context/do-not-touch.md`).

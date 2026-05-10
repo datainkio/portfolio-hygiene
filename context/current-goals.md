@@ -32,7 +32,7 @@ This file is the single-source-of-truth for what matters _right now_.
 - [ ] Tune cinematic pacing and overlap between sections (video/hero handoff, hero/bio/awards transitions, reduced-motion behavior).
 - [ ] Support content strategy through frontmatter and templates.
 - [ ] Document coding conventions and standards.
-- [ ] Complete Sanity adoption hardening and treat any remaining Airtable references as legacy migration-only.
+- [ ] Complete Sanity adoption hardening and remove residual legacy migration wording from active docs.
 - [ ] Iterate on the frontend domain module (post-MVP refinements) after MVP behavior stabilizes.
 
 ## Done (recent)

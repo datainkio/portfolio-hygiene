@@ -33,6 +33,10 @@ If you find contradictions, flag them explicitly as drift risks and propose wher
   - Concierge remains the only router; the `portfolio-frontend-domain` module contains an internal classification map but is not a peer router.
   - Source: `/aix/docs/decisions/0002-portfolio-frontend-domain-model-a.md`
 
+- **ADR 0003 — Context Freshness Gate (Sidecar + Deterministic Drift Scoring)**
+  - Keeps `/context` review metadata in a sidecar and enforces drift thresholds via repo-managed git hooks (including cross-repo frontend signals).
+  - Source: `/aix/docs/decisions/0003-context-freshness-gate.md`
+
 - **ADR 0004 — Remove Airtable Integration Folder**
   - Removes the legacy Airtable integration folder from the frontend to reduce coupling and maintenance overhead.
   - Legacy migration cleanup ADR; not an active implementation path.

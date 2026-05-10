@@ -30,7 +30,7 @@ This file tracks AIX and developer-experience backlog priorities.
 - [ ] TODO: Improve repo discoverability by adding lightweight index pages to key folders.
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/31
 - [ ] TODO: Provide direction for keeping READMEs current and aligned with folder state.
-- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/38
+- Issue URL: https://github.com/datainkio/portfolio-governance/issues/38
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/30
 
 ## Later / Parked
@@ -40,7 +40,7 @@ This file tracks AIX and developer-experience backlog priorities.
 - [ ] FEAT: Open permissions for running VS Code tasks without extra user input (including sensitive paths where approved).
 - [ ] FEAT: Add user feedback loops for multi-step agent responses and apply feedback into drift updates.
 - [ ] TODO: Learn user's UX style/preferences/priorities.
-- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/37
+- Issue URL: https://github.com/datainkio/portfolio-governance/issues/37
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/28
 - [ ] TODO: Tune agent cautiousness to reduce overlong completions and overengineered solutions.
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/27
