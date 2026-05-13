@@ -25,5 +25,5 @@ Remove the Airtable integration folder from the frontend repo (`frontend/airtabl
 
 ## Links
 
-- CMS integration: `frontend/cms/README.md`
+- CMS integration: `frontend/data/sanity/README.md`
 - Sanity integration notes: `frontend/docs/sanity-integration.md`
