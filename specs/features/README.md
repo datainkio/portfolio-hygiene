@@ -15,3 +15,4 @@ This folder defines product features end-to-end so AIX can align implementation 
 - Concierge 11ty module boundary: [specs/features/concierge-11ty-module-boundary.md](concierge-11ty-module-boundary.md)
 - Concierge Sanity module boundary: [specs/features/concierge-sanity-module-boundary.md](concierge-sanity-module-boundary.md)
 - TODO format for GitHub + Obsidian/VS Code discoverability: [specs/features/todo-format-discoverability.md](todo-format-discoverability.md)
+- Template frontmatter schema (DX + AIX discoverability for Nunjucks templates): [specs/features/template-frontmatter-schema.md](template-frontmatter-schema.md)
