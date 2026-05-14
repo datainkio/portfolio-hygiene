@@ -38,6 +38,7 @@ This file tracks AIX and developer-experience backlog priorities.
 - [ ] FEAT: When refactoring begins, create skills (or the equivalent) for preferred technologies, platforms, values, and working style. At the moment this list looks like: Tailwind, GSAP, 11ty, Sanity, accessibility, DX, AIX, personality, response style, commit messages.
 - [ ] FEAT: Instruct appropriate module to prioritize semantically meaningful DOM elements over divs.
 - [ ] TODO: Account for terminal EOF errors and stuck heredoc modes.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/42
 - [ ] FEAT: Create explicit frontmatter schema for workspace.
 - [ ] FEAT: Open permissions for running VS Code tasks without extra user input (including sensitive paths where approved).
 - [ ] FEAT: Add user feedback loops for multi-step agent responses and apply feedback into drift updates.
@@ -48,7 +49,9 @@ This file tracks AIX and developer-experience backlog priorities.
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/27
 - [ ] FEAT: Hook up ChatGPT browser instance to repos.
 - [ ] TODO: Evaluate creating agent modules dedicated to specific libraries, platforms, etc. For example, a module current with all GSAP documentation and best practices. Another module for Sanity, etc.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/41
 - [ ] TODO: Note that /aix brings value in the form of reducing token usage by maintaining context rather than rebuilding with each new request,.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/40
 
 ## Done
 
