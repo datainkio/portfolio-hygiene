@@ -6,10 +6,10 @@ aix:
    surface: internal
    owner: AIX
    tags:
-      - specs
-      - ai
-      - taskmaster
-      - task-management
+      - #specs
+      - #ai
+      - #taskmaster
+      - #task-management
    type: spec
    scope: aix
    audience: maintainers

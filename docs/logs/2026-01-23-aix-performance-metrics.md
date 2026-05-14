@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - metrics
-    - aix
-    - performance
+    - #metrics
+    - #aix
+    - #performance
   type: log
   scope: aix
   audience: maintainers

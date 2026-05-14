@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - logs
-    - hygiene
-    - audits
+    - #logs
+    - #hygiene
+    - #audits
   type: guide
   scope: aix
   audience: maintainers

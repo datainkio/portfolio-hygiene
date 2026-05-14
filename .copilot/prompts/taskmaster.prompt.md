@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - copilot
-    - prompts
-    - tasks
+    - #copilot
+    - #prompts
+    - #tasks
   type: guide
   scope: aix
   audience: maintainers

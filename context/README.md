@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - context
-    - canon
-    - guidance
+    - #context
+    - #canon
+    - #guidance
   type: context
   scope: aix
   audience: maintainers

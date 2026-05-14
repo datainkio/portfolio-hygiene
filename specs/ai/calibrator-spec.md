@@ -6,10 +6,10 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - specs
-    - ai
-    - calibrator
-    - alignment
+    - #specs
+    - #ai
+    - #calibrator
+    - #alignment
   type: spec
   scope: aix
   audience: maintainers

@@ -6,9 +6,9 @@ aix:
 	surface: internal
 	owner: AIX
 	tags:
-		- routing
-		- concierge
-		- pointer
+		- #routing
+		- #concierge
+		- #pointer
 	type: guide
 	scope: aix
 	audience: maintainers

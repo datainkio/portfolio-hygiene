@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - context
-    - design-philosophy
-    - principles
+    - #context
+    - #design-philosophy
+    - #principles
   type: context
   scope: aix
   audience: maintainers

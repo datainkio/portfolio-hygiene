@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - specs
-    - index
-    - guidance
+    - #specs
+    - #index
+    - #guidance
   type: guide
   scope: aix
   audience: maintainers

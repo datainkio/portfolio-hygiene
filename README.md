@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - readme
-    - overview
-    - onboarding
+    - #readme
+    - #overview
+    - #onboarding
   type: guide
   scope: aix
   audience: maintainers

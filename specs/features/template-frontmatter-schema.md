@@ -6,13 +6,13 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - templates
-    - frontmatter
-    - nunjucks
-    - 11ty
-    - discoverability
-    - dx
-    - aix-hygiene
+    - #templates
+    - #frontmatter
+    - #nunjucks
+    - #11ty
+    - #discoverability
+    - #dx
+    - #aix-hygiene
   type: spec
   scope: frontend
   audience: maintainers

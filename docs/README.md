@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - docs
-    - hub
-    - navigation
+    - #docs
+    - #hub
+    - #navigation
   type: guide
   scope: aix
   audience: maintainers
