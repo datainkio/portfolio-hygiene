@@ -139,7 +139,7 @@ tags:
 ---
 ```
 
-> **Eleventy collision note:** `tags` is an Eleventy-reserved frontmatter key that adds a page to a collection. If template files using this schema are processed as Eleventy content pages, use `templateTags` instead of `tags`, or ensure the file is excluded from collection processing. For layout files (in `_includes/`) this is not a concern as Eleventy does not add layouts to collections.
+> **Eleventy `tags` note:** `tags` is also an Eleventy frontmatter key used for collection membership. This is intentional — Eleventy adding template files to tagged collections is acceptable and may be useful for tooling. If collection membership is explicitly undesired for a given file, add `eleventyExcludeFromCollections: true` to its frontmatter instead.
 
 ---
 
@@ -223,9 +223,9 @@ All fields are optional unless marked **required**.
 
 ### `tags` — Discovery labels
 
-| Field  | Type     | Description                                                                                                                       |
-| ------ | -------- | --------------------------------------------------------------------------------------------------------------------------------- |
-| `tags` | string[] | Short labels for search, graph traversal, and Obsidian linking. Use `templateTags` if Eleventy collection collision is a concern. |
+| Field  | Type     | Description                                                                                                                                                       |
+| ------ | -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tags` | string[] | Short labels for search, graph traversal, and Obsidian linking. Eleventy will add files bearing these tags to matching collections — this is acceptable behavior. |
 
 ---
 
@@ -253,7 +253,7 @@ All fields are optional unless marked **required**.
 
 ## Dependencies & Risks
 
-- **Eleventy `tags` collision:** The `tags` key is consumed by Eleventy for collection membership. Layouts in `_includes/` are safe; page-level templates should use `templateTags` if this spec is applied there.
+- **Eleventy `tags` behavior:** The `tags` key is consumed by Eleventy for collection membership. This is accepted — template files appearing in tagged collections is harmless and potentially useful. If a specific file must be excluded, add `eleventyExcludeFromCollections: true` to its frontmatter.
 - **Eleventy `layout` collision:** Do not add a `layout:` key here; use `source.eleventyLayout` instead.
 - **Parser performance:** Frontmatter is parsed at build time by Eleventy for all template files. Schema fields are exposed as template data variables — keep values inert (no callable objects).
 - **Drift risk:** `components.uses` and `contentModel.sanityTypes` can become stale if refactors are not accompanied by frontmatter updates. `agent.reviewTriggers` exists to flag this.
