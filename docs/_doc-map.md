@@ -12,7 +12,7 @@ aix:
 
 # AIX Doc Map
 
-- Primary docs hub: [README.md](README.md)
+- Primary docs hub: [README.md](dataink.io/aix/docs/README.md)
 - Agent index: [agents.md](agents.md)
 - Decisions index: [decisions/README.md](decisions/README.md)
 - Runbooks index: [runbooks/README.md](runbooks/README.md)

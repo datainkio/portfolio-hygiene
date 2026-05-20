@@ -29,7 +29,7 @@ Constraint discovered mid-run:
 - Hero intro completion fix (reliable bus emission): [../../../frontend/js/choreography/sections/hero/Hero.js](../../../frontend/js/choreography/sections/hero/Hero.js)
 - Landing sequence logs enabled for hero intro start/complete: [../../../frontend/js/choreography/sequences/landing/LandingSequence.js](../../../frontend/js/choreography/sequences/landing/LandingSequence.js)
 - New date filter: `formatDate`: [../../../frontend/eleventy/filters/date.js](../../../frontend/eleventy/filters/date.js)
-- Dev command guidance updated (start:nobundle as default): [../../../frontend/README.md](../../../frontend/README.md)
+- Dev command guidance updated (start:nobundle as default): [../../../frontend/README.md](README.frontend.md)
 
 ---
 

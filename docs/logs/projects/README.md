@@ -11,4 +11,4 @@ This folder contains **project-specific operational artifacts** (audits, evaluat
 
 ## Projects
 
-- [frontend/](frontend/README.md)
+- [frontend/](dataink.io/aix/docs/logs/projects/frontend/README.md)
