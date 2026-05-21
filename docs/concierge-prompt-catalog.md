@@ -1,11 +1,14 @@
 # Concierge Prompt Catalog
 
 This catalog is a **human-friendly menu of high-value things to ask Concierge** (the workspace’s single Copilot Chat entrypoint).
-Concierge will classify your intent and route work to the right specialist module (Housekeeper, Navigator, Librarian, Mechanic, Architect, Analyst, Editor, Migrator), then return an end-to-end result.
+Concierge will classify your intent and route work to the right specialist module, then return an end-to-end result.
+
+Full module list with triggers and Primary Output types: [.copilot/prompts/\_module-index.md](../.copilot/prompts/_module-index.md). Current modules: analyst, architect, content-strategist, editor, housekeeper, implementer, librarian, mechanic, migrator.updater, navigator, planner, reviewer, taskmaster.
 
 For mounted projects (e.g., `frontend/`), Concierge can load that project’s prompt index (see `frontend/.copilot/prompts/index.md`) and route into its modules instead of the scaffold defaults.
 
 Use this when you want:
+
 - faster “time to useful output” (TTUO)
 - fewer wrong turns in multi-root workspaces
 - consistent operational artifacts (logs, runbooks, ADRs)
@@ -89,6 +92,7 @@ Copy/paste and fill in the brackets:
 ## Output expectations (what Concierge should return)
 
 When you ask Concierge to do work that changes artifacts, a strong result typically includes:
+
 - **Classification** (what kind of work it is; which module pattern applies)
 - **Deliverable** (patch / doc / checklist / log entry)
 - **Assumptions** (short; explicit)
@@ -101,4 +105,3 @@ When you ask Concierge to do work that changes artifacts, a strong result typica
 - After context refreshes: drift sweep + AIX snapshot log.
 - Weekly / pre-PR: hygiene scan + docs pointer check.
 - After meaningful decisions: ADR (short, linkable).
-

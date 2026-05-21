@@ -11,14 +11,21 @@ Concierge occasionally emits a ceremonial callout (p = 1/6) before the standard 
 
 ## Specialist Modules (selected by Concierge)
 
-- Housekeeper — hygiene/excludes/drift; logs AIX snapshots. Prompt module: [.copilot/prompts/housekeeper.prompt.md](../.copilot/prompts/housekeeper.prompt.md); Role/workflow notes: [docs/agent-roles-and-workflows.md](agent-roles-and-workflows.md)
-- Navigator — context concierge; assembles minimal sources and flags drift. Prompt module: [.copilot/prompts/navigator.prompt.md](../.copilot/prompts/navigator.prompt.md)
-- Librarian — documentation steward; keeps docs/runbooks/decisions fresh and linked. Prompt module: [.copilot/prompts/librarian.prompt.md](../.copilot/prompts/librarian.prompt.md)
-- Analyst — AIX observer; runs probes and records FRA/CR/HF/TTUO/CUS. Prompt module: [.copilot/prompts/analyst.prompt.md](../.copilot/prompts/analyst.prompt.md)
-- Architect — structure/decisions. Prompt module: [.copilot/prompts/architect.prompt.md](../.copilot/prompts/architect.prompt.md)
-- Mechanic — build/CI failures. Prompt module: [.copilot/prompts/mechanic.prompt.md](../.copilot/prompts/mechanic.prompt.md)
-- Editor — narrative/doc writing. Prompt module: [.copilot/prompts/editor.prompt.md](../.copilot/prompts/editor.prompt.md)
-- Migrator — scaffold migration/upgrades; audits differences, applies safe updates, writes changelogs. Prompt module: [.copilot/prompts/migrator.updater.prompt.md](../.copilot/prompts/migrator.updater.prompt.md); Guide: [docs/migration.md](../docs/migration.md)
+Full triggers and output types live in [aix/.copilot/prompts/\_module-index.md](../.copilot/prompts/_module-index.md).
+
+- Analyst — analysis briefs, tradeoffs, requirements, acceptance criteria. Prompt: [.copilot/prompts/analyst.prompt.md](../.copilot/prompts/analyst.prompt.md)
+- Architect — repo/workspace structure, agent/module strategy, standards. Prompt: [.copilot/prompts/architect.prompt.md](../.copilot/prompts/architect.prompt.md)
+- Content Strategist — copywriting, messaging, voice/tone, microcopy. Prompt: [.copilot/prompts/content-strategist.prompt.md](../.copilot/prompts/content-strategist.prompt.md); Doc: [content-strategist.md](content-strategist.md)
+- Editor — rewrite/refine existing prose without changing intent. Prompt: [.copilot/prompts/editor.prompt.md](../.copilot/prompts/editor.prompt.md)
+- Housekeeper — workspace hygiene, ignores, naming, drift; logs AIX snapshots. Prompt: [.copilot/prompts/housekeeper.prompt.md](../.copilot/prompts/housekeeper.prompt.md); Workflow notes: [agent-roles-and-workflows.md](agent-roles-and-workflows.md)
+- Implementer — implement an approved change end-to-end (edit, verify, report). Prompt: [.copilot/prompts/implementer.prompt.md](../.copilot/prompts/implementer.prompt.md)
+- Librarian — documentation curation, READMEs, cross-linking, discoverability. Prompt: [.copilot/prompts/librarian.prompt.md](../.copilot/prompts/librarian.prompt.md)
+- Mechanic — diagnose build/test/CI/tooling failures with minimal fixes. Prompt: [.copilot/prompts/mechanic.prompt.md](../.copilot/prompts/mechanic.prompt.md)
+- Migrator — scaffold migration/upgrades; audits differences, applies safe updates, writes changelogs. Prompt: [.copilot/prompts/migrator.updater.prompt.md](../.copilot/prompts/migrator.updater.prompt.md); Guide: [migration.md](migration.md)
+- Navigator — file/entrypoint discovery; minimal context packs; flags drift. Prompt: [.copilot/prompts/navigator.prompt.md](../.copilot/prompts/navigator.prompt.md)
+- Planner — convert a request into a sequenced execution plan with checkpoints. Prompt: [.copilot/prompts/planner.prompt.md](../.copilot/prompts/planner.prompt.md)
+- Reviewer — review a plan/spec/diff/text for correctness, risk, completeness, AIX impact. Prompt: [.copilot/prompts/reviewer.prompt.md](../.copilot/prompts/reviewer.prompt.md)
+- Taskmaster — frame the active task, embed TODOs in files, guard against drift. Prompt: [.copilot/prompts/taskmaster.prompt.md](../.copilot/prompts/taskmaster.prompt.md); Conventions: [task-management.md](task-management.md)
 
 ## Project Domain Modules (selected by Concierge when in-scope)
 
@@ -32,15 +39,21 @@ Note: some projects may include their own domain-specific agents (e.g., choreogr
 
 ## When to Use Which
 
-- Start with Concierge; it will route.
-- Housekeeper: quick hygiene scan, pre-PR hygiene, post-refresh AIX snapshot, align gitignore/excludes.
-- Navigator: gather authoritative context before coding/reviewing; detect drift between /context and /.copilot/context.
-- Librarian: fix or update docs/runbooks/decisions, repair links, align commands to current scripts.
-- Analyst: measure AIX after refresh or before releases; flag regressions.
-- Architect: decide structure/routes/CMS schema; outline options.
-- Mechanic: unblock failing builds/CI/runtime with minimal changes.
-- Editor: draft/revise narrative docs/portfolio text.
-- Migrator: audit or upgrade an existing project to a newer vitaixmen version; generate migration plans and changelogs; never touches application code unless explicitly requested.
+Start with Concierge; it will route. Pick by the deliverable you want:
+
+- Hygiene scan, pre-PR hygiene, gitignore/excludes alignment → Housekeeper
+- Authoritative context before coding/reviewing; locate the right file → Navigator
+- Fix/update docs, repair links, align commands to current scripts → Librarian
+- AIX measurement after refreshes or before releases → Analyst
+- Structure/route/schema decisions with options and tradeoffs → Architect
+- Unblock failing builds/CI/runtime with minimal changes → Mechanic
+- Rewrite existing prose for clarity (no strategy change) → Editor
+- Draft new copy with voice/tone strategy (hero, services, CTAs) → Content Strategist
+- Audit/upgrade a project to a newer scaffold version → Migrator
+- Implement an approved change with edits + checks + report → Implementer
+- Sequence a multi-step rollout with verification checkpoints → Planner
+- Review a proposed plan/spec/diff for risk and completeness → Reviewer
+- Frame the active task and keep file-embedded TODOs honest → Taskmaster
 
 ## Copy/Paste Prompts (project-specific)
 
@@ -63,15 +76,10 @@ Note: some projects may include their own domain-specific agents (e.g., choreogr
 
 ## Starting Points
 
-- Context truth: [context/README.md](../context/README.md)
+- Context truth: [context/README.context.md](../context/README.context.md)
 - Curated map: [.copilot/context/workspace-map.md](../.copilot/context/workspace-map.md)
+- Module index (canonical routing): [.copilot/prompts/\_module-index.md](../.copilot/prompts/_module-index.md)
 - AIX spec: [specs/performance/aix.md](../specs/performance/aix.md)
-- Refresh runbook: [docs/runbooks/refresh-ai-context.md](../docs/runbooks/refresh-ai-context.md)
-- Workspace migration guide: [docs/migration.md](../docs/migration.md)
-
-## Useful Links
-
-- Context truth: [context/README.md](../context/README.md)
-- Workspace map: [.copilot/context/workspace-map.md](../.copilot/context/workspace-map.md)
-- AIX spec: [specs/performance/aix.md](../specs/performance/aix.md)
-- Logs folder: [docs/logs/](logs/README.md)
+- Refresh runbook: [runbooks/refresh-ai-context.md](runbooks/refresh-ai-context.md)
+- Workspace migration guide: [migration.md](migration.md)
+- Logs folder: [logs/README.md](logs/README.md)

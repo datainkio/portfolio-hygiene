@@ -1,15 +1,8 @@
 # Agent Roles & Workflows
 
-This document defines explicit roles, responsibilities, and workflows for AI agents operating in this workspace.
+This document captures operational workflows for AI agents in this workspace. The **canonical module list** (analyst, architect, content-strategist, editor, housekeeper, implementer, librarian, mechanic, migrator.updater, navigator, planner, reviewer, taskmaster) lives in [../.copilot/prompts/\_module-index.md](../.copilot/prompts/_module-index.md). For when-to-use guidance, see [agents.md](agents.md).
 
-Agents should prioritize workspace hygiene and AIX performance before everything else. Follow the sequence: read context/specs → plan → execute minimal change → report with links.
-
-## Roles
-
-- Planner: clarify scope, collect context, outline steps.
-- Implementer: perform edits within scope and constraints.
-- QA: verify changes, sanity-check instructions and links.
-- Housekeeper: maintain hygiene (structure, excludes, docs freshness) and log reports.
+General sequence for any module: read context/specs → plan → execute minimal change → report with links. Prioritize workspace hygiene and AIX performance.
 
 ## Housekeeper workflow (hygiene)
 
@@ -17,25 +10,25 @@ Use these playbooks; do not change product logic unless fixing hygiene drift.
 
 ### Quick scan (on demand)
 
-1) Read `context/` and `specs/` for drift or TODOs; note gaps.
-2) Validate required folders exist: `context/`, `specs/`, `docs/decisions/`, `docs/runbooks/`, `docs/notes/`, `docs/logs/`.
-3) Check excludes consistency (`.vscode/settings.json`, `.gitignore`) for `node_modules/`, build outputs, caches, `.obsidian/`.
-4) Record findings in a report (see Logging).
+1. Read `context/` and `specs/` for drift or TODOs; note gaps.
+2. Validate required folders exist: `context/`, `specs/`, `docs/decisions/`, `docs/runbooks/`, `docs/notes/`, `docs/logs/`.
+3. Check excludes consistency (`.vscode/settings.json`, `.gitignore`) for `node_modules/`, build outputs, caches, `.obsidian/`.
+4. Record findings in a report (see Logging).
 
 ### Weekly tidy
 
-1) Run Quick scan.
-2) Refresh AI context per `docs/runbooks/refresh-ai-context.md`.
-3) Prune or flag stale notes/specs; file follow-ups instead of rewriting intent.
-4) Update AIX metrics snapshot if measurements exist (FRA, CR, HF, CUS, TTUO from `specs/performance/aix.md`).
-5) Log report.
+1. Run Quick scan.
+2. Refresh AI context per `docs/runbooks/refresh-ai-context.md`.
+3. Prune or flag stale notes/specs; file follow-ups instead of rewriting intent.
+4. Update AIX metrics snapshot if measurements exist (FRA, CR, HF, CUS, TTUO from `specs/performance/aix.md`).
+5. Log report.
 
 ### Pre-PR hygiene check
 
-1) Ensure workspace clean (no unrelated changes).
-2) Confirm docs touched have aligned context/specs/ADRs.
-3) Verify links/paths cited exist to reduce hallucinations.
-4) Log report with any blockers.
+1. Ensure workspace clean (no unrelated changes).
+2. Confirm docs touched have aligned context/specs/ADRs.
+3. Verify links/paths cited exist to reduce hallucinations.
+4. Log report with any blockers.
 
 ## Logging (required)
 

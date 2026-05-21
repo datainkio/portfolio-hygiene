@@ -17,7 +17,7 @@ Root entrypoint: start at [README.md](../../README.md) for the workspace-level A
 
 - Routing canon: [.copilot/ROUTING.md](ROUTING.md)
 - Router contract: [.copilot/prompts/concierge.prompt.md](prompts/concierge.prompt.md)
-- Curated agent context: [.copilot/context/README.md](context/README.md)
+- Curated agent context: [.copilot/context/README.context.md](context/README.context.md)
 - Workspace map: [.copilot/context/workspace-map.md](context/workspace-map.md)
 
 ## Prompt modules

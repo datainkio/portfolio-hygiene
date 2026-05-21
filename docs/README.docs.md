@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - #docs
-    - #hub
-    - #navigation
+    -  #docs
+    -  #hub
+    -  #navigation
   type: guide
   scope: aix
   audience: maintainers
@@ -30,20 +30,21 @@ This folder is the **human-facing docs hub** for the workspace.
 
 ## Start here
 
-- New to the repo: `docs/onboarding/README.md`
-- Getting started: [docs/getting-started.md](getting-started.md)
+- New to the repo: [onboarding/README.onboarding.md](onboarding/README.onboarding.md)
+- Getting started: [getting-started.md](getting-started.md)
 
 ## Key areas
 
-- Agent Index: [docs/agents.md](agents.md) (see also `.copilot/`)
-- AI audits: [docs/ai/audits/README.md](ai/audits/README.md)
-- Decisions (ADRs): [docs/decisions/README.md](decisions/README.md)
-- Runbooks (operational how-tos): [docs/runbooks/README.md](runbooks/README.md)
-- Maintenance: [docs/maintenance/aix-calibration-plan.md](maintenance/aix-calibration-plan.md)
-- Validation: [docs/maintenance/aix-validation.md](maintenance/aix-validation.md)
-- Notes (exploration / not authoritative): `docs/notes/`
-- Logs (historical records): [docs/logs/README.md](logs/README.md)
-- Changes (migration logs): [docs/changes/README.md](changes/README.md)
+- Agent Index: [agents.md](agents.md) (canonical module list: [../.copilot/prompts/\_module-index.md](../.copilot/prompts/_module-index.md))
+- Concierge prompt catalog: [concierge-prompt-catalog.md](concierge-prompt-catalog.md)
+- AI audits: [ai/audits/README.audits.md](ai/audits/README.audits.md)
+- Decisions (ADRs): [decisions/README.decisions.md](decisions/README.decisions.md)
+- Runbooks (operational how-tos): [runbooks/README.runbooks.md](runbooks/README.runbooks.md)
+- Changes (migration logs): [changes/README.changes.md](changes/README.changes.md)
+- Maintenance: [maintenance/aix-calibration-plan.md](maintenance/aix-calibration-plan.md)
+- Validation: [maintenance/aix-validation.md](maintenance/aix-validation.md)
+- Notes (exploration / not authoritative): [notes/README.md](notes/README.md)
+- Logs (historical records): [logs/README.md](logs/README.md)
 
 ## Runbook highlights
 
@@ -58,8 +59,8 @@ This folder is the **human-facing docs hub** for the workspace.
 
 ## Notes
 
-- Notes hub: [docs/notes/README.md](notes/README.md)
-- Scratchpad: [docs/notes/scratch.md](notes/scratch.md)
+- Notes hub: [notes/README.md](notes/README.md)
+- Scratchpad: [notes/scratch.md](notes/scratch.md)
 
 ## Backlog
 

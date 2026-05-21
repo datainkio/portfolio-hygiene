@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - #specs
-    - #index
-    - #guidance
+    -  #specs
+    -  #index
+    -  #guidance
   type: guide
   scope: aix
   audience: maintainers
@@ -77,33 +77,33 @@ Both humans and AI agents should reference them before making non-trivial change
 - [specs/ai/domain-agent-probes.spec.md](ai/domain-agent-probes.spec.md)
 - [specs/ai/domain-specialized-coding-agent.spec.md](ai/domain-specialized-coding-agent.spec.md)
 
-### Animation (frontend-owned)
+### Animation (frontend-owned, sibling repo)
 
-- [frontend/specs/animation/README.md](../../frontend/specs/animation/README.md)
+Lives in `frontend/specs/animation/` in the frontend workspace folder; not linked here to keep this index repo-local.
 
 ### Architecture
 
-- [specs/architecture/README.md](architecture/README.md)
+- [specs/architecture/README.architecture.md](architecture/README.architecture.md)
 - [specs/architecture/template.md](architecture/template.md)
 
 ### CMS
 
-- [specs/cms/README.md](cms/README.md)
+- [specs/cms/README.cms.md](cms/README.cms.md)
 - [specs/cms/template.md](cms/template.md)
 
 ### Components
 
-- [specs/components/README.md](components/README.md)
+- [specs/components/README.components.md](components/README.components.md)
 - [specs/components/template.md](components/template.md)
 
 ### Data
 
-- [specs/data/README.md](data/README.md)
+- [specs/data/README.data.md](data/README.data.md)
 - [specs/data/template.md](data/template.md)
 
 ### Features
 
-- [specs/features/README.md](features/README.md)
+- [specs/features/README.features.md](features/README.features.md)
 - [specs/features/adr-spec-sync.spec.md](features/adr-spec-sync.spec.md)
 - [specs/features/concierge-11ty-module-boundary.md](features/concierge-11ty-module-boundary.md)
 - [specs/features/concierge-sanity-module-boundary.md](features/concierge-sanity-module-boundary.md)
@@ -115,17 +115,17 @@ Both humans and AI agents should reference them before making non-trivial change
 
 ### Performance
 
-- [specs/performance/README.md](performance/README.md)
+- [specs/performance/README.aix.md](performance/README.aix.md)
 - [specs/performance/template.md](performance/template.md)
 
 ### Routes & Content
 
-- [specs/routes-content/README.md](routes-content/README.md)
+- [specs/routes-content/README.routes-content.md](routes-content/README.routes-content.md)
 - [specs/routes-content/template.md](routes-content/template.md)
 
 ### UX
 
-- [specs/ux/README.md](ux/README.md)
+- [specs/ux/README.ux.md](ux/README.ux.md)
 - [specs/ux/accessibility.md](ux/accessibility.md)
 - [specs/ux/design-system.md](ux/design-system.md)
 - [specs/ux/interactions.md](ux/interactions.md)

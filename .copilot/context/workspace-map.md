@@ -3,33 +3,38 @@
 This file describes where everything lives in the workspace and what each folder contains.
 Focus: keep AI agents oriented and fast.
 
-This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend/`, and `backend/`.
+This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend/`, and `backend/`. This map is rooted in `aix/`; sibling repos are siblings of the `aix/` workspace folder.
 
 ## Workspace Roots (repo-level)
 
-- [aix/](../../../aix/) — AIX scaffold, docs, specs, and agent workflows.
-- [frontend/](../../../frontend/) — frontend project (11ty + Nunjucks + Tailwind + GSAP).
-- [backend/](../../../backend/) — backend/CMS tooling and schemas.
-- [notes/](../../../notes/) — workspace notes.
+- [aix/](../../) — AIX scaffold, docs, specs, and agent workflows.
+- Sibling: `frontend/` (11ty + Nunjucks + Tailwind + GSAP) — added separately to the multi-root workspace.
+- Sibling: `backend/` (Sanity Studio + tooling) — added separately to the multi-root workspace.
 
 ## Copilot Configuration
 
-- Copilot/agent configuration hub: [.copilot/README.md](../README.md)
+- Copilot/agent configuration hub: [.copilot/README.copilot.md](../README.copilot.md)
 - Routing canon: [.copilot/ROUTING.md](../ROUTING.md)
+- Module index (canonical routing surface): [.copilot/prompts/\_module-index.md](../prompts/_module-index.md)
 - Prompt modules:
+  - Concierge (router contract): [.copilot/prompts/concierge.prompt.md](../prompts/concierge.prompt.md)
+  - Analyst: [.copilot/prompts/analyst.prompt.md](../prompts/analyst.prompt.md)
   - Architect: [.copilot/prompts/architect.prompt.md](../prompts/architect.prompt.md)
+  - Content Strategist: [.copilot/prompts/content-strategist.prompt.md](../prompts/content-strategist.prompt.md)
   - Editor: [.copilot/prompts/editor.prompt.md](../prompts/editor.prompt.md)
   - Housekeeper: [.copilot/prompts/housekeeper.prompt.md](../prompts/housekeeper.prompt.md)
   - Implementer: [.copilot/prompts/implementer.prompt.md](../prompts/implementer.prompt.md)
   - Librarian: [.copilot/prompts/librarian.prompt.md](../prompts/librarian.prompt.md)
   - Mechanic: [.copilot/prompts/mechanic.prompt.md](../prompts/mechanic.prompt.md)
+  - Migrator Updater: [.copilot/prompts/migrator.updater.prompt.md](../prompts/migrator.updater.prompt.md)
   - Navigator: [.copilot/prompts/navigator.prompt.md](../prompts/navigator.prompt.md)
   - Planner: [.copilot/prompts/planner.prompt.md](../prompts/planner.prompt.md)
   - Reviewer: [.copilot/prompts/reviewer.prompt.md](../prompts/reviewer.prompt.md)
+  - Taskmaster: [.copilot/prompts/taskmaster.prompt.md](../prompts/taskmaster.prompt.md)
 
 ## Canonical Context (source of truth)
 
-- [context/README.md](../../context/README.md) — what “context” means and why it’s authoritative.
+- [context/README.context.md](../../context/README.context.md) — what “context” means and why it’s authoritative.
 - Key canonical files (all in [context/](../../context/)):
   - [context/project.md](../../context/project.md) — project intent / north star
   - [context/design-philosophy.md](../../context/design-philosophy.md) — guiding principles
@@ -40,14 +45,14 @@ This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend
 
 ## Curated Agent Context (orientation layer)
 
-- [.copilot/context/README.md](README.md) — what this curated layer is.
+- [.copilot/context/README.context.md](README.context.md) — what this curated layer is.
 - Curated files (keep short, point to canonical truth):
   - [.copilot/context/workspace-map.md](workspace-map.md) — this map
   - Additional curated context stubs are not present yet in this workspace snapshot.
 
 ## Specs (contracts)
 
-- [specs/README.md](../../specs/README.md) — what “specs” are and how to use them.
+- [specs/README.specs.md](../../specs/README.specs.md) — what “specs” are and how to use them.
 - Specs are organized by topic folders under [specs/](../../specs/):
   - AI specs:
     - [specs/ai/context-drift-without-timestamps.spec.md](../../specs/ai/context-drift-without-timestamps.spec.md)
@@ -55,46 +60,46 @@ This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend
     - [specs/ai/ceremonial-response-spec.md](../../specs/ai/ceremonial-response-spec.md)
     - [specs/ai/domain-agent-probes.spec.md](../../specs/ai/domain-agent-probes.spec.md)
     - [specs/ai/domain-specialized-coding-agent.spec.md](../../specs/ai/domain-specialized-coding-agent.spec.md)
-  - Animation (frontend-owned): - [frontend/specs/animation/README.md](../../../frontend/specs/animation/README.md) - [frontend/specs/animation/template.md](../../../frontend/specs/animation/template.md) - [frontend/specs/animation/motion-accessibility-policy.md](../../../frontend/specs/animation/motion-accessibility-policy.md)
+  - Animation (frontend-owned, sibling repo): see `frontend/specs/animation/` in the frontend workspace folder.
   - Architecture: [specs/architecture/](../../specs/architecture/)
-    - [specs/architecture/README.md](../../specs/architecture/README.md)
+    - [specs/architecture/README.architecture.md](../../specs/architecture/README.architecture.md)
     - [specs/architecture/template.md](../../specs/architecture/template.md)
   - Components: [specs/components/](../../specs/components/)
-    - [specs/components/README.md](../../specs/components/README.md)
+    - [specs/components/README.components.md](../../specs/components/README.components.md)
     - [specs/components/template.md](../../specs/components/template.md)
   - Routes/content: [specs/routes-content/](../../specs/routes-content/)
-    - [specs/routes-content/README.md](../../specs/routes-content/README.md)
+    - [specs/routes-content/README.routes-content.md](../../specs/routes-content/README.routes-content.md)
     - [specs/routes-content/template.md](../../specs/routes-content/template.md)
   - CMS: [specs/cms/](../../specs/cms/)
-    - [specs/cms/README.md](../../specs/cms/README.md)
+    - [specs/cms/README.cms.md](../../specs/cms/README.cms.md)
     - [specs/cms/template.md](../../specs/cms/template.md)
   - Data: [specs/data/](../../specs/data/)
-    - [specs/data/README.md](../../specs/data/README.md)
+    - [specs/data/README.data.md](../../specs/data/README.data.md)
     - [specs/data/template.md](../../specs/data/template.md)
   - UX (has real docs): [specs/ux/](../../specs/ux/)
-    - [specs/ux/README.md](../../specs/ux/README.md)
+    - [specs/ux/README.ux.md](../../specs/ux/README.ux.md)
     - [specs/ux/accessibility.md](../../specs/ux/accessibility.md)
     - [specs/ux/design-system.md](../../specs/ux/design-system.md)
     - [specs/ux/interactions.md](../../specs/ux/interactions.md)
     - [specs/ux/template.md](../../specs/ux/template.md)
   - Features:
-    - [specs/features/README.md](../../specs/features/README.md)
+    - [specs/features/README.features.md](../../specs/features/README.features.md)
     - [specs/features/adr-spec-sync.spec.md](../../specs/features/adr-spec-sync.spec.md)
     - [specs/features/concierge-mounted-project-aix.md](../../specs/features/concierge-mounted-project-aix.md)
     - [specs/features/concierge-project-aix.todo.md](../../specs/features/concierge-project-aix.todo.md)
     - [specs/features/js-frontmatter-schema.md](../../specs/features/js-frontmatter-schema.md)
     - [specs/features/template.md](../../specs/features/template.md)
   - Performance (AIX spec lives here): [specs/performance/aix.md](../../specs/performance/aix.md)
-    - [specs/performance/README.md](../../specs/performance/README.md)
+    - [specs/performance/README.aix.md](../../specs/performance/README.aix.md)
     - [specs/performance/template.md](../../specs/performance/template.md)
 
 ## Docs (narrative, non-canonical)
 
-- [docs/README.md](../../docs/README.md) — human-facing narrative notes (not authoritative by default).
+- [docs/README.docs.md](../../docs/README.docs.md) — human-facing narrative notes (not authoritative by default).
 - Key doc entrypoints:
   - Agent index: [docs/agents.md](../../docs/agents.md)
-  - AI audits: [docs/ai/audits/README.md](../../docs/ai/audits/README.md)
-  - Changes: [docs/changes/README.md](../../docs/changes/README.md)
+  - AI audits: [docs/ai/audits/README.audits.md](../../docs/ai/audits/README.audits.md)
+  - Changes: [docs/changes/README.changes.md](../../docs/changes/README.changes.md)
   - Runbooks: [docs/runbooks/](../../docs/runbooks/)
     - [docs/runbooks/aix-audit-report.example.md](../../docs/runbooks/aix-audit-report.example.md)
     - [docs/runbooks/optimize-aix-for-frontend.md](../../docs/runbooks/optimize-aix-for-frontend.md)
@@ -112,18 +117,18 @@ This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend
 
 ## Scripts
 
-- [scripts/README.md](../../scripts/README.md) — lightweight workspace utilities (keep dependency-free when possible).
+- [scripts/README.scripts.md](../../scripts/README.scripts.md) — lightweight workspace utilities (keep dependency-free when possible).
 
 ## Assets & Data
 
 - [assets/](../../assets/) and [data/](../../data/) exist and are currently empty.
-- Assets manifest: [assets/README.md](../../assets/README.md)
-- Data manifest: [data/README.md](../../data/README.md)
+- Assets manifest: [assets/README.assets.md](../../assets/README.assets.md)
+- Data manifest: [data/README.data.md](../../data/README.data.md)
 
 ## Project Context Packs
 
 - Project-specific context lives under [context/projects/](../../context/projects/)
-  - Index: [context/projects/README.md](../../context/projects/README.md)
+  - Index: [context/projects/README.projects.md](../../context/projects/README.projects.md)
 - When you add files, include a small manifest (`README.md` or `manifest.json`) so agents can locate media/data fast.
 
 ## Agent Workflows (roles/playbooks)
@@ -143,16 +148,12 @@ This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend
 
 ## Workspace Config
 
-- [dataink.io.code-workspace](../../../dataink.io.code-workspace) — VS Code workspace definition.
-- VS Code settings/tasks live in [.vscode/](../../../.vscode/) (includes the “New Project” task).
-- Root README: [README.md](../../../README.md) — workspace intent + quick actions.
+- VS Code settings/tasks live in [.vscode/](../../.vscode/) (includes agent-ops and cross-repo task shortcuts).
 - Template notes: [aix/template_notes.md](../../template_notes.md)
-- Workspace Copilot instructions: [.github/copilot-instructions.md](../../../.github/copilot-instructions.md)
 
 ## Agent Roles
 
-- Concierge: router; registered in Copilot; emits handoff requests to specialists.
-- Specialists: Housekeeper (hygiene/excludes/AIX logging), Navigator (context packs), Librarian (docs), Analyst (AIX probes), Architect (structure/decisions), Mechanic (build/CI failures), Editor (narrative).
+Concierge routes to the active modules listed in [.copilot/prompts/\_module-index.md](../prompts/_module-index.md): analyst, architect, content-strategist, editor, housekeeper, implementer, librarian, mechanic, migrator.updater, navigator, planner, reviewer, taskmaster.
 
 ## Agent Notes / Next AIX actions
 

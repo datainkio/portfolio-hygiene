@@ -6,8 +6,8 @@ This folder is the home for exploratory notes and drafts.
 
 - Active priorities: [aix/context/current-goals.md](../../context/current-goals.md)
 - Durable backlog: [aix/TODO.md](../../TODO.md)
-- Durable constraints and decisions: [aix/context/](../../context/README.md)
-- Durable specifications: [aix/specs/](../../specs/README.md)
+- Durable constraints and decisions: [aix/context/](../../context/README.context.md)
+- Durable specifications: [aix/specs/](../../specs/README.specs.md)
 
 Notes in this folder are not source-of-truth task records.
 
@@ -16,7 +16,7 @@ Notes in this folder are not source-of-truth task records.
 1. Capture raw ideas here while exploring.
 2. If actionable now, promote to [aix/context/current-goals.md](../../context/current-goals.md).
 3. If durable but not active, promote to [aix/TODO.md](../../TODO.md).
-4. If it becomes policy or contract, promote into [aix/context/](../../context/README.md) or [aix/specs/](../../specs/README.md).
+4. If it becomes policy or contract, promote into [aix/context/](../../context/README.context.md) or [aix/specs/](../../specs/README.specs.md).
 5. Keep a short backlink in the note to the promoted canonical file.
 
 ## Resources and references

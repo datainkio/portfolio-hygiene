@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - #readme
-    - #overview
-    - #onboarding
+    -  #readme
+    -  #overview
+    -  #onboarding
   type: guide
   scope: aix
   audience: maintainers
@@ -73,20 +73,22 @@ Canonical sources:
 
 ### Module roles
 
-- `concierge.prompt.md`: routing contract and response schema enforcement
-- `analyst.prompt.md`: analysis briefs, tradeoffs, recommendations
-- `architect.prompt.md`: architecture and standards decisions
-- `editor.prompt.md`: rewriting and structural clarity for prose/docs
-- `content-strategist.prompt.md`: messaging, content strategy, microcopy
-- `housekeeper.prompt.md`: workspace hygiene, naming, ignores, cleanup
-- `implementer.prompt.md`: implementation execution and validation reporting
-- `librarian.prompt.md`: documentation curation, cross-linking, discoverability
-- `mechanic.prompt.md`: build/test/tooling triage and minimal fixes
-- `migrator.updater.prompt.md`: safe scaffold upgrades for existing projects
-- `navigator.prompt.md`: file/entrypoint discovery and placement guidance
-- `planner.prompt.md`: actionable execution plans and checkpoints
-- `reviewer.prompt.md`: quality/risk/completeness reviews
-- `taskmaster.prompt.md`: task framing, anti-drift TODO discipline
+The canonical list (with triggers and Primary Output types) lives in [.copilot/prompts/\_module-index.md](.copilot/prompts/_module-index.md). Summary:
+
+- `concierge` — routing contract and response schema
+- `analyst` — analysis briefs, tradeoffs, recommendations
+- `architect` — architecture and standards decisions
+- `content-strategist` — messaging, copywriting, microcopy
+- `editor` — rewriting and structural clarity for prose/docs
+- `housekeeper` — workspace hygiene, naming, ignores, cleanup
+- `implementer` — implementation execution and validation reporting
+- `librarian` — documentation curation, cross-linking, discoverability
+- `mechanic` — build/test/tooling triage and minimal fixes
+- `migrator.updater` — safe scaffold upgrades for existing projects
+- `navigator` — file/entrypoint discovery and placement guidance
+- `planner` — actionable execution plans and checkpoints
+- `reviewer` — quality/risk/completeness reviews
+- `taskmaster` — task framing, anti-drift TODO discipline
 
 ### Mounted project modules
 
@@ -128,16 +130,18 @@ Full menu: [docs/concierge-prompt-catalog.md](docs/concierge-prompt-catalog.md)
 
 ## Docs
 
-- Getting started: `docs/getting-started.md`
-- Docs hub: `docs/README.md`
+- Getting started: [docs/getting-started.md](docs/getting-started.md)
+- Docs hub: [docs/README.docs.md](docs/README.docs.md)
+- Agent index: [docs/agents.md](docs/agents.md)
 - Concierge prompt catalog: [docs/concierge-prompt-catalog.md](docs/concierge-prompt-catalog.md)
 - AIX backlog: [TODO.md](TODO.md)
 - Template notes: [template_notes.md](template_notes.md)
 
 ## AI configuration
 
-- Copilot/agent config hub: [.copilot/README.md](.copilot/README.md)
-- Curated agent context: [.copilot/context/README.md](.copilot/context/README.md)
+- Copilot/agent config hub: [.copilot/README.copilot.md](.copilot/README.copilot.md)
+- Module index (routing): [.copilot/prompts/\_module-index.md](.copilot/prompts/_module-index.md)
+- Curated agent context: [.copilot/context/README.context.md](.copilot/context/README.context.md)
 - Agent entrypoints: [.github/README.md](.github/README.md)
 - Workspace Copilot instructions: [../.github/copilot-instructions.md](../.github/copilot-instructions.md)
 
@@ -147,9 +151,9 @@ This scaffold is intentionally **tool-agnostic**. Use what your project needs.
 
 ### Utilities & manifests
 
-- Scripts hub: [scripts/README.md](scripts/README.md)
-- Assets manifest: [assets/README.md](assets/README.md)
-- Data manifest: [data/README.md](data/README.md)
+- Scripts hub: [scripts/README.scripts.md](scripts/README.scripts.md)
+- Assets manifest: [assets/README.assets.md](assets/README.assets.md)
+- Data manifest: [data/README.data.md](data/README.data.md)
 
 ### Agent Ops tasks (recommended)
 
