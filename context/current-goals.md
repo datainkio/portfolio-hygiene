@@ -20,17 +20,18 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Now
 
+- [ ] Write the spec for the project page view.
 - [ ] Create a page template to display the complete view of a project.
 - [ ] Confirm require project data from Sanity is available to 11ty.
 - [ ] Design the page template and render the project data.
 - [ ] Test and confirm responsiveness at default breakpoints defined by Tailwind (base, sm, md, lg, xl).
-- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/43
 - [ ] Address any weirdness on Safari/iOS.
 - [x] Complete the active landing-page UX flow with seamless choreography (video -> hero -> bio -> awards) and a clean handoff into downstream content.
 - [x] Display block content within the Bio section.
 
 ## Next
 
+- [ ] Add sidecar files for JS files
 - [ ] Execute cinematic pacing pass: tighten video/hero handoff overlap and verify scroll re-entry behavior.
 - [ ] Complete AIX hygiene pass closeout: canonicalize backlog ownership and record a dated validation snapshot.
 - [ ] Build the migration plan away from the current state of prod to this newest version.
