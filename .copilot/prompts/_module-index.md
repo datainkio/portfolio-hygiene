@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - #copilot
-    - #prompts
-    - #routing
+    -  #copilot
+    -  #prompts
+    -  #routing
   type: guide
   scope: aix
   audience: maintainers
@@ -31,6 +31,15 @@ This index is the primary routing surface for Concierge. Each module lists a one
 
 **Top triggers:** route, select module, routing rubric, response schema, AIX constraints
 **Primary Output type:** Contract / Output Schema
+
+---
+
+## Cross-cutting rules (apply to ALL modules)
+
+These rules live in [concierge.prompt.md](concierge.prompt.md) and are binding on every module below (Implementer, Planner, Reviewer, Mechanic, Editor, etc.). Modules MUST NOT redefine or relax them.
+
+- **Conversation compaction (`/compact`)**: preserve only `current task goal`, `approved architectural decisions`, `real file paths already inspected`, `explicit constraints`, `unresolved TODOs`, `rejected approaches with reasons`. Drop exploratory chatter, repeated explanations, tool-call narration, unselected speculation, and ceremonial content. Output a single compact block under those six headings — no preamble.
+- **Stable decision-point handoff notes**: write to `aix/docs/notes/handoff-<short-slug>.md` using the template in `concierge.prompt.md` (Goal / Files involved / Decisions made / Constraints / Rejected approaches / Next action). Notes-only that turn; no implementation edits. Reuse the same file across updates.
 
 ---
 

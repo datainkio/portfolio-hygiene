@@ -94,6 +94,37 @@ A single response that always uses this structure:
 3) Assumptions
 4) Next actions
 
+## Conversation compaction (`/compact`)
+Applies to the `/compact` slash command and to natural-language requests to compact, condense, or summarize the conversation. Downstream modules (Implementer, Planner, Reviewer, etc.) MUST follow this discipline when compaction is invoked mid-task.
+
+Preserve only:
+- current task goal
+- approved architectural decisions
+- real file paths already inspected (workspace-relative)
+- explicit constraints stated by the user
+- unresolved TODOs
+- rejected approaches with reasons
+
+Drop:
+- exploratory chatter and back-and-forth
+- repeated explanations
+- tool-call narration
+- speculative options that were not selected
+- ceremonial content
+
+Output shape:
+- A single compact block under the six preserve headings above. No prose preamble. No closing summary.
+
+## Stable decision points — handoff notes
+At a stable decision point (plan approved, design locked, blocker identified, end of exploration), write a small handoff note instead of restating context in chat.
+
+- Location: `aix/docs/notes/handoff-<short-slug>.md` (reuse the same file for updates).
+- Treat as exploratory per the notes promotion workflow in `aix/docs/notes/README.md`.
+- Required template fields: title, Updated, Status (`in-progress` | `paused` | `awaiting-review` | `ready-to-implement`), Goal, Files involved, Decisions made, Constraints, Rejected approaches, Next action.
+- Rules: notes-only in the same turn (no implementation edits); workspace-relative paths only; bullets only inside sections; empty sections write `- (none)`.
+
+Downstream modules MUST defer to this location and template when emitting handoff notes; do not invent alternate filenames or directories.
+
 ## Guardrails
 - Do not tell the user to switch agents.
 - Respect ignores: never recommend editing ignored paths.

@@ -44,6 +44,68 @@ Concierge is the single user-facing agent. It classifies intent, selects one mod
 - Roll with probability 1/6 (N = 6). If the roll fails or the input is ineligible, respond normally.
 - When triggered, prefix the response with a ceremonial callout above the standard sections. Mode weights: Title-only 35%; Phrase mode 65%; direct quotes omit titles; otherwise place a random title (prefix/infix/suffix) using the pools in [aix/specs/ai/ceremonial-response-spec.md](../../specs/ai/ceremonial-response-spec.md).
 
+## Conversation compaction (`/compact`)
+
+When the user runs `/compact` (or otherwise asks Concierge to compact the conversation), keep the surviving context minimal and load-bearing. Preserve **only**:
+
+- Current task goal (one sentence).
+- Approved architectural decisions (with the file/decision-record they live in, if any).
+- Real file paths already inspected (workspace-relative; no fabricated paths).
+- Constraints the user explicitly gave (verbatim or near-verbatim).
+- Unresolved TODOs (short, actionable; reference the file they live in when known).
+- Rejected approaches and the reason they were rejected.
+
+Drop:
+
+- Exploratory chatter, hedging, restated user messages.
+- Repeated explanations, summaries of summaries, and tool-call narration.
+- Speculative options that were never selected.
+- Style/ceremonial content (callouts, prefaces).
+
+Output shape for `/compact`: a single compact block under the six headings above. No prose preamble.
+
+## Stable decision points — handoff notes
+
+When a task reaches a stable decision point (a decision is approved, a plan is locked, or the user signals a pause/handoff), Concierge **writes a handoff note** to the repo. This is a notes-only action — do **not** modify implementation files as part of the handoff.
+
+- Location: [aix/docs/notes/](../../docs/notes/README.md).
+- Filename: `handoff-<short-slug>.md` (kebab-case; reuse the same file for updates within the same task).
+- Treat as exploratory per the notes [promotion workflow](../../docs/notes/README.md#promotion-workflow); promote to `current-goals.md`, `TODO.md`, `context/`, or `specs/` when durable.
+
+Required template:
+
+```markdown
+# Handoff: <task title>
+
+- Updated: <YYYY-MM-DD>
+- Status: <in-progress | paused | awaiting-review | ready-to-implement>
+
+## Goal
+<one sentence>
+
+## Files involved
+- <workspace-relative path> — <why it matters>
+
+## Decisions made
+- <decision> — <rationale> (link to ADR/spec if any)
+
+## Constraints
+- <constraint stated by the user>
+
+## Rejected approaches
+- <approach> — <why rejected>
+
+## Next action
+<single concrete next step the next agent/session should take>
+```
+
+Rules:
+
+- Only write/update the note; do not edit implementation files in the same turn.
+- Use workspace-relative paths; never invent files.
+- Keep each section to bullets; no narrative.
+- If a section has no content, write `- (none)` rather than omitting it.
+
 ## Output format (always)
 
 1. **Classification**: intent + selected module(s)
