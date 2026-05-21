@@ -25,6 +25,7 @@ This file is the single-source-of-truth for what matters _right now_.
 - [ ] Confirm require project data from Sanity is available to 11ty.
 - [ ] Design the page template and render the project data.
 - [ ] Test and confirm responsiveness at default breakpoints defined by Tailwind (base, sm, md, lg, xl).
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/44
 - [ ] Address any weirdness on Safari/iOS.
 - [x] Complete the active landing-page UX flow with seamless choreography (video -> hero -> bio -> awards) and a clean handoff into downstream content.
 - [x] Display block content within the Bio section.
