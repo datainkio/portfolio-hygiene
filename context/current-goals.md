@@ -32,6 +32,7 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Next
 
+- [ ] Create user guide singleton, update with content, design, and implement.
 - [ ] Add sidecar files for JS files
 - [ ] Execute cinematic pacing pass: tighten video/hero handoff overlap and verify scroll re-entry behavior.
 - [ ] Complete AIX hygiene pass closeout: canonicalize backlog ownership and record a dated validation snapshot.
