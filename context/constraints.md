@@ -23,6 +23,7 @@ If a constraint is project-specific (e.g., only `/frontend`), link to that proje
 - **Secret handling**: never commit tokens; prefer `.env` / CI secrets for `FIGMA_TOKEN`, `SANITY_*`, and other provider credentials.
 - **Commit message format**: all commit messages must be prefixed with a conventional commit tag — e.g. `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `style:`, `test:`, `perf:`.
 - **README naming**: README files must be named `README.[folder-name].md` (e.g. `README.docs.md`, `README.context.md`). Never use plain `README.md`.
+- **Template sidecars**: every `.njk` file gets a co-located `.md` sidecar (e.g. `bio.njk` → `bio.md`). Sidecars are consumed primarily through Obsidian; match the format of existing sidecars in `frontend/views/`.
 
 ## Decision authority
 
