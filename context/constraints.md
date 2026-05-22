@@ -21,6 +21,8 @@ If a constraint is project-specific (e.g., only `/frontend`), link to that proje
 - **Performance is intentional**: avoid unnecessary JS/deps; measure or justify animation cost.
 - **Noise control / indexing hygiene**: keep search + watcher excludes aligned with `.gitignore` and avoid indexing build outputs, caches, and vendor directories.
 - **Secret handling**: never commit tokens; prefer `.env` / CI secrets for `FIGMA_TOKEN`, `SANITY_*`, and other provider credentials.
+- **Commit message format**: all commit messages must be prefixed with a conventional commit tag — e.g. `feat:`, `fix:`, `chore:`, `docs:`, `refactor:`, `style:`, `test:`, `perf:`.
+- **README naming**: README files must be named `README.[folder-name].md` (e.g. `README.docs.md`, `README.context.md`). Never use plain `README.md`.
 
 ## Decision authority
 

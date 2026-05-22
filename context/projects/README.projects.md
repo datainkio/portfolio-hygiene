@@ -17,6 +17,7 @@ Suggested contents per project:
 
 - [Portfolio frontend](portfolio-frontend.md)
 - [Portfolio backend](portfolio-backend.md)
+- Portfolio content-model — cross-cutting content contracts (field definitions + page composition patterns); no context pack yet, see `content-model/` sibling repo.
 
 Maintenance:
 

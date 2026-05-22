@@ -3,13 +3,14 @@
 This file describes where everything lives in the workspace and what each folder contains.
 Focus: keep AI agents oriented and fast.
 
-This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend/`, and `backend/`. This map is rooted in `aix/`; sibling repos are siblings of the `aix/` workspace folder.
+This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend/`, `backend/`, and `content-model/`. This map is rooted in `aix/`; sibling repos are siblings of the `aix/` workspace folder.
 
 ## Workspace Roots (repo-level)
 
 - [aix/](../../) — AIX scaffold, docs, specs, and agent workflows.
 - Sibling: `frontend/` (11ty + Nunjucks + Tailwind + GSAP) — added separately to the multi-root workspace.
 - Sibling: `backend/` (Sanity Studio + tooling) — added separately to the multi-root workspace.
+- Sibling: `content-model/` (cross-cutting content contracts) — field-level content definitions (`documents/`) and page composition patterns (`patterns/`); the authority layer between backend schema and frontend templates. Added 2026-05-22.
 
 ## Copilot Configuration
 
@@ -145,6 +146,12 @@ This workspace includes multiple sibling repos: `aix/` (AIX scaffold), `frontend
 - [.github/README.md](../../.github/README.md) — agent discovery notes
 - Concierge entrypoint: [.github/agents/Concierge.md](../../.github/agents/Concierge.md)
 - Welcoming Party entrypoint: [.github/agents/WelcomingParty.md](../../.github/agents/WelcomingParty.md)
+
+## Agent Skills
+
+- Installed skills live under `frontend/.agents/skills/` (symlinked to Claude Code).
+- Active GSAP skills (all MIT): `gsap-core`, `gsap-timeline`, `gsap-scrolltrigger`, `gsap-plugins`, `gsap-performance`, `gsap-utils`.
+- Source: `greensock/gsap-skills` via the skills marketplace.
 
 ## Workspace Config
 

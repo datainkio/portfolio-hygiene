@@ -39,6 +39,7 @@ This file is the single-source-of-truth for what matters _right now_.
 - [ ] Build the migration plan away from the current state of prod to this newest version.
 - [ ] Validate landing sequence behavior with focused runtime checks and update choreography docs/context where behavior contracts changed.
 - [ ] Tune cinematic pacing and overlap between sections (video/hero handoff, hero/bio/awards transitions, reduced-motion behavior).
+- [x] Install and integrate GSAP skills for project
 - [x] Support content strategy through frontmatter and templates.
 - [ ] Document coding conventions and standards.
 - [x] Complete Sanity adoption hardening and remove residual legacy migration wording from active docs.
