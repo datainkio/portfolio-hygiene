@@ -6,9 +6,9 @@ aix:
   surface: internal
   owner: AIX
   tags:
-    - #onboarding
-    - #claude-code
-    - #agent
+    -  #onboarding
+    -  #claude-code
+    -  #agent
   type: guide
   scope: aix
   audience: agents
@@ -28,14 +28,14 @@ This document is written for Claude Code (Anthropic's CLI agent) entering this w
 
 This is a **web portfolio project** for a practitioner (Russell Lebo, russell@dataink.io). It is organized as four discrete but complementary folders, each with a distinct role and authority boundary:
 
-| Folder | Role | Stack |
-|---|---|---|
-| `aix/` | AI agent experience hygiene — the workspace scaffold that makes the other three folders work well for AI | Vitaixmin (custom scaffold) |
-| `backend/` | CMS — content modeling and Sanity Studio | Sanity Studio + TypeScript |
-| `frontend/` | Presentation layer — static site | Eleventy (11ty) + Nunjucks + Tailwind v4 + GSAP |
-| `content-model/` | Cross-cutting content contract authority — defines data structure for both `backend/` and `frontend/` | Markdown specs (documents + patterns) |
+| Folder           | Role                                                                                                     | Stack                                           |
+| ---------------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------- |
+| `aix/`           | AI agent experience hygiene — the workspace scaffold that makes the other three folders work well for AI | Vitaixmin (custom scaffold)                     |
+| `backend/`       | CMS — content modeling and Sanity Studio                                                                 | Sanity Studio + TypeScript                      |
+| `frontend/`      | Presentation layer — static site                                                                         | Eleventy (11ty) + Nunjucks + Tailwind v4 + GSAP |
+| `content-model/` | Cross-cutting content contract authority — defines data structure for both `backend/` and `frontend/`    | Markdown specs (documents + patterns)           |
 
-You are typically invoked in the context of `backend/`, but the workspace gives you visibility across all four folders.
+Russ spends roughly 40% of his time working in `frontend`, 30% in `backend/`, 20% in `aix/`, and 10% in `content-model`. His workspace is design to give him visibility across all four folders.
 
 ---
 
@@ -66,6 +66,7 @@ content-model/ → cross-cutting content structure: "what data looks like and ho
 ```
 
 **Decision precedence:**
+
 1. Latest accepted ADR (in `aix/docs/decisions/`)
 2. `aix/specs/` contracts
 3. `aix/context/current-goals.md` (time-bound — not architecture authority)
@@ -111,6 +112,7 @@ content-model/
 ### Current state (as of 2026-05-22)
 
 A skeleton, scoped to the project page view currently being built. Intended to eventually cover all content types.
+
 - `documents/work/project.md` — content contract for the `project` document type; bootstrapped from the Sanity schema
 - `patterns/project-page.md` — page composition pattern with 8 ordered regions; substantive but still has open questions (PDF pipeline, SEO surface, navigation affordances)
 
@@ -123,12 +125,14 @@ Both files link bidirectionally to the Sanity schema (`backend/schemaTypes/docum
 This workspace was designed for GitHub Copilot + a Concierge routing model. You (Claude Code) are a different AI surface. Here is what to carry over:
 
 **What applies to you:**
+
 - The guiding principles (clarity, consistency, accessibility, performance, scope discipline)
 - The context hierarchy and authority model
 - The behavioral constraints (no broad refactors, no new patterns without instruction, flag ADR conflicts)
 - The content-model as an authority layer
 
 **What does not apply to you:**
+
 - Concierge module routing (that is Copilot-specific)
 - `.copilot/` prompt files (not your configuration)
 - Module selection logic
@@ -140,6 +144,7 @@ When you are uncertain about intent, follow the same decision protocol as the Co
 ## Active Work (as of 2026-05-22)
 
 **Now:** Building the project page view.
+
 - Spec: `frontend/specs/views/project-page.views-spec.md` (may not exist yet)
 - Content contract: `content-model/documents/work/project.md`
 - Page pattern: `content-model/patterns/project-page.md`
@@ -169,15 +174,15 @@ These are non-negotiable:
 
 ## Getting Unstuck
 
-| Situation | Where to look |
-|---|---|
-| Unclear what to work on | `aix/context/current-goals.md` |
-| Unclear what's allowed | `aix/context/constraints.md` |
-| Contradicting an accepted decision | `aix/context/decisions.md` + full ADR in `aix/docs/decisions/` |
-| Backend schema question | `backend/schemaTypes/SCHEMA_ARCHITECTURE.md`, `backend/docs/SCHEMA_GUIDE.md` |
-| Frontend implementation question | `aix/context/projects/portfolio-frontend.md`, `frontend/.copilot/prompts/` |
-| Content structure question | `content-model/documents/` or `content-model/patterns/` |
-| Where a file belongs | Mirror what's already there; consult `aix/context/project.md` folder semantics section |
+| Situation                          | Where to look                                                                          |
+| ---------------------------------- | -------------------------------------------------------------------------------------- |
+| Unclear what to work on            | `aix/context/current-goals.md`                                                         |
+| Unclear what's allowed             | `aix/context/constraints.md`                                                           |
+| Contradicting an accepted decision | `aix/context/decisions.md` + full ADR in `aix/docs/decisions/`                         |
+| Backend schema question            | `backend/schemaTypes/SCHEMA_ARCHITECTURE.md`, `backend/docs/SCHEMA_GUIDE.md`           |
+| Frontend implementation question   | `aix/context/projects/portfolio-frontend.md`, `frontend/.copilot/prompts/`             |
+| Content structure question         | `content-model/documents/` or `content-model/patterns/`                                |
+| Where a file belongs               | Mirror what's already there; consult `aix/context/project.md` folder semantics section |
 
 ---
 
