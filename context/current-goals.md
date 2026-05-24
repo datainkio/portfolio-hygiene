@@ -20,6 +20,9 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Now
 
+- [ ] Display the singleton User Guide on its own page.
+- [ ] Fix [[userGuideProjection.js]]: `pageAbstract` is traversed as Portable Text but is a plain `string`; `pageBody` is not projected at all.
+- [ ] Fix [[transforms/user-guide.js]]: reads `valuePropRichText` to build `bodyHtml`; the correct field is `pageBody`.
 - [ ] Write the spec for the project page view.
 - [ ] Create a page template to display the complete view of a project.
 - [ ] Confirm require project data from Sanity is available to 11ty.
@@ -32,21 +35,29 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Next
 
-- [ ] Create user guide singleton, update with content, design, and implement.
-- [ ] Add sidecar files for JS files
-- [ ] Execute cinematic pacing pass: tighten video/hero handoff overlap and verify scroll re-entry behavior.
+**User guide — content-model drift:**
+- [ ] Update [[singletons/userGuide|content-model/documents/singletons/userGuide.md]]: rename body field `valuePropRichText` → `pageBody` and add the `pageAbstract` string field.
+- [ ] Update [[pages/user-guide|content-model/contracts/pages/user-guide.md]]: document `pageAbstract` and its computed `abstract` key.
+- [ ] Update [[patterns/userGuide|content-model/patterns/userGuide.md]]: correct layout reference from `landing.njk` to `base.njk`.
+
+**Workspace context drift:**
+- [ ] Update [[README.content-model|content-model/README.content-model.md]]: add `contracts/`, `objects/`, and `taxonomies/` to the folder structure map.
+- [ ] Fix [[portfolio-frontend|aix/context/projects/portfolio-frontend.md]]: correct stale template path `njk/` → `views/`.
+
+**Other:**
+- [ ] Add sidecar files for JS files.
+- [ ] Document coding conventions and standards.
+- [ ] Complete cinematic pacing pass: tighten video/hero handoff overlap, tune section transitions (hero/bio/awards), verify scroll re-entry behavior, and update choreography docs/context.
+- [ ] Validate landing sequence behavior with focused runtime checks and update choreography docs/context where behavior contracts changed.
 - [ ] Complete AIX hygiene pass closeout: canonicalize backlog ownership and record a dated validation snapshot.
 - [ ] Build the migration plan away from the current state of prod to this newest version.
-- [ ] Validate landing sequence behavior with focused runtime checks and update choreography docs/context where behavior contracts changed.
-- [ ] Tune cinematic pacing and overlap between sections (video/hero handoff, hero/bio/awards transitions, reduced-motion behavior).
-- [x] Install and integrate GSAP skills for project
-- [x] Support content strategy through frontmatter and templates.
-- [ ] Document coding conventions and standards.
-- [x] Complete Sanity adoption hardening and remove residual legacy migration wording from active docs.
-- [x] Iterate on the frontend domain module (post-MVP refinements) after MVP behavior stabilizes.
 
 ## Done (recent)
 
+- [x] Install and integrate GSAP skills for project.
+- [x] Support content strategy through frontmatter and templates.
+- [x] Complete Sanity adoption hardening and remove residual legacy migration wording from active docs.
+- [x] Iterate on the frontend domain module (post-MVP refinements) after MVP behavior stabilizes.
 - [x] Prepare to share project with Sam by updating /aix/README. Prioritize high-level documentation of the agent modules.
 - [x] Preserve preload UX contract: Hero intro must follow BG Video intro completion (no early hero start).
 - [x] Keep AIX optimized for this workstream by maintaining accurate context and routing signals (especially `current-goals.md`) so execution stays focused.
