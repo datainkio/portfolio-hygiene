@@ -1,21 +1,10 @@
 ---
-aix:
-  id: aix.copilot.prompts.taskmaster
-  role: Manage tasks, priorities, and checklists.
-  status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #tasks
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
+name: Taskmaster Module Prompt
+description: Manage tasks, priorities, and checklists.
+tags:
+  - copilot
+  - prompts
+  - tasks
 ---
 
 # Taskmaster Module Prompt
@@ -57,18 +46,18 @@ When you encounter a Markdown list item like `- TODO: ...`, convert it into a pr
 Use the file’s native comment syntax; do not use a universal wrapper.
 | File type      | Format                             |
 | -------------- | ---------------------------------- |
-| JS / TS / CSS  | `// TODO(...)`                     |
-| Python / Shell | `# TODO(...)`                      |
-| HTML           | `<!-- TODO(...) -->`               |
-| Markdown       | `<!-- TODO(...) -->` *(preferred)* |
-| YAML / TOML    | `# TODO(...)`                      |
+| JS / TS / CSS  | `// [ ] TODO(...)`                     |
+| Python / Shell | `# [ ] TODO(...)`                      |
+| HTML           | `<!-- [ ] TODO(...) -->`               |
+| Markdown       | `<!-- [ ] TODO(...) -->` *(preferred)* |
+| YAML / TOML    | `# [ ] TODO(...)`                      |
 
 ### Identifier-only TODO with prefix
-- `// TODO: <message>`
-- `// TODO(scope): <message>`
-- `// BUG: <message>`
-- `// CHORE: <message>`
-- `// DOCS: <message>`
+- `// [ ] TODO: <message>`
+- `// [ ] TODO(scope): <message>`
+- `// [ ] BUG: <message>`
+- `// [ ] CHORE: <message>`
+- `// [ ] DOCS: <message>`
 
 ### Canonical grammar
 - `<PREFIX>: <imperative description> [optional metadata]`
@@ -135,16 +124,16 @@ Only these identifiers are actionable (others are ignored by the workflow):
 - `<COMMENT> <IDENTIFIER>(scope): <short title>`
 
 Examples:
-- `// BUG: Fix race in task hydration`
-- `// TODO(taskmaster): Align HTML comment parsing rules`
-- `# DOCS(workflow): Add Taskmaster examples for TODO options`
+- `// [ ] BUG: Fix race in task hydration`
+- `// [ ] TODO(taskmaster): Align HTML comment parsing rules`
+- `# [ ] DOCS(workflow): Add Taskmaster examples for TODO options`
 
 ### Extended form (recommended)
 A TODO may include up to **5 comment-prefixed body lines**, followed by **comment-prefixed option lines**.
 
 JS/TS example:
 ```js
-// TODO: Add Taskmaster docs for TODO options
+// [ ] TODO: Add Taskmaster docs for TODO options
 // Include examples for JS, Python, YAML.
 // Mention CLOSE_ISSUES behavior when removing TODOs.
 // labels: documentation
@@ -153,7 +142,7 @@ JS/TS example:
 
 Python example:
 ```py
-# PERF: Reduce cold-start time for preview build
+# [ ] PERF: Reduce cold-start time for preview build
 # Investigate caching strategy and dependency loading.
 # labels: performance
 ```

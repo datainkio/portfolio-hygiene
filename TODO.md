@@ -15,7 +15,6 @@ This file tracks AIX and developer-experience backlog priorities.
 - [ ] BUG: Resolve Concierge stopping mid-task when no user input is required.
 - [ ] BUG: Handle EOF and syntax errors (e.g., unexpected end of JSON input) during file processing.
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/29
-- [ ] FEAT: Improve drift gate pre-commit output so commit-block messaging is concise and actionable.
 - [ ] TODO: Improve terminal task output guidance (especially how to adjust `context/current-goals.md`).
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/35
 
@@ -38,8 +37,9 @@ This file tracks AIX and developer-experience backlog priorities.
 - [ ] FEAT: When refactoring begins, create skills (or the equivalent) for preferred technologies, platforms, values, and working style. At the moment this list looks like: Tailwind, GSAP, 11ty, Sanity, accessibility, DX, AIX, personality, response style, commit messages.
 - [ ] FEAT: Instruct appropriate module to prioritize semantically meaningful DOM elements over divs.
 - [ ] TODO: Account for terminal EOF errors and stuck heredoc modes.
-- [ ] FEAT: Create explicit frontmatter schema for workspace.
+- [ ] FEAT: Implement template frontmatter schema per [specs/features/template-frontmatter-schema.md](specs/features/template-frontmatter-schema.md).
 - [ ] FEAT: Open permissions for running VS Code tasks without extra user input (including sensitive paths where approved).
+- [ ] FEAT: Improve drift gate pre-commit output so commit-block messaging is concise and actionable.
 - [ ] FEAT: Add user feedback loops for multi-step agent responses and apply feedback into drift updates.
 - [ ] TODO: Learn user's UX style/preferences/priorities.
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/37
@@ -48,11 +48,54 @@ This file tracks AIX and developer-experience backlog priorities.
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/27
 - [ ] FEAT: Hook up ChatGPT browser instance to repos.
 - [ ] TODO: Evaluate creating agent modules dedicated to specific libraries, platforms, etc. For example, a module current with all GSAP documentation and best practices. Another module for Sanity, etc.
-- [ ] TODO: Note that /aix brings value in the form of reducing token usage by maintaining context rather than rebuilding with each new request,.
 
-## Done
+### Concierge: Project AIX Maintenance Feature
 
-- [x] Integrate maintenance of constraints and decisions.
-- [x] Reinforce constraint that context management should not require humans editing meta lines.
-- [x] Test drift check on commit.
-- [x] Add allowlisted Agent Ops tasks (safe file ops + cross-repo scripts) to reduce terminal confirmation friction.
+**Permissions & Guardrails (Mounted Projects)**
+
+- [ ] Define doc-optimization policy for mounted projects (allowed: improve discoverability/cross-linking, consolidate prompts/modules, reduce duplication; forbidden: rewrite product docs for style).
+- [ ] Define doc-optimization allowlist (which doc areas may be changed, e.g. docs/ai/, prompt indexes).
+- [ ] Define doc-optimization denylist (product docs / marketing copy / narrative docs unless explicitly requested).
+- [ ] Denylist: production source behavior files (templates/JS/CSS) unless explicitly requested.
+- [ ] Auto-fix must support: apply-all vs apply-selected changes.
+
+**Benchmarking & Scoring**
+
+- [ ] Extend probe bank with a mounted-project subset (project discovery + prompt routing + safe auto-fix dry-run).
+- [ ] Implement baseline benchmark capture per project (store snapshot artifacts).
+- [ ] Implement re-score + comparison (run probes; write snapshots; produce deltas).
+- [ ] Implement logging + measurement hooks (emit structured run summaries).
+- [ ] Implement: deterministic manifest discovery (root + fallback).
+- [ ] Implement: audit directory resolution + safe creation (auto-fix only).
+- [ ] Implement: snapshot writer + baseline/previous selector.
+- [ ] Implement: delta generator + report formatter.
+- [ ] Implement: confirmation-gated validation command runner.
+
+**Discovery (Mounted Project Profiling)**
+
+- [ ] Inventory current AIX surfaces in imported projects (.copilot/, docs/ai/, `<mounted-project>/.github/copilot-instructions.md`, legacy agents).
+- [ ] Design "Project AIX Profile" format (derived facts: prompts, context packs, entrypoints, ignored paths, build artifacts).
+- [ ] Specify discovery algorithm (multi-root scan + heuristic scoring + duplicate/overlap detection).
+
+**Recommendations & Output (Report Mode)**
+
+- [ ] Add UX for Concierge output (audit summary, recommended moves, one-command/one-patch options).
+- [ ] Define "AIX hygiene checklist" generation (project-local, actionable, links to files).
+- [ ] Define Concierge routing rules for imported projects (module selection precedence; conflict resolution).
+
+**Optional Auto-fix**
+
+- [ ] Specify remediation actions (report-first suggestions + optional auto-fix; never touch generated/build outputs).
+- [ ] Define auto-fix invocation UX (dry-run default; confirm/apply; patch preview).
+- [ ] Define rollback strategy (revert prompt/module moves; preserve legacy references).
+
+**Workflows**
+
+- [ ] Define optimization workflow (one-time improvements): identify highest-leverage fixes → propose patches → optional apply → validate with scoring deltas.
+- [ ] Define maintenance workflow (ongoing hygiene): detect drift/noise regressions → suggest pruning/realignment → optional apply → validate with scoring deltas.
+
+**Spec Drafting**
+
+- [ ] Spec: Auto-fix categories (docs optimization, prompt modularization, ignore hygiene, agent deconfliction).
+- [ ] Spec: Validation plan (before/after comparison, regression guardrails, logs).
+

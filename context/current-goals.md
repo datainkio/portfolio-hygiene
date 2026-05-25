@@ -30,8 +30,6 @@ This file is the single-source-of-truth for what matters _right now_.
 - [ ] Test and confirm responsiveness at default breakpoints defined by Tailwind (base, sm, md, lg, xl).
 - \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/44
 - [ ] Address any weirdness on Safari/iOS.
-- [x] Complete the active landing-page UX flow with seamless choreography (video -> hero -> bio -> awards) and a clean handoff into downstream content.
-- [x] Display block content within the Bio section.
 
 ## Next
 
@@ -64,26 +62,12 @@ This file is the single-source-of-truth for what matters _right now_.
 - [ ] Complete AIX hygiene pass closeout: canonicalize backlog ownership and record a dated validation snapshot.
 - [ ] Build the migration plan away from the current state of prod to this newest version.
 
-## Done (recent)
-
-- [x] Install and integrate GSAP skills for project.
-- [x] Support content strategy through frontmatter and templates.
-- [x] Complete Sanity adoption hardening and remove residual legacy migration wording from active docs.
-- [x] Iterate on the frontend domain module (post-MVP refinements) after MVP behavior stabilizes.
-- [x] Prepare to share project with Sam by updating /aix/README. Prioritize high-level documentation of the agent modules.
-- [x] Preserve preload UX contract: Hero intro must follow BG Video intro completion (no early hero start).
-- [x] Keep AIX optimized for this workstream by maintaining accurate context and routing signals (especially `current-goals.md`) so execution stays focused.
-- [x] Stabilized choreography baseline for landing flow (hero/awards lifecycle reliability, hero re-entry event semantics, and DOM contract alignment).
-- [x] Removed inline "Last updated" stamps and codified repo-signal freshness policy.
-- [x] Added the AIX hygiene recovery pass to active execution and scoped it to conservative checks first.
-
 ## Not Now
 
 - [ ] Update links in sidecar files to target the relevant sidecar files, not the implementation. The goal is to improve findability and discoverability within Obsidian, which is designed for Markdown files only.
 - [ ] Tighten up documentation for /eleventy/services/NavigationBuilder.njk. That shit is wayyy to long and unreadable.
 - [ ] Integrate project management tasks into the Majordomo custom agent. For example, automating synchronization of the project backlog with current-goals.md.
 - [ ] Develop the browser-accessible documentation spec for making documentation available to remote agents.
-- [ ] Improve drift gate messaging surfaced by VS Code (keep it short and actionable)
 - [ ] Auto-generated global inventories (a full ToC of every log file) in the workspace map.
 - [ ] Heavy automation for logging/indexing until the evidence loop stabilizes and proves it saves time.
 - [ ] Broad refactors inside mounted projects in the name of “cleanup” (unless explicitly approved).
