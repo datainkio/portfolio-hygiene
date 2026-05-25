@@ -42,6 +42,7 @@ This file tracks AIX and developer-experience backlog priorities.
 - [ ] FEAT: Improve drift gate pre-commit output so commit-block messaging is concise and actionable.
 - [ ] FEAT: Add user feedback loops for multi-step agent responses and apply feedback into drift updates.
 - [ ] TODO: Learn user's UX style/preferences/priorities.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/48
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/37
 - Issue URL: https://github.com/datainkio/portfolio-governance/issues/28
 - [ ] TODO: Tune agent cautiousness to reduce overlong completions and overengineered solutions.
@@ -56,6 +57,7 @@ This file tracks AIX and developer-experience backlog priorities.
 - [ ] Define doc-optimization policy for mounted projects (allowed: improve discoverability/cross-linking, consolidate prompts/modules, reduce duplication; forbidden: rewrite product docs for style).
 - [ ] Define doc-optimization allowlist (which doc areas may be changed, e.g. docs/ai/, prompt indexes).
 - [ ] Define doc-optimization denylist (product docs / marketing copy / narrative docs unless explicitly requested).
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/47
 - [ ] Denylist: production source behavior files (templates/JS/CSS) unless explicitly requested.
 - [ ] Auto-fix must support: apply-all vs apply-selected changes.
 

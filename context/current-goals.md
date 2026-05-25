@@ -51,7 +51,9 @@ This file is the single-source-of-truth for what matters _right now_.
 - [ ] Remove or implement the placeholder [[eleventy/collections/documentation.js]] — an empty-array collection occupies a name and misleads readers of `index.js`.
 - [ ] Add Sanity fetch freshness logging (cache hit vs. network) to match the `TailwindLogger` pattern — closes a DX blind spot during local development.
 - [ ] Refactor `NavigationBuilder.buildNestedStructure()` from O(n²) to O(n) using a Map-based parent lookup.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/52
 - [ ] Reconcile the two-file `_registry` split: merge `_registry.md` docs into `_registry.njk` or make their distinct roles explicit.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/51
 
 **Other:**
 

@@ -49,7 +49,9 @@ Use the file’s native comment syntax; do not use a universal wrapper.
 | JS / TS / CSS  | `// [ ] TODO(...)`                     |
 | Python / Shell | `# [ ] TODO(...)`                      |
 | HTML           | `<!-- [ ] TODO(...) -->`               |
+                       - \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/46
 | Markdown       | `<!-- [ ] TODO(...) -->` *(preferred)* |
+                       - \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/45
 | YAML / TOML    | `# [ ] TODO(...)`                      |
 
 ### Identifier-only TODO with prefix
