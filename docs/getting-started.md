@@ -54,6 +54,7 @@ Each project includes a small metadata file:
 ```
 
 This file records:
+
 - Which scaffold version the project was created from
 - When it was created
 - Which parts of the workspace are scaffold‑managed
@@ -80,11 +81,13 @@ There is **no automatic syncing** with the scaffold — by design.
 As the scaffold improves over time, you can bring updates into existing projects using Concierge (Migrator module).
 
 Recommended workflow:
+
 1. Ask Concierge to run Migrator in **Audit mode** to see what changed
 2. Review the proposed updates
 3. Apply only the safe updates you want
 
 The Migrator will:
+
 - Never touch application code
 - Never overwrite authored documentation
 - Always produce a changelog
@@ -93,15 +96,15 @@ The Migrator will:
 
 ## After Using This Template
 
-- [ ] Rename the repository (and update the description)
-- [ ] Confirm the default branch name and protection rules (if any)
-- [ ] Update `README.md` to reflect the new project
-- [ ] Update `/context/project.md` (or equivalent) with the new project’s goals, constraints, and stakeholders
-- [ ] Search the repo for placeholders like `TEMPLATE`, `RENAME_ME`, `YOUR_ORG`, `YOUR_PROJECT`
-- [ ] Review `.env.example` (never commit real secrets)
-- [ ] Update package/app identifiers (`package.json` name, app title, bundle identifiers, etc.) as applicable
-- [ ] Remove or replace example content (sample assets, demo pages, placeholder data)
-- [ ] Open Copilot Chat and ask **Concierge** for a “template personalization checklist” once to verify setup
+- [ ] TODO Rename the repository (and update the description)
+- [ ] TODO Confirm the default branch name and protection rules (if any)
+- [ ] TODO Update `README.md` to reflect the new project
+- [ ] TODO Update `/context/project.md` (or equivalent) with the new project’s goals, constraints, and stakeholders
+- [ ] TODO Search the repo for placeholders like `TEMPLATE`, `RENAME_ME`, `YOUR_ORG`, `YOUR_PROJECT`
+- [ ] TODO Review `.env.example` (never commit real secrets)
+- [ ] TODO Update package/app identifiers (`package.json` name, app title, bundle identifiers, etc.) as applicable
+- [ ] TODO Remove or replace example content (sample assets, demo pages, placeholder data)
+- [ ] TODO Open Copilot Chat and ask **Concierge** for a “template personalization checklist” once to verify setup
 
 Want to make your own template from this? Take advantage of docs/audit_report_template.md to ensure you hit all the right points.
 
@@ -122,4 +125,3 @@ Want to make your own template from this? Take advantage of docs/audit_report_te
 > **The scaffold is a starter kit.
 > Projects are independent.
 > Upgrades are intentional, not automatic.**
-
