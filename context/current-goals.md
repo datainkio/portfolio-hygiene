@@ -46,6 +46,15 @@ This file is the single-source-of-truth for what matters _right now_.
 - [ ] Update [[README.content-model|content-model/README.content-model.md]]: add `contracts/`, `objects/`, and `taxonomies/` to the folder structure map.
 - [ ] Fix [[portfolio-frontend|aix/context/projects/portfolio-frontend.md]]: correct stale template path `njk/` → `views/`.
 
+**11ty config improvements (from code review):**
+
+- [ ] Gate the HTML minifier transform in [[eleventy/plugins/plugins.js]] behind `NODE_ENV === 'production'` so dev builds stay readable.
+- [ ] Replace the module-scope SVG cache in [[eleventy/filters/file.js]] (`inlineSvgFromUrl`) with `@11ty/eleventy-fetch` so the cache is file-system backed and consistent across build modes.
+- [ ] Remove or implement the placeholder [[eleventy/collections/documentation.js]] — an empty-array collection occupies a name and misleads readers of `index.js`.
+- [ ] Add Sanity fetch freshness logging (cache hit vs. network) to match the `TailwindLogger` pattern — closes a DX blind spot during local development.
+- [ ] Refactor `NavigationBuilder.buildNestedStructure()` from O(n²) to O(n) using a Map-based parent lookup.
+- [ ] Reconcile the two-file `_registry` split: merge `_registry.md` docs into `_registry.njk` or make their distinct roles explicit.
+
 **Other:**
 
 - [ ] Add sidecar files for JS files.
@@ -71,6 +80,7 @@ This file is the single-source-of-truth for what matters _right now_.
 ## Not Now
 
 - [ ] Update links in sidecar files to target the relevant sidecar files, not the implementation. The goal is to improve findability and discoverability within Obsidian, which is designed for Markdown files only.
+- [ ] Tighten up documentation for /eleventy/services/NavigationBuilder.njk. That shit is wayyy to long and unreadable.
 - [ ] Integrate project management tasks into the Majordomo custom agent. For example, automating synchronization of the project backlog with current-goals.md.
 - [ ] Develop the browser-accessible documentation spec for making documentation available to remote agents.
 - [ ] Improve drift gate messaging surfaced by VS Code (keep it short and actionable)
