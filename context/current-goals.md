@@ -20,9 +20,6 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Now
 
-- [ ] BUG: Fix [userGuideProjection.js](frontend/data/sanity/projections/userGuide/userGuideProjection.js): `pageAbstract` is traversed as Portable Text but is a plain `string`; `pageBody` is not projected at all.
-- [ ] BUG: Fix [transforms/user-guide.js](frontend/data/sanity/transforms/user-guide.js): reads `valuePropRichText` to build `bodyHtml`; the correct field is `pageBody`.
-- [ ] FEAT: Display the singleton User Guide on its own page.
 - [ ] TODO: Write the spec for the project page view.
 - [ ] TODO: Confirm required project data from Sanity is available to 11ty.
 - [ ] FEAT: Create a page template to display the complete view of a project.
