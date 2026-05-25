@@ -36,15 +36,18 @@ This file is the single-source-of-truth for what matters _right now_.
 ## Next
 
 **User guide — content-model drift:**
+
 - [ ] Update [[singletons/userGuide|content-model/documents/singletons/userGuide.md]]: rename body field `valuePropRichText` → `pageBody` and add the `pageAbstract` string field.
 - [ ] Update [[pages/user-guide|content-model/contracts/pages/user-guide.md]]: document `pageAbstract` and its computed `abstract` key.
 - [ ] Update [[patterns/userGuide|content-model/patterns/userGuide.md]]: correct layout reference from `landing.njk` to `base.njk`.
 
 **Workspace context drift:**
+
 - [ ] Update [[README.content-model|content-model/README.content-model.md]]: add `contracts/`, `objects/`, and `taxonomies/` to the folder structure map.
 - [ ] Fix [[portfolio-frontend|aix/context/projects/portfolio-frontend.md]]: correct stale template path `njk/` → `views/`.
 
 **Other:**
+
 - [ ] Add sidecar files for JS files.
 - [ ] Document coding conventions and standards.
 - [ ] Complete cinematic pacing pass: tighten video/hero handoff overlap, tune section transitions (hero/bio/awards), verify scroll re-entry behavior, and update choreography docs/context.
@@ -67,6 +70,7 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Not Now
 
+- [ ] Update links in sidecar files to target the relevant sidecar files, not the implementation. The goal is to improve findability and discoverability within Obsidian, which is designed for Markdown files only.
 - [ ] Integrate project management tasks into the Majordomo custom agent. For example, automating synchronization of the project backlog with current-goals.md.
 - [ ] Develop the browser-accessible documentation spec for making documentation available to remote agents.
 - [ ] Improve drift gate messaging surfaced by VS Code (keep it short and actionable)
