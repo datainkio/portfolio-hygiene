@@ -31,12 +31,10 @@ This file is the single-source-of-truth for what matters _right now_.
 
 **User guide — content-model drift:**
 
-- [ ] BUG: Update [patterns/userGuide](content-model/patterns/userGuide.md): correct layout reference from `landing.njk` to `base.njk`.
 - [ ] TODO: Update [singletons/userGuide](content-model/documents/singletons/userGuide.md) and [pages/user-guide](content-model/contracts/pages/user-guide.md): rename `valuePropRichText` → `pageBody`, add `pageAbstract` field, and document its computed `abstract` key.
 
 **Workspace context drift:**
 
-- [ ] BUG: Fix [portfolio-frontend](aix/context/projects/portfolio-frontend.md): correct stale template path `njk/` → `views/`.
 - [ ] TODO: Update [README.content-model](content-model/README.content-model.md): add `contracts/`, `objects/`, and `taxonomies/` to the folder structure map.
 
 **Other:**

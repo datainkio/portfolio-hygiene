@@ -37,6 +37,8 @@ A single **Triage Report** in Markdown with exactly these sections:
 ## Blocking question (max 1, only if required)
 Can you paste the exact error output (or the failing command + stack trace) and say where it occurs (local vs CI)?
 
+When blocked (no error log provided): emit a provisional Triage Report covering the three most common root causes for the described error category. Label every section "Provisional — assumes [assumption]". Request the full error log as the next action so a confirmed diagnosis can follow.
+
 ## Do / Don’t
 ### Do
 - Prefer smallest safe fix; keep blast radius low.

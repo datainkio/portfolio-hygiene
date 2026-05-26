@@ -21,6 +21,9 @@ context:
   current_goals: aix/context/current-goals.md
   constraints:   aix/context/constraints.md
   decisions:     aix/context/decisions.md
+  project_context:
+    frontend:    aix/context/projects/portfolio-frontend.md
+    backend:     aix/context/projects/portfolio-backend.md
 
 specs:           aix/specs/   # subdirs: ai/ ux/ features/ architecture/ cms/ data/ components/ routes-content/ performance/
 

@@ -20,3 +20,9 @@ Do not use any module when the user wants prompt-module normalization or routing
 
 ## Cross-cutting rules
 Conversation compaction and stable-decision handoff notes are defined in `concierge.prompt.md` and are binding on all modules. See that file for the full contract.
+
+## Terminal task output
+When a module instructs the user to run a command or task:
+1. Always emit the exact command to run — do not just describe it.
+2. For long-running tasks, include the expected output shape (e.g., "should print `✓ build complete` with no errors") so the user can tell whether it succeeded without reading every line.
+3. If output may be truncated, absent, or silent on success, include a "How to Verify" step that does not depend on seeing the full output (e.g., check a generated file, run a follow-up command, or inspect a known artifact).

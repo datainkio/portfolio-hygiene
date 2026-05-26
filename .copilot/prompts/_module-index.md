@@ -44,6 +44,15 @@ Defined in [concierge.prompt.md](concierge.prompt.md) — binding on all modules
 
 ---
 
+## calibrator.prompt.md
+
+**Purpose:** Lightweight constraint alignment check before execution — validates scope, constraints, and assumptions.
+**Top triggers:** calibrate, check against constraints, is this safe, alignment check, constraint conflict, ADR conflict
+**Primary Output type:** Calibration Snapshot (`pass` | `warn` | `block`)
+**File:** [aix/.copilot/prompts/calibrator.prompt.md](calibrator.prompt.md)
+
+---
+
 ## editor.prompt.md
 
 **Purpose:** Rewrite/edit text with consistent voice, structure, and clarity (docs, copy, narrative).

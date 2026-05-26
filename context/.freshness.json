@@ -5,14 +5,26 @@
       "reviewedAt": "2026-01-18T17:37:10.488Z"
     },
     "context/current-goals.md": {
-      "contentHash": "bb7d85bb822718fd77cfe09131897b757cc53b1c63fcf1fc3e32bc91fb0b557c",
-      "reviewedAt": "2026-01-18T17:37:10.488Z"
+      "contentHash": "8dfd735d3604494c049ba8779cebdd8799cce33631f7fd00cbcdf8b618a1336d",
+      "reviewedAt": "2026-05-26T00:00:00.000Z"
     },
     "context/decisions.md": {
       "contentHash": "0a08c90f4b39e48dd3ef6cb1d0582ee3c148637d3f2d534568f5b5c113a0c324",
       "reviewedAt": "2026-01-18T17:37:10.488Z"
+    },
+    "context/project.md": {
+      "contentHash": "6af185cbed4b01668f1798af1baeff7b7a03398cea15934172205d9a08acd9da",
+      "reviewedAt": "2026-05-26T00:00:00.000Z"
+    },
+    "context/projects/portfolio-frontend.md": {
+      "contentHash": "057e39e212834f4dc5f414af4c0d14997a2c8a2c84d4836b8bb5500390aa6cee",
+      "reviewedAt": "2026-05-26T00:00:00.000Z"
+    },
+    "context/projects/portfolio-backend.md": {
+      "contentHash": "a2ba3d1f5106c471059c533fe07dd53a75e2bce7fca1f734ba17a600ccdfb569",
+      "reviewedAt": "2026-05-26T00:00:00.000Z"
     }
   },
-  "updatedAt": "2026-01-18T17:37:10.481Z",
-  "version": 1
+  "updatedAt": "2026-05-26T00:00:00.000Z",
+  "version": 2
 }

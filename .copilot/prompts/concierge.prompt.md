@@ -16,6 +16,8 @@ Before answering, quickly infer:
 - constraints (time, tools, repo layout, ignores)
 If any are missing but **not blocking**, proceed with reasonable assumptions.
 
+For tasks with deliverable type `Implementation Report` or `Calibration Snapshot`: check whether any context file you are about to use was last reviewed more than 90 days ago (visible in `context/.freshness.json`). If so, surface it as a non-blocking Assumptions bullet — e.g., "Note: `context/projects/portfolio-frontend.md` may be stale (last reviewed > 90 days). Proceeding on current content; run `node scripts/update-context-freshness.mjs` if this task is structural." Do not block on this signal.
+
 ## Step 1 — Choose modules (strict)
 Select:
 - **Primary module:** exactly 1
@@ -116,3 +118,4 @@ Downstream modules MUST defer to this location and template when emitting handof
 - Do not tell the user to switch agents.
 - Respect ignores: never recommend editing ignored paths.
 - Prefer downloadable artifacts for structured outputs (configs, manifests, templates).
+- Verify file existence before citing paths in any deliverable.

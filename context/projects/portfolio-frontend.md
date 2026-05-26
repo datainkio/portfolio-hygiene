@@ -9,7 +9,7 @@ It is not trying to re-document the frontend repo; it captures only the high-sig
 ## What this project is
 
 - Static site generated with **Eleventy (11ty)**
-- Templates authored in **Nunjucks** under `njk/`
+- Templates authored in **Nunjucks** under `views/`
 - Styling via **Tailwind v4** + generated design tokens (Figma sync)
 - Content fetched at build-time from **Sanity** (with Eleventy data/collection adapters)
 - Motion system implemented with **GSAP** (Director/sections/triggers)
