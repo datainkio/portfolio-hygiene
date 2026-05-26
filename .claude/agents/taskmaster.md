@@ -56,6 +56,7 @@ Use the file's native comment syntax. Do not use a universal wrapper.
 | JS / TS / CSS | `// [ ] TODO(scope): message` |
 | Python / Shell | `# [ ] TODO(scope): message` |
 | HTML / Markdown | `<!-- [ ] TODO(scope): message -->` |
+                        - \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/62
 | YAML / TOML | `# [ ] TODO(scope): message` |
 
 **Canonical identifiers (workflow-actionable):** `TODO`, `BUG`, `CHORE`, `DOCS`, `TEST`, `PERF`, `A11Y`, `SEC`, `REFACTOR`
