@@ -120,24 +120,29 @@ Both files link bidirectionally to the Sanity schema (`backend/schemaTypes/docum
 
 ---
 
-## The Routing System (Copilot / Concierge)
+## The Agent System
 
-This workspace was designed for GitHub Copilot + a Concierge routing model. You (Claude Code) are a different AI surface. Here is what to carry over:
+Both GitHub Copilot and Claude Code are first-class AI surfaces in this workspace. Each has a platform-native agent layer backed by the same shared authority model.
 
-**What applies to you:**
+**GitHub Copilot** routes through the Concierge agent (`.github/agents/Concierge.md`) and a set of prompt modules in `.copilot/prompts/`. Users interact via `@Concierge` in VS Code Chat.
 
+**Claude Code** uses a parallel set of purpose-built sub-agents in `.claude/agents/`. Each agent maps to the same module roles (analyst, implementer, navigator, etc.) with descriptions tuned for Claude's routing logic. `CLAUDE.md` at the aix root is the primary entrypoint.
+
+**Shared by both surfaces:**
 - The guiding principles (clarity, consistency, accessibility, performance, scope discipline)
-- The context hierarchy and authority model
+- The context hierarchy and authority model (`context/` → `specs/` → `docs/`)
 - The behavioral constraints (no broad refactors, no new patterns without instruction, flag ADR conflicts)
 - The content-model as an authority layer
+- The handoff note convention (`aix/docs/notes/handoff-<slug>.md`)
 
-**What does not apply to you:**
+**Platform-specific (do not cross-apply):**
+- `.copilot/prompts/` — Copilot Chat prompt modules; not Claude's configuration
+- `.claude/agents/` — Claude Code sub-agents; not Copilot's configuration
+- Concierge ceremonial content — Copilot-specific interaction pattern
 
-- Concierge module routing (that is Copilot-specific)
-- `.copilot/` prompt files (not your configuration)
-- Module selection logic
+When uncertain about intent, follow the same decision protocol regardless of platform: check `context/` → `specs/` → `docs/` → mirror existing patterns → ask only if ambiguity affects correctness.
 
-When you are uncertain about intent, follow the same decision protocol as the Concierge agents: check `/context` → `/specs` → `/docs` → mirror existing patterns → ask only if ambiguity affects correctness.
+**Getting started (Claude Code):** See `aix/CLAUDE.md` for the workspace orientation protocol and agent index.
 
 ---
 
@@ -180,7 +185,7 @@ These are non-negotiable:
 | Unclear what's allowed             | `aix/context/constraints.md`                                                           |
 | Contradicting an accepted decision | `aix/context/decisions.md` + full ADR in `aix/docs/decisions/`                         |
 | Backend schema question            | `backend/schemaTypes/SCHEMA_ARCHITECTURE.md`, `backend/docs/SCHEMA_GUIDE.md`           |
-| Frontend implementation question   | `aix/context/projects/portfolio-frontend.md`, `frontend/.copilot/prompts/`             |
+| Frontend implementation question   | `aix/context/projects/portfolio-frontend.md`, `frontend/.github/copilot-instructions.md` |
 | Content structure question         | `content-model/documents/` or `content-model/patterns/`                                |
 | Where a file belongs               | Mirror what's already there; consult `aix/context/project.md` folder semantics section |
 

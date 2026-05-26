@@ -6,9 +6,9 @@ aix:
 	surface: internal
 	owner: AIX
 	tags:
-		- #routing
-		- #concierge
-		- #pointer
+		- "#routing"
+		- "#concierge"
+		- "#pointer"
 	type: guide
 	scope: aix
 	audience: maintainers
@@ -21,7 +21,8 @@ aix:
 # Routing Canon (Pointer)
 
 Canonical routing rules live here:
+
 - [aix/.copilot/ROUTING.md](.copilot/ROUTING.md)
 
 This file exists to avoid missing-route lookups in tooling that expects aix/ROUTING.md.
-Edit routing policy in `aix/.copilot/ROUTING.md`, not in this pointer.
+Edit routing policy in [aix/.copilot/ROUTING.md](.copilot/ROUTING.md), not in this pointer.

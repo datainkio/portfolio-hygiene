@@ -75,7 +75,7 @@ AI agents should consistently optimize for the following:
 * **Tooling**
 
   * VS Code
-  * GitHub Copilot (primary AI collaborator)
+  * AI agents (GitHub Copilot via `.copilot/`, Claude Code via `.claude/`)
   * GitHub Actions (if CI is present)
 
 ---

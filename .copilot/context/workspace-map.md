@@ -12,7 +12,13 @@ Multi-root workspace: `aix/` (this repo), `frontend/`, `backend/`, `content-mode
 ## Canonical files
 
 ```yaml
-routing:
+claude_code:
+  entrypoints:
+    aix:      aix/CLAUDE.md
+    frontend: frontend/CLAUDE.md
+  agents:     aix/.claude/agents/
+
+copilot:
   concierge:   aix/.copilot/prompts/concierge.prompt.md
   module_index: aix/.copilot/prompts/_module-index.md
 
