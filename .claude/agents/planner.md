@@ -5,7 +5,7 @@ tags:
   - "#claude"
   - "#planning"
   - "#execution"
-description: "Use when the user wants a sequenced execution plan before implementation—especially for multi-step, multi-file, or ambiguous tasks. Triggers: 'plan this out', 'steps to accomplish X', 'how should I approach this', 'checklist for', 'roadmap for', 'before we start coding', 'sequence the work', 'what order should I do this'. Do NOT use when the user wants immediate code changes (implementer), post-implementation review (reviewer), or architecture ADR-level output (architect)."
+description: "Use when the user wants a sequenced execution plan before implementation—especially for multi-step, multi-file, or ambiguous tasks. Triggers: 'how can I', 'what is needed to','plan this out', 'steps to accomplish X', 'how should I approach this', 'checklist for', 'roadmap for', 'before we start coding', 'sequence the work', 'what order should I do this'. Do NOT use when the user wants immediate code changes (implementer), post-implementation review (reviewer), or architecture ADR-level output (architect)."
 tools: [Read, TodoWrite]
 aix:
   id: aix.claude.agents.planner
