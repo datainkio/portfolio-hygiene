@@ -43,7 +43,15 @@
 ## Decisions
 - Scorecard bands adopted from AIX guidance (good/warning/broken) to standardize pass criteria.
 
-## Open Questions
-- Who owns ongoing scoring and dashboard maintenance?
-- Where should canonical task bank and scored runs live (e.g., /data subfolder)?
-- Do we automate scoring or keep manual for now?
+## Scoring Ownership
+- **Owner:** Russell. Run the probe bank manually after each significant context, tooling, or module change.
+- **Cadence:** once per milestone or after any change to `context/`, `specs/ai/`, or `.copilot/prompts/`.
+- **Task bank:** `aix/docs/maintenance/aix-probe-bank.md` (11 canonical probes, P1–P9 + M1–M2).
+- **Scored runs:** log to `aix/docs/logs/YYYY-MM-DD-aix-probe-run.md` using the scoring worksheet in the probe bank file.
+- **Automation:** keep manual for now — automated scoring requires a stable evidence loop that does not yet exist. Revisit when logged runs consistently show expected outputs.
+
+## CUS Definition (normalized)
+CUS is a per-response quality score from 0 to 2 — not a count of files used:
+- **0** — generic advice; does not use any repo context
+- **1** — references repo structure or files loosely, without citing the authoritative source
+- **2** — cites correct files/paths and draws from authoritative context (`context/`, `specs/`, `docs/decisions/`)

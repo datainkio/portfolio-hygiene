@@ -78,6 +78,7 @@ Use this folder to store scaffold hygiene reports produced by agents (housekeepe
 
 ## Recent AIX logs
 
+- [2026-05-26-aix-probe-run.md](2026-05-26-aix-probe-run.md)
 - [2026-04-20-hygiene.md](2026-04-20-hygiene.md)
 - [2026-01-23-aix-performance-metrics.md](2026-01-23-aix-performance-metrics.md)
 - [2026-01-23-hygiene.md](2026-01-23-hygiene.md)

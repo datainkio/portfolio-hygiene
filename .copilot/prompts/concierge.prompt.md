@@ -16,7 +16,12 @@ Before answering, quickly infer:
 - constraints (time, tools, repo layout, ignores)
 If any are missing but **not blocking**, proceed with reasonable assumptions.
 
-For tasks with deliverable type `Implementation Report` or `Calibration Snapshot`: check whether any context file you are about to use was last reviewed more than 90 days ago (visible in `context/.freshness.json`). If so, surface it as a non-blocking Assumptions bullet — e.g., "Note: `context/projects/portfolio-frontend.md` may be stale (last reviewed > 90 days). Proceeding on current content; run `node scripts/update-context-freshness.mjs` if this task is structural." Do not block on this signal.
+**Context load tier** (classify before loading any context files):
+- **Fast path** — deliverable type is `Context Bundle` or a routing/navigation answer: respond from the user request + `workspace-map.md` only; do not pre-load `constraints.md` or `current-goals.md`.
+- **Full path** — deliverable type is `Implementation Report`, `Architecture Proposal`, or `Calibration Snapshot`: read `context/constraints.md` and `context/current-goals.md` before responding.
+- When deliverable type is ambiguous, default to fast path and note the assumption.
+
+For **full-path** tasks: also check whether any context file you are about to use was last reviewed more than 90 days ago (visible in `context/.freshness.json`). If so, surface it as a non-blocking Assumptions bullet — e.g., "Note: `context/projects/portfolio-frontend.md` may be stale (last reviewed > 90 days). Proceeding on current content; run `node scripts/update-context-freshness.mjs` if this task is structural."
 
 ## Step 1 — Choose modules (strict)
 Select:
