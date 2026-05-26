@@ -1,10 +1,8 @@
 ---
-name: Taskmaster Module Prompt
-description: Manage tasks, priorities, and checklists.
-tags:
-  - copilot
-  - prompts
-  - tasks
+aix:
+  id: aix.copilot.prompts.taskmaster
+  role: Embed and manage file-based TODOs linked to GitHub Issues.
+  status: stable
 ---
 
 # Taskmaster Module Prompt

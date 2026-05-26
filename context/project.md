@@ -137,6 +137,22 @@ Avoid:
 
 ---
 
+## Decision Posture
+
+- **Default to existing patterns** unless a spec explicitly changes them.
+- **Prefer minimal, reversible changes** for hygiene or structural improvements.
+- **Avoid global automation** unless it demonstrably reduces cognitive load.
+- **Treat `/context` and `/specs` as canonical**; `/docs` explains, but does not decide.
+
+## Interaction Design Rules of Thumb
+
+- Reduce motion when it doesn't clarify intent or hierarchy.
+- Animate only when it improves comprehension or flow.
+- Use progressive disclosure over dense layouts.
+- Favor readable typography and generous spacing for long-form content.
+
+---
+
 ## What This File Is *Not*
 
 * ❌ A roadmap

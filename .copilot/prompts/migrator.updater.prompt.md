@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.migrator-updater
   role: Plan and execute migrations/updates for scaffolded projects.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #migration
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Migrator Module — Vitaixmen Updater (Copilot / Concierge)

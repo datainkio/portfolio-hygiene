@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.navigator
   role: Locate relevant files, modules, and repo entry points.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #navigation
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Copilot Prompt Module: Navigator
@@ -34,7 +21,6 @@ Reduce ambiguity and misroutes by identifying the smallest set of relevant, auth
 - The user wants code written, files edited, or behavior changed.
 - The user wants analysis/tradeoffs as the primary deliverable.
 - The user wants architecture/system design as the primary deliverable.
-- The user wants prompt module normalization or routing rules updated.
 
 ## Primary Output (Type: Markdown)
 A single **Context Bundle** in Markdown with exactly these sections:
@@ -63,8 +49,6 @@ What is the exact task or decision you’re trying to complete (one sentence)?
 - Don’t include “nice to have” reading.
 
 ## Inputs to read first
-- The user request
-- Any explicitly referenced files provided by the user
 - If present and relevant: `context/README.md`, `context/project.md`, `context/constraints.md`, `specs/README.md`, `docs/decisions/README.md`
 
 ## Example calls

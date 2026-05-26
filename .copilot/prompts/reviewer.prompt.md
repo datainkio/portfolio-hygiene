@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.reviewer
   role: Review changes for correctness, risks, and quality.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #review
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Copilot Prompt Module: Reviewer
@@ -34,7 +21,6 @@ Provide focused feedback on an existing change set (diff/PR/files) to catch corr
 - The user wants new code written or refactors performed.
 - The user wants debugging/triage of a failing build/test/runtime error.
 - The user wants architecture decisions or a system design proposal.
-- The user wants prompt module normalization or routing rules updated.
 
 ## Primary Output (Type: Markdown)
 A single **Review Report** in Markdown with exactly these sections:
@@ -62,8 +48,6 @@ What’s the review input (diff/PR link or list of changed files), and what shou
 - Don’t expand scope into implementation.
 
 ## Inputs to read first
-- The user request
-- Any explicitly referenced files provided by the user
 - The diff / changed files (if provided)
 - If present and relevant: `context/constraints.md`, `context/design-philosophy.md`, `specs/README.md`
 

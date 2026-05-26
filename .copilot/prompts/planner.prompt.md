@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.planner
   role: Produce plans, steps, and task breakdowns.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #planning
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Copilot Prompt Module: Planner
@@ -35,7 +22,6 @@ Turn the user’s goal into an actionable plan with clear sequencing, assumption
 - The user wants debugging/triage of a failing build/test or runtime error.
 - The user wants review/critique of an existing diff/PR.
 - The user wants architecture/ADR-level decisions.
-- The user wants prompt module normalization or routing rules updated.
 
 ## Primary Output (Type: Markdown)
 A single **Execution Plan** in Markdown with exactly these sections:
@@ -64,8 +50,6 @@ What is the exact success criteria (expected behavior/output)?
 - Don’t ask multiple questions; at most one blocking question.
 
 ## Inputs to read first
-- The user request
-- Any explicitly referenced files provided by the user
 - If present and relevant: `context/constraints.md`, `context/project.md`, `specs/README.md`
 
 ## Example calls

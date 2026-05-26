@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.mechanic
   role: Diagnose and fix technical issues.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #debugging
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Copilot Prompt Module: Mechanic
@@ -34,7 +21,6 @@ Triage errors, identify likely root causes, and propose minimal, targeted fixes 
 - The user wants feature implementation or refactors unrelated to the failure.
 - The user wants architecture/system design or ADR-style decisions.
 - The user wants prose editing or doc improvements as the primary deliverable.
-- The user wants prompt module normalization or routing rules updated.
 
 ## Primary Output (Type: Markdown)
 A single **Triage Report** in Markdown with exactly these sections:
@@ -63,8 +49,6 @@ Can you paste the exact error output (or the failing command + stack trace) and 
 - Don’t invent logs or repo details not provided.
 
 ## Inputs to read first
-- The user request
-- Any explicitly referenced files provided by the user
 - If present and relevant: `vitaixmen.code-workspace`, `.vscode/tasks.json`, `.vscode/settings.json`
 
 ## Example calls

@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.housekeeper
   role: Clean up and normalize repository hygiene.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #hygiene
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Copilot Prompt Module: Housekeeper
@@ -35,7 +22,6 @@ Standardize and clean up repository/workspace structure (naming, folders, ignore
 - The user wants system architecture or design decisions (route to an architecture module).
 - The user wants tradeoff analysis/option comparison as the main deliverable (route to an analysis module).
 - The user wants prose editing as the primary work (route to an editor/librarian module).
-- The user wants prompt module normalization or routing rules updated.
 
 ## Primary Output (Type: Markdown)
 A single **Workspace Hygiene Plan** in Markdown with exactly these sections:
@@ -66,8 +52,6 @@ Do you want a conservative cleanup (minimal moves/renames) or an opinionated res
 - Don’t expand scope into architecture or planning unless asked.
 
 ## Inputs to read first
-- The user request
-- Any explicitly referenced files provided by the user
 - If present and relevant: `README.md`, `docs/README.md`, `context/constraints.md`, `context/design-philosophy.md`
 
 ## Example calls

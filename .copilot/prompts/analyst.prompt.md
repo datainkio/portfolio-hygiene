@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.analyst
   role: Provide analysis and options without coding.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #analysis
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Copilot Prompt Module: Analyst
@@ -35,8 +22,6 @@ Create decision-support analysis (requirements clarification, tradeoffs, risks, 
 - The user requests a system architecture or deployment design (route to an architecture module).
 - The user wants a project plan, task breakdown, or execution sequencing (route to a planning module).
 - The user wants copywriting, UX writing, or marketing content.
-- The user wants prompt-module normalization or routing rules updated.
-
 ## Primary Output (Type: Markdown)
 A single **Analysis Brief** in Markdown with exactly these sections:
 - **Decision / Question** (1–2 sentences)
@@ -68,10 +53,7 @@ What decision are you trying to make, and what 2–3 constraints matter most (ti
 - Don’t invent repo-specific details; ask the blocking question if critical context is missing.
 - Don’t recommend multiple “primary” paths; pick one and justify it.
 
-## Inputs to read first
-- The user request
-- Any explicitly referenced files provided by the user
-- If present and relevant: `context/constraints.md`, `context/project.md`, `context/design-philosophy.md`, `context/decisions.md`
+## Inputs to read first (if present and relevant) `context/constraints.md`, `context/project.md`, `context/design-philosophy.md`, `context/decisions.md`
 
 ## Example calls
 - “Compare using Postgres vs DynamoDB for this workload and recommend one.”

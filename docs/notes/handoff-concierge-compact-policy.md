@@ -14,7 +14,7 @@
 - [aix/.github/agents/Concierge.md](../../.github/agents/Concierge.md) — edited; canonical entrypoint loaded by the chatmode
 - [aix/.copilot/prompts/concierge.prompt.md](../../.copilot/prompts/concierge.prompt.md) — edited; compaction + handoff-note sections mirrored, downstream modules bound by them
 - [aix/.copilot/prompts/\_module-index.md](../../.copilot/prompts/_module-index.md) — edited; added Cross-cutting rules section pointing at concierge.prompt.md
-- [aix/docs/notes/README.md](dataink.io/aix/docs/notes/README.md) — referenced; defines notes promotion workflow
+- [aix/docs/notes/README.md](README.md) — referenced; defines notes promotion workflow
 
 ## Decisions made
 

@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.implementer
   role: Implement requested changes end-to-end.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #implementation
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Copilot Prompt Module: Implementer
@@ -39,7 +26,6 @@ Make concrete, minimal codebase changes to satisfy the user request (features, f
 - The user wants architecture/system design without coding (route to an architecture module).
 - The user wants prose editing or documentation rewriting as the primary task (route to an editor/librarian module).
 - The user wants only a plan/timeline/task breakdown (route to a planning module).
-- The user wants prompt module normalization or routing rules updated.
 
 ## Primary Output (Type: Markdown)
 
@@ -76,8 +62,6 @@ What is the expected behavior (acceptance criteria), and where in the repo shoul
 
 ## Inputs to read first
 
-- The user request
-- Any explicitly referenced files provided by the user
 - The most relevant nearby code/docs identified from the request (use the workspace, avoid assumptions)
 
 ## Example calls

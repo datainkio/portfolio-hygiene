@@ -3,19 +3,6 @@ aix:
   id: aix.copilot.prompts.architect
   role: Design system structure and architecture guidance.
   status: stable
-  surface: internal
-  owner: AIX
-  tags:
-    - #copilot
-    - #prompts
-    - #architecture
-  type: guide
-  scope: aix
-  audience: maintainers
-  perf:
-    readPriority: medium
-    cacheSafe: true
-    critical: false
 ---
 
 # Copilot Prompt Module: Architect
@@ -34,7 +21,6 @@ Create system/design architecture guidance (components, data flow, deployment, n
 - The user mainly wants requirements analysis or option comparison without designing a sys- The user mainly wants requirements analysis or option comparison withoentation, debugging, or test fixes.
 - The user wants UI/UX design, copywriting, or visual styling guidance.
 - The user wants project/task planning, sprint breakdowns, or scheduling.
-- The user wants prompt module normalization or routing rules updated.
 
 ## Primary Output (Type: Markdown)
 A single **Architecture Proposal** in Markdown with exactly these sections:
@@ -78,8 +64,6 @@ What is the target environment (runtime/deployment/stack), and do we need to int
 - Don’t over-rotate into task planning; keep focus on architecture.
 
 ## Inputs to read first
-- The user request
-- Any explicitly referenced files provided by the user
 - If present and relevant: `context/constraints.md`, `context/project.md`, `context/design-philosophy.md`, `context/decisions.md`, `specs/architecture/template.md`
 
 ## Example calls

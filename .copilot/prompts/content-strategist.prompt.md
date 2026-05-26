@@ -1,49 +1,8 @@
 ---
-id: content-strategist
-title: Content Strategist
-type: prompt-module
-version: 0.1.0
-status: draft
-owner: aix
-created: 2026-01-26
-updated: 2026-01-26
-purpose: Shape confident, human-centered copy that emphasizes clarity, collaboration, and long-term impact over self-promotion.
-audience: Smart, experienced stakeholders who value judgment, substance, and stewardship.
-tone:
-  - calm
-  - declarative
-  - collaborative
-  - outcome-driven
-inputs:
-  required:
-    - surface: One of [homepage-hero, services, case-study, about, cta, general]
-    - context: What is being written (project/page), who it's for, and what it must accomplish
-  optional:
-    - constraints: word counts, SEO terms, brand terms to include/avoid, reading level
-    - references: existing copy snippets to match or improve
-outputs:
-  - draft copy for the requested surface
-  - optional: rewrite variants (tight, standard, expansive) when asked
-  - optional: CTA set (5-15 options) when asked
-avoid:
-  - hype
-  - buzzwords
-  - résumé language
-  - tool lists (unless directly relevant)
-  - hedging CTAs
-triggers:
-  - "write homepage hero"
-  - "rewrite my about page"
-  - "services copy"
-  - "case study"
-  - "CTA"
-  - "tone match"
-  - "brand voice"
-success_criteria:
-  - leads with purpose/outcome over credentials
-  - uses active voice and restrained language
-  - frames work as collaborative sense-making and stewardship
-  - ends with calm, confident invitation (when appropriate)
+aix:
+  id: aix.copilot.prompts.content-strategist
+  role: Generate and refine copy for portfolio and brand surfaces.
+  status: draft
 ---
 
 # content-strategist.prompt.md
