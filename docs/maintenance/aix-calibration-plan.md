@@ -3,7 +3,7 @@
 This document describes a **human‑led calibration pass** to ensure GitHub Copilot benefits from the completed modularization.
 The goal is not to refactor prompts, but to **shape Copilot’s routing instincts** through controlled, corrective usage.
 
-This is a *usage plan*, not an agent instruction.
+This is a *usage plan*, not an agent instruction. Requirements and acceptance criteria: [specs/ai/calibrator-spec.md](../../specs/ai/calibrator-spec.md).
 
 ---
 

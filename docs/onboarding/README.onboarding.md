@@ -2,6 +2,14 @@
 
 Start here if you’re new to this repo.
 
+## Choose your path
+
+- **Setting up from template?** → [docs/getting-started.md](../getting-started.md)
+- **Claude Code agent entering cold?** → [docs/onboarding/claude-code-onboarding.md](claude-code-onboarding.md)
+- **Human contributor to this repo?** → continue below
+
+---
+
 ## What this repo is
 
 This repo is **Vitaixmen**: a VS Code workspace starter with repo hygiene, documentation patterns, and Copilot/agent setup.

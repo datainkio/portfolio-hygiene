@@ -57,6 +57,8 @@ Start with Concierge; it will route. Pick by the deliverable you want:
 
 ## Copy/Paste Prompts (project-specific)
 
+For a comprehensive prompt menu organized by outcome, see [docs/concierge-prompt-catalog.md](concierge-prompt-catalog.md). The prompts below are this project's most common starting points.
+
 - Concierge: "Classify and hand off: fix failing 11ty build referencing missing layout; include next steps."
 - Concierge: "Route: plan GSAP animations for homepage hero; note perf/a11y constraints."
 - Housekeeper: "Run a quick hygiene scan for root + frontend + backend; ensure excludes cover .obsidian/, node_modules/, frontend/\_site/, backend/.sanity/; list fixes with links."

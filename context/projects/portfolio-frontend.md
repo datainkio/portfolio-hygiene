@@ -41,7 +41,7 @@ When editing files inside the frontend repo, prefer its file-scoped constraints:
 
 - `/frontend/.copilot/prompts/js.prompt.md`: browser-first JS, progressive enhancement, idempotent initialization
 - `/frontend/.copilot/prompts/display.prompt.md`: Nunjucks/11ty semantics, minimal template logic
-- `/frontend/.copilot/README.md`: prompt scoping and precedence rules
+- `/frontend/.copilot/README.copilot.md`: prompt scoping and precedence rules
 - `/frontend/.github/copilot-instructions.md`: repo-wide conventions and critical gotchas
 - `/frontend/.copilot/prompts/index.md`: project-local prompt catalog (templates, choreography, JS)
 
