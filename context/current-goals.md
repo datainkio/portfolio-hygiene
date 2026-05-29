@@ -20,14 +20,21 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Now
 
-- [ ] TODO: Write the spec for the project page view.
-- [ ] TODO: Confirm required project data from Sanity is available to 11ty.
-- [ ] FEAT: Create and design the project page template; render the project data.
+- [ ] FEAT: Simplify management of motion tokens by using gsap.setDefault (or equivalent) and removing ...ANIMATION_DEFAULTS from tween properties.
+- [ ] TODO: Refine timing and properties for Card intro, outro, and interstitial animations.
+- [ ] TODO: Improve DX and stability of Card motion by refining code structure, moving constants to config files, and adhering to GSAP best practices.
+- [ ] CHORE: Clear out accumulated AI development debt from Card.js and CardManager.js.
 - [ ] TODO: Test and confirm responsiveness at default breakpoints defined by Tailwind (base, sm, md, lg, xl).
 - [ ] TODO: Address any weirdness on Safari/iOS.
   - Issue: [#44](https://github.com/datainkio/portfolio-governance/issues/44)
 
 ## Next
+
+**Project Page - deliver complete UX**
+
+- [ ] TODO: Write the spec for the project page view.
+- [ ] TODO: Confirm required project data from Sanity is available to 11ty.
+- [ ] FEAT: Create and design the project page template; render the project data.
 
 **User guide — content-model drift:**
 
