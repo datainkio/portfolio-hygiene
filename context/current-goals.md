@@ -20,6 +20,7 @@ This file is the single-source-of-truth for what matters _right now_.
 
 ## Now
 
+- [ ] FEAT: A smoother, more reliable integration of Claude into my design/dev workflow.
 - [ ] FEAT: Simplify management of motion tokens by using gsap.setDefault (or equivalent) and removing ...ANIMATION_DEFAULTS from tween properties.
 - [ ] TODO: Refine timing and properties for Card intro, outro, and interstitial animations.
 - \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/68
