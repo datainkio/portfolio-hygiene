@@ -22,10 +22,13 @@ This file is the single-source-of-truth for what matters _right now_.
 
 - [ ] FEAT: Simplify management of motion tokens by using gsap.setDefault (or equivalent) and removing ...ANIMATION_DEFAULTS from tween properties.
 - [ ] TODO: Refine timing and properties for Card intro, outro, and interstitial animations.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/68
 - [ ] TODO: Improve DX and stability of Card motion by refining code structure, moving constants to config files, and adhering to GSAP best practices.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/67
 - [ ] CHORE: Clear out accumulated AI development debt from Card.js and CardManager.js.
 - [ ] TODO: Test and confirm responsiveness at default breakpoints defined by Tailwind (base, sm, md, lg, xl).
 - [ ] TODO: Address any weirdness on Safari/iOS.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/65
   - Issue: [#44](https://github.com/datainkio/portfolio-governance/issues/44)
 
 ## Next
@@ -33,7 +36,9 @@ This file is the single-source-of-truth for what matters _right now_.
 **Project Page - deliver complete UX**
 
 - [ ] TODO: Write the spec for the project page view.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/64
 - [ ] TODO: Confirm required project data from Sanity is available to 11ty.
+- \[ \] Issue URL: https://github.com/datainkio/portfolio-governance/issues/63
 - [ ] FEAT: Create and design the project page template; render the project data.
 
 **User guide — content-model drift:**
