@@ -41,8 +41,8 @@ AI agent experience (AIX) scaffold for the dataink.io portfolio. Four discrete f
 
 At the start of any task, read in this order:
 
-1. [`current-goals.md`](context/current-goals.md) — what is being worked on now
-2. [`constraints.md`](context/constraints.md) — non-negotiables; never violate
+1. [`current-goals.md`](dataink.io/aix/context/current-goals.md) — what is being worked on now
+2. [`constraints.md`](dataink.io/aix/context/constraints.md) — non-negotiables; never violate
 3. [`decisions.md`](context/decisions.md) — accepted ADRs; flag conflicts before proceeding
 4. Project-specific context for the target repo:
    - Frontend: [`portfolio-frontend.md`](context/projects/portfolio-frontend.md)

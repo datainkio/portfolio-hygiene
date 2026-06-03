@@ -24,7 +24,7 @@ Operational how-tos live here. Each runbook should be actionable, time-bounded, 
 
 - [Refresh AI Context & Indexes](refresh-ai-context.md)
 - [Context Freshness & Guided Refresh](context-freshness.md)
-- [Update current goals](current-goals.md)
+- [Update current goals](dataink.io/aix/docs/runbooks/current-goals.md)
 - [Frontmatter and Sidecars](frontmatter-and-sidecars.md)
 
 ## Templates
