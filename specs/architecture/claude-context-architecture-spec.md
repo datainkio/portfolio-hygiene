@@ -1,70 +1,70 @@
 ---
-title: "Claude Context Architecture Spec"
+title: Claude Context Architecture Spec
 aliases:
-  - "Claude AIX Context Spec"
-  - "AIX Context Architecture"
-  - "Claude Code Context Strategy"
-  - "Claude VS Code Agent Context Spec"
-id: "aix.claude.context-architecture"
-type: "spec"
-status: "draft"
+  - Claude AIX Context Spec
+  - AIX Context Architecture
+  - Claude Code Context Strategy
+  - Claude VS Code Agent Context Spec
+id: aix.claude.context-architecture
+type: spec
+status: draft
 created: 2026-05-29
 updated: 2026-05-29
-version: "0.1.0"
-owner: "Russell Lebo"
-project: "AIX"
+version: 0.1.0
+owner: Russell Lebo
+project: AIX
 scope:
-  - "Claude Code"
-  - "VS Code"
-  - "AIX hygiene"
-  - "DX hygiene"
-summary: "A complete specification for using Claude project memory, skills, and subagents to improve token efficiency, response accuracy, and response time for a creative technologist workflow."
+  - Claude Code
+  - VS Code
+  - AIX hygiene
+  - DX hygiene
+summary: A complete specification for using Claude project memory, skills, and subagents to improve token efficiency, response accuracy, and response time for a creative technologist workflow.
 audience:
-  - "Creative technologists"
-  - "UX designers"
-  - "Frontend developers"
-  - "AI workflow maintainers"
+  - Creative technologists
+  - UX designers
+  - Frontend developers
+  - AI workflow maintainers
 stack:
   frontend:
-    - "11ty"
-    - "Nunjucks"
-    - "Tailwind CSS"
-    - "GSAP"
+    - 11ty
+    - Nunjucks
+    - Tailwind CSS
+    - GSAP
   backend:
-    - "Sanity"
+    - Sanity
   methods:
-    - "Atomic design"
-    - "Accessibility-first implementation"
-    - "Reduced-motion support"
-    - "Responsive breakpoint testing"
+    - Atomic design
+    - Accessibility-first implementation
+    - Reduced-motion support
+    - Responsive breakpoint testing
 tools:
-  - "Claude Code"
-  - "VS Code"
-  - "Obsidian"
-  - "Sanity Studio"
-  - "Eleventy"
+  - Claude Code
+  - VS Code
+  - Obsidian
+  - Sanity Studio
+  - Eleventy
 tags:
   - "#aix"
   - "#dx"
-  - "#claude"
-  - "#claude-code"
-  - "#vscode"
-  - "#agents"
-  - "#skills"
-  - "#context"
-  - "#context-engineering"
-  - "#optimization"
-  - "#token-efficiency"
-  - "#eleventy"
-  - "#nunjucks"
-  - "#tailwindcss"
-  - "#gsap"
-  - "#sanity"
-  - "#atomic-design"
-  - "#accessibility"
-  - "#reduced-motion"
+  - "#aix/claude"
+  - "#aix/claude-code"
+  - "#tooling/vscode"
+  - "#aix/agents"
+  - "#aix/skills"
+  - "#aix/context"
+  - "#aix/context-engineering"
+  - "#dx/optimization"
+  - "#aix/token-efficiency"
+  - "#frontend/eleventy"
+  - "#frontend/nunjucks"
+  - "#style/tailwindcss"
+  - "#design/motion/gsap"
+  - "#backend/sanity"
+  - "#design/atomic-design"
+  - "#ux/accessibility"
+  - "#ux/accessibility/reduced-motion"
 links:
-  - "[[AIX]]"
+  - "[[knowledge management/tags/aix]]"
   - "[[Claude Code]]"
   - "[[VS Code]]"
   - "[[11ty]]"

@@ -5,12 +5,12 @@ docType: "guide"
 status: "active"
 owner: "aix"
 tags:
-  - frontmatter
-  - sidecars
-  - obsidian
+  - system/frontmatter
+  - dx/sidecars
+  - tooling/Obsidian
   - aix
-  - conventions
-  - runbook
+  - dx/conventions
+  - aix/runbook
 permalink: false
 aliases:
   - "Frontmatter Runbook"
