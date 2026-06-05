@@ -4,6 +4,7 @@ Operational how-tos live here. Each runbook should be actionable, time-bounded, 
 
 ## When to add
 
+
 - Repeated ops: deploys, cutovers, CMS schema migrations, cache purges.
 - Incident patterns: build failures, webhook errors, slow pages.
 - Maintenance: rotating keys, upgrading dependencies, regenerating assets.
@@ -25,6 +26,7 @@ Operational how-tos live here. Each runbook should be actionable, time-bounded, 
 - [Refresh AI Context & Indexes](refresh-ai-context.md)
 - [Context Freshness & Guided Refresh](context-freshness.md)
 - [Update current goals](current-goals.md)
+- [Frontmatter and Sidecars](frontmatter-and-sidecars.md)
 - [Frontmatter and Sidecars](frontmatter-and-sidecars.md)
 
 ## Templates
