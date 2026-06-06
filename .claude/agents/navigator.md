@@ -43,7 +43,7 @@ Reduce ambiguity and misroutes by identifying the smallest set of relevant, auth
 - User wants architecture/system design as the primary deliverable → architect
 
 ## Context Loading (Fast Path)
-Use the workspace map and current request. Reference [`workspace-map.md`](../../.copilot/context/workspace-map.md) for the compact canonical file manifest. Load additional context only if ambiguity would prevent producing a correct Context Bundle.
+Use the current request plus the workspace entrypoints: root [`CLAUDE.md`](../../../CLAUDE.md) and [`frontend/CLAUDE.md`](../../../frontend/CLAUDE.md) for the file map and routing. Load additional context only if ambiguity would prevent producing a correct Context Bundle.
 
 ## Output: Context Bundle
 

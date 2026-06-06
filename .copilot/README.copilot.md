@@ -1,5 +1,8 @@
 # Copilot & AI Assistant Configuration
 
+> [!warning] DEPRECATED — Copilot/ChatGPT-era AIX layer
+> Superseded by the Claude-native approach in [cleanup,-revise,-and-optimize-aix-for-cl](../../context/goals/AIX_tasks/cleanup,-revise,-and-optimize-aix-for-cl.md). Authority for Claude is root `CLAUDE.md` + `.claude/agents/` + `.claude/skills/`. Kept for reference pending deletion.
+
 This folder defines how AI assistants should operate within this workspace.
 
 It contains instructions, prompts, and curated context designed to help agents

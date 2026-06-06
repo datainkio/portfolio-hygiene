@@ -2,10 +2,13 @@
 aix:
   id: aix.copilot.prompts.concierge
   role: Canonical routing contract for Concierge.
-  status: stable
+  status: deprecated
 ---
 
 # Copilot Prompt Module: Concierge Router Contract
+
+> [!warning] DEPRECATED — superseded by the Claude-native AIX approach
+> Claude Code routes to subagents natively; this router is not used. See [cleanup,-revise,-and-optimize-aix-for-cl](../../../context/goals/AIX_tasks/cleanup,-revise,-and-optimize-aix-for-cl.md). Kept for reference pending deletion — do not build on it.
 
 This is the canonical routing contract used by the Concierge agent. It is optimized for AIX: predictable module selection, low follow-up burden, and minimal instruction drift.
 

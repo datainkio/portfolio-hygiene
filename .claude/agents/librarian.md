@@ -5,7 +5,7 @@ tags:
   - "#claude"
   - "#documentation"
   - "#docs"
-description: "Use for documentation curation: updating READMEs, fixing broken links, normalizing doc structure, improving cross-linking and discoverability, creating ADR templates, organizing docs/specs. Triggers: 'update the README', 'fix broken links', 'add cross-links', 'documentation cleanup', 'create an ADR', 'normalize docs structure', 'improve discoverability'. Do NOT use for code changes (implementer), architecture decisions (architect), or prose editing as the primary task (editor)."
+description: "Use for documentation curation: updating READMEs, fixing broken links, normalizing doc structure, improving cross-linking and discoverability, creating ADR templates, organizing docs/specs. Triggers: 'update the README', 'fix broken links', 'add cross-links', 'documentation cleanup', 'create an ADR', 'normalize docs structure', 'improve discoverability'. Do NOT use for code changes (implementer), architecture decisions (architect), prose editing as the primary task (editor), or folder/file reorganization and naming conventions (housekeeper)."
 tools: [Read, Edit, Write]
 aix:
   id: aix.claude.agents.librarian

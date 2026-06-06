@@ -6,7 +6,7 @@ tags:
   - "#hygiene"
   - "#workspace"
   - "#conventions"
-description: "Use for workspace hygiene tasks: renaming files, organizing folders, standardizing naming conventions, cleaning up ignores, normalizing structure, reducing clutter. Triggers: 'clean up', 'reorganize this folder', 'rename files', 'hygiene pass', 'naming convention', '.gitignore cleanup', 'where should this go', 'reduce clutter', 'standardize structure'. Do NOT use for feature implementation (implementer), architecture decisions (architect), or prose editing (editor)."
+description: "Use for workspace hygiene tasks: renaming files, organizing folders, standardizing naming conventions, cleaning up ignores, normalizing structure, reducing clutter. Triggers: 'clean up', 'reorganize this folder', 'rename files', 'hygiene pass', 'naming convention', '.gitignore cleanup', 'where should this go', 'reduce clutter', 'standardize structure'. Do NOT use for feature implementation (implementer), architecture decisions (architect), prose editing (editor), or documentation content, links, and READMEs (librarian)."
 tools: [Read, Edit, Write, Bash]
 aix:
   id: aix.claude.agents.housekeeper
