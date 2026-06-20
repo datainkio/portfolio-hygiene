@@ -3,12 +3,12 @@ name: obsidian-bases
 description: Create and edit Obsidian Bases (.base files) with views, filters, formulas, and summaries. Use when working with .base files, creating database-like views of notes, or when the user mentions Bases, table views, card views, filters, or formulas in Obsidian.
 license: MIT
 tags:
-  - "#obsidian"
-  - "#obsidian-bases"
-  - "#bases"
-  - "#database"
-  - "#pkm"
-  - "#skill"
+  - bases
+  - database
+  - Obsidian
+  - obsidian-bases
+  - pkm
+  - skill
 aix:
   id: aix.skill.obsidian-bases
   role: Claude Code skill for Obsidian Bases — .base files, views, filters, formulas, and database-like note querying.

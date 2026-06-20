@@ -1,9 +1,9 @@
 ---
 tags:
-  - "#aix"
-  - "#aix/claude"
-  - "#ux/navigation/entrypoint"
-  - "#tooling/workspace"
+  - aix
+  - claude
+  - entrypoint
+  - workspace
 aix:
   id: aix.claude.entrypoint
   role: Claude Code workspace entrypoint for the dataink.io portfolio.

@@ -6,10 +6,10 @@ status: active
 audience:
   - agents
 tags:
-  - "#aix"
-  - "#aix/snapshot"
-  - "#performance"
-  - "#claude"
+  - aix
+  - claude
+  - performance
+  - snapshot
 ---
 
 # AIX Snapshot — 2026-06-06

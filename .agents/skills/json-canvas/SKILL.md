@@ -3,13 +3,13 @@ name: json-canvas
 description: Create and edit JSON Canvas files (.canvas) with nodes, edges, groups, and connections. Use when working with .canvas files, creating visual canvases, mind maps, flowcharts, or when the user mentions Canvas files in Obsidian.
 license: MIT
 tags:
-  - "#obsidian"
-  - "#json-canvas"
-  - "#canvas"
-  - "#mind-map"
-  - "#flowchart"
-  - "#visualization"
-  - "#skill"
+  - canvas
+  - flowchart
+  - json-canvas
+  - mind-map
+  - Obsidian
+  - skill
+  - visualization
 aix:
   id: aix.skill.json-canvas
   role: Claude Code skill for JSON Canvas (.canvas) files — nodes, edges, groups, and visual diagrams in Obsidian.

@@ -3,13 +3,13 @@ name: obsidian-markdown
 description: Create and edit Obsidian Flavored Markdown with wikilinks, embeds, callouts, properties, and other Obsidian-specific syntax. Use when working with .md files in Obsidian, or when the user mentions wikilinks, callouts, frontmatter, tags, embeds, or Obsidian notes.
 license: MIT
 tags:
-  - "#obsidian"
-  - "#markdown"
-  - "#wikilinks"
-  - "#callouts"
-  - "#frontmatter"
-  - "#pkm"
-  - "#skill"
+  - callouts
+  - frontmatter
+  - markdown
+  - Obsidian
+  - pkm
+  - skill
+  - wikilinks
 aix:
   id: aix.skill.obsidian-markdown
   role: Claude Code skill for Obsidian Flavored Markdown — wikilinks, embeds, callouts, properties, and Obsidian-specific syntax.

@@ -3,13 +3,13 @@ name: defuddle
 description: Extract clean markdown content from web pages using Defuddle CLI, removing clutter and navigation to save tokens. Use instead of WebFetch when the user provides a URL to read or analyze, for online documentation, articles, blog posts, or any standard web page. Do NOT use for URLs ending in .md — those are already markdown, use WebFetch directly.
 license: MIT
 tags:
-  - "#defuddle"
-  - "#web-scraping"
-  - "#markdown"
-  - "#content-extraction"
-  - "#cli"
-  - "#token-efficiency"
-  - "#skill"
+  - cli
+  - content-extraction
+  - defuddle
+  - markdown
+  - skill
+  - token-efficiency
+  - web-scraping
 aix:
   id: aix.skill.defuddle
   role: Claude Code skill for Defuddle CLI — extract clean markdown from web pages, removing clutter to minimize token usage.
