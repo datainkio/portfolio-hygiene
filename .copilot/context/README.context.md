@@ -11,5 +11,5 @@ an orientation layer, not a source of truth.
 ## Files
 
 - Workspace map: [.copilot/context/workspace-map.md](workspace-map.md)
-- Canonical constraints: [context/constraints.md](../../context/constraints.md)
-- Current goals: [context/current-goals.md](../../context/current-goals.md)
+- Canonical constraints: [context/constraints.md](../../../context/constraints.md)
+- Current goals: [context/current-goals.md](../../../context/current-goals.md)

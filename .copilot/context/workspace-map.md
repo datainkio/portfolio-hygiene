@@ -16,16 +16,16 @@ claude_code:
   entrypoints:
     aix:      aix/CLAUDE.md
     frontend: frontend/CLAUDE.md
-  agents:     aix/.claude/agents/
+  agents:     .claude/agents/
 
 copilot:
   concierge:   aix/.copilot/prompts/concierge.prompt.md
   module_index: aix/.copilot/prompts/_module-index.md
 
 context:
-  project:       aix/context/project.md
-  current_goals: aix/context/current-goals.md
-  constraints:   aix/context/constraints.md
+  project:       context/project.md        # root context/ is the authority
+  current_goals: context/current-goals.md  # root context/ is the authority
+  constraints:   context/constraints.md    # root context/ is the authority
   decisions:     aix/context/decisions.md
   project_context:
     frontend:    aix/context/projects/portfolio-frontend.md
