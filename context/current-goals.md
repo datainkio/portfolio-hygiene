@@ -16,7 +16,7 @@ aix:
 
 # Current Goals
 
-This file is the single-source-of-truth for what matters _right now_.
+> **Deprecated (2026-07-09):** authority moved to root [`context/current-goals.md`](../../context/current-goals.md) per the workspace Authority Model in [`aix/CLAUDE.md`](../CLAUDE.md). Content below is historical — do not update; do not treat as current.
 
 ## Now
 

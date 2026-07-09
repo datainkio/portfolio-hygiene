@@ -66,25 +66,25 @@ content-model/ → cross-cutting content structure and page composition
 
 Decision precedence: latest accepted ADR > `aix/specs/` > `context/current-goals.md`
 
-## Available Agents (`.claude/agents/`)
+## Available Agents (`../.claude/agents/`)
 
 | Agent | Purpose | Primary Output |
 |-------|---------|----------------|
-| [analyst](.claude/agents/analyst.md) | Compare options, recommend direction | Analysis Brief |
-| [architect](.claude/agents/architect.md) | Workspace/repo architecture decisions | Architecture Proposal |
-| [calibrator](.claude/agents/calibrator.md) | Constraint alignment check before execution | Calibration Snapshot |
-| [choreographer](.claude/agents/choreographer.md) | GSAP motion, section choreography, scroll behavior | Choreography Report |
-| [content-strategist](.claude/agents/content-strategist.md) | Portfolio copy and brand content | Content Draft |
-| [editor](.claude/agents/editor.md) | Rewrite/edit existing prose | Edited Draft |
-| [housekeeper](.claude/agents/housekeeper.md) | Workspace hygiene, naming, ignores | Hygiene Plan |
-| [implementer](.claude/agents/implementer.md) | Implement approved changes end-to-end | Implementation Report |
-| [librarian](.claude/agents/librarian.md) | Docs curation, cross-linking, READMEs | Documentation Pack |
-| [mechanic](.claude/agents/mechanic.md) | Build/test/tooling failures | Triage Report |
-| [migrator-updater](.claude/agents/migrator-updater.md) | Safe scaffold upgrades | Migration Plan |
-| [navigator](.claude/agents/navigator.md) | File/folder location guidance | Context Bundle |
-| [planner](.claude/agents/planner.md) | Sequenced execution plans | Execution Plan |
-| [reviewer](.claude/agents/reviewer.md) | Quality/risk/completeness review | Review Report |
-| [taskmaster](.claude/agents/taskmaster.md) | File-embedded TODOs, GitHub Issues | Task Snapshot |
+| [analyst](../.claude/agents/analyst.md) | Compare options, recommend direction | Analysis Brief |
+| [architect](../.claude/agents/architect.md) | Workspace/repo architecture decisions | Architecture Proposal |
+| [calibrator](../.claude/agents/calibrator.md) | Constraint alignment check before execution | Calibration Snapshot |
+| [choreographer](../.claude/agents/choreographer.md) | GSAP motion, section choreography, scroll behavior | Choreography Report |
+| [content-strategist](../.claude/agents/content-strategist.md) | Portfolio copy and brand content | Content Draft |
+| [editor](../.claude/agents/editor.md) | Rewrite/edit existing prose | Edited Draft |
+| [housekeeper](../.claude/agents/housekeeper.md) | Workspace hygiene, naming, ignores | Hygiene Plan |
+| [implementer](../.claude/agents/implementer.md) | Implement approved changes end-to-end | Implementation Report |
+| [librarian](../.claude/agents/librarian.md) | Docs curation, cross-linking, READMEs | Documentation Pack |
+| [mechanic](../.claude/agents/mechanic.md) | Build/test/tooling failures | Triage Report |
+| [migrator-updater](../.claude/agents/migrator-updater.md) | Safe scaffold upgrades | Migration Plan |
+| [navigator](../.claude/agents/navigator.md) | File/folder location guidance | Context Bundle |
+| [planner](../.claude/agents/planner.md) | Sequenced execution plans | Execution Plan |
+| [reviewer](../.claude/agents/reviewer.md) | Quality/risk/completeness review | Review Report |
+| [taskmaster](../.claude/agents/taskmaster.md) | File-embedded TODOs, GitHub Issues | Task Snapshot |
 
 ## Cross-Cutting Rules (All Agents)
 
@@ -116,8 +116,8 @@ This file is the routing home for workspace-hygiene checks:
 | Context/doc drift, stale docs, broken links | `drift-check` skill |
 | Sidecar + frontmatter conventions (`.njk`/`.js` → `.md`) | `frontmatter-lint` skill |
 | AIX session scoring/logging → `aix/docs/logs/` | `aix-snapshot` skill |
-| File/folder hygiene, naming, ignores | [`housekeeper`](.claude/agents/housekeeper.md) agent |
-| Doc curation, cross-links, READMEs | [`librarian`](.claude/agents/librarian.md) agent |
+| File/folder hygiene, naming, ignores | [`housekeeper`](../.claude/agents/housekeeper.md) agent |
+| Doc curation, cross-links, READMEs | [`librarian`](../.claude/agents/librarian.md) agent |
 
 Automated hooks (`.claude/hooks/`: `log-tokens.sh`, `warn-sidecar.sh`, `warn-commit-prefix.sh`) enforce logging, sidecar, and commit-prefix checks at tool level — agents do not re-implement these.
 

@@ -1,5 +1,7 @@
 # Constraints
 
+> **Deprecated (2026-07-09):** authority moved to root [`context/constraints.md`](../../context/constraints.md) per the workspace Authority Model in [`aix/CLAUDE.md`](../CLAUDE.md). Content below is historical — do not update; do not treat as current.
+
 This file records **workspace-level constraints** that should not be violated by humans or AI agents.
 
 If a constraint is project-specific (e.g., only `/frontend`), link to that project’s canonical doc rather than duplicating details here.

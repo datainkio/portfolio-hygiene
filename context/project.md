@@ -1,5 +1,7 @@
 # Project Context
 
+> **Deprecated (2026-07-09):** authority moved to root [`context/project.md`](../../context/project.md) per the workspace Authority Model in [`aix/CLAUDE.md`](../CLAUDE.md). Content below is historical — do not update; do not treat as current.
+
 ## Purpose of This Document
 
 This file provides **foundational, durable context** about the project for AI agents operating inside this workspace (e.g., GitHub Copilot, custom agents, reviewers, linters).
