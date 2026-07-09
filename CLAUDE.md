@@ -41,8 +41,8 @@ AI agent experience (AIX) scaffold for the dataink.io portfolio. Four discrete f
 
 At the start of any task, read in this order:
 
-1. [`current-goals.md`](dataink.io/aix/context/current-goals.md) — what is being worked on now
-2. [`constraints.md`](dataink.io/aix/context/constraints.md) — non-negotiables; never violate
+1. [`current-goals.md`](../context/current-goals.md) — what is being worked on now (root `context/` is the authority)
+2. [`constraints.md`](../context/constraints.md) — non-negotiables; never violate
 3. [`decisions.md`](context/decisions.md) — accepted ADRs; flag conflicts before proceeding
 4. Project-specific context for the target repo:
    - Frontend: [`portfolio-frontend.md`](context/projects/portfolio-frontend.md)
@@ -57,13 +57,14 @@ Do not infer intent from code until you have read the context files.
 ## Authority Model
 
 ```
-aix/context/   → canonical truth: "why this exists, how to think here"
+context/       → canonical truth (root tree): goals, constraints, memory, handoffs
+aix/context/   → aix-scaffold-specific material only (decisions.md, projects/)
 aix/specs/     → prescriptive contracts: "what must be true"
 aix/docs/      → explanatory/narrative: "how things work, why decisions were made"
 content-model/ → cross-cutting content structure and page composition
 ```
 
-Decision precedence: latest accepted ADR > `aix/specs/` > `aix/context/current-goals.md`
+Decision precedence: latest accepted ADR > `aix/specs/` > `context/current-goals.md`
 
 ## Available Agents (`.claude/agents/`)
 
@@ -72,6 +73,7 @@ Decision precedence: latest accepted ADR > `aix/specs/` > `aix/context/current-g
 | [analyst](.claude/agents/analyst.md) | Compare options, recommend direction | Analysis Brief |
 | [architect](.claude/agents/architect.md) | Workspace/repo architecture decisions | Architecture Proposal |
 | [calibrator](.claude/agents/calibrator.md) | Constraint alignment check before execution | Calibration Snapshot |
+| [choreographer](.claude/agents/choreographer.md) | GSAP motion, section choreography, scroll behavior | Choreography Report |
 | [content-strategist](.claude/agents/content-strategist.md) | Portfolio copy and brand content | Content Draft |
 | [editor](.claude/agents/editor.md) | Rewrite/edit existing prose | Edited Draft |
 | [housekeeper](.claude/agents/housekeeper.md) | Workspace hygiene, naming, ignores | Hygiene Plan |
@@ -104,6 +106,34 @@ Decision precedence: latest accepted ADR > `aix/specs/` > `aix/context/current-g
 **Frontend constraints:** `aix/context/projects/portfolio-frontend.md` is authoritative for frontend scope. Also see `frontend/.github/copilot-instructions.md` for do-not-edit and build-order constraints.
 
 **Secrets:** Never commit tokens, API keys, or credentials. Use `.env` / CI secrets.
+
+## AIX Hygiene Routing
+
+This file is the routing home for workspace-hygiene checks:
+
+| Responsibility | Route to |
+|---|---|
+| Context/doc drift, stale docs, broken links | `drift-check` skill |
+| Sidecar + frontmatter conventions (`.njk`/`.js` → `.md`) | `frontmatter-lint` skill |
+| AIX session scoring/logging → `aix/docs/logs/` | `aix-snapshot` skill |
+| File/folder hygiene, naming, ignores | [`housekeeper`](.claude/agents/housekeeper.md) agent |
+| Doc curation, cross-links, READMEs | [`librarian`](.claude/agents/librarian.md) agent |
+
+Automated hooks (`.claude/hooks/`: `log-tokens.sh`, `warn-sidecar.sh`, `warn-commit-prefix.sh`) enforce logging, sidecar, and commit-prefix checks at tool level — agents do not re-implement these.
+
+## Model Selection
+
+Workspace/AIX task tiers — applied via Agent tool `model` param when dispatching subagents:
+
+| Task type | Model |
+|---|---|
+| Planning, ADRs, architecture | `opus` |
+| Doc curation, edits | `sonnet` |
+| Hygiene checks (drift, lint, sidecar), logging, snapshots | `haiku` |
+
+## Current Goals
+
+Domain goals: maintain [AIX.md](../context/goals/AIX.md) — implementation steps specific to this domain. Every goal MUST reference its parent goal in [current-goals.md](../context/current-goals.md). Update the domain file as steps complete; never fork or restate root goals locally — link to them. Root `context/current-goals.md` is the authority.
 
 ## Shared Platform
 
