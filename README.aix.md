@@ -219,7 +219,7 @@ This scaffold is intentionally **tool-agnostic**. Use what your project needs.
 
 - Scripts hub: [scripts/README.scripts.md](scripts/README.scripts.md)
 - Assets manifest: [assets/README.assets.md](assets/README.assets.md)
-- Data manifest: [data/README.data.md](data/README.data.md)
+- Data manifest: [data/README.data.md](dataink.io/aix/data/README.data.md)
 
 ### Agent Ops tasks (recommended)
 

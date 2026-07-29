@@ -98,7 +98,7 @@ Lives in `frontend/specs/animation/` in the frontend workspace folder; not linke
 
 ### Data
 
-- [specs/data/README.data.md](data/README.data.md)
+- [specs/data/README.data.md](dataink.io/aix/specs/data/README.data.md)
 - [specs/data/template.md](data/template.md)
 
 ### Features

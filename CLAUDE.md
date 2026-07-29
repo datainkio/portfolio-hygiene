@@ -43,7 +43,7 @@ At the start of any task, read in this order:
 
 1. [`current-goals.md`](../context/current-goals.md) — what is being worked on now (root `context/` is the authority)
 2. [`constraints.md`](../context/constraints.md) — non-negotiables; never violate
-3. [`decisions.md`](context/decisions.md) — accepted ADRs; flag conflicts before proceeding
+3. [`decisions.md`](dataink.io/aix/context/decisions.md) — accepted ADRs; flag conflicts before proceeding
 4. Project-specific context for the target repo:
    - Frontend: [`portfolio-frontend.md`](context/projects/portfolio-frontend.md)
    - Backend: [`portfolio-backend.md`](context/projects/portfolio-backend.md)
